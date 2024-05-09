@@ -1,21 +1,51 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Main;
 
-/**
- *
- * @author Marilou Ilacio
- */
-public class Main {
+import java.sql.*;
+import otherForms.*;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+
+public class Main {
+    
+    public static String username = "";
+    public static String selectedRole = "";
+    public static String fullname = "";
+
+  public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+
+                progressScreen loading = new progressScreen(null, true);
+                loading.setVisible(true);
+
+                new logIn().show();
+
+            }
+        });
     }
     
+    // Code for Database Connection
+    public static Connection getDbCon() {
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "#MySQL2220");
+            return con;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+
+    }
+
+    public static void closeCon() {
+        try {
+            if (getDbCon() != null) {
+                getDbCon().close();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
+
