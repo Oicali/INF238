@@ -15,7 +15,7 @@ import otherForms.*;
  *
  * @author jairus
  */
-public class Hme extends javax.swing.JFrame {
+public class home extends javax.swing.JFrame {
 
     /**
      * Creates new form Main
@@ -25,15 +25,15 @@ public class Hme extends javax.swing.JFrame {
     private Form2 form2;
     private Form3 form3;
     private Form7 form7;
-    
-    public Hme() {
+
+    public home() {
         initComponents();
-        setBackground(new Color(0,0,0,0));
+        setBackground(new Color(0, 0, 0, 0));
         setForm(form0); // added to be in form 0 by default
-        menu.initMoving(Hme.this);
-        menu.addEventMenuSelected(new EventMenuSelected(){
+        menu.initMoving(home.this);
+        menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
-            public void selected(int index){
+            public void selected(int index) {
                 //System.out.println(index);
                 if (Main.selectedRole.equalsIgnoreCase("Administrator")) {
                     if (index == 0) {
@@ -55,7 +55,7 @@ public class Hme extends javax.swing.JFrame {
                         new logIn().show();
                     }
 
-                } else if (Main.selectedRole.equalsIgnoreCase("Employee")){
+                } else if (Main.selectedRole.equalsIgnoreCase("Employee")) {
                     if (index == 0) {
                         setForm(form0);
                     } else if (index == 1) {
@@ -63,7 +63,7 @@ public class Hme extends javax.swing.JFrame {
                     } else if (index == 2) {
                         setForm(form3);
                     } else if (index == 3) {
-                        
+
                     } else if (index == 4) {
 
                     } else if (index == 5) {
@@ -74,39 +74,39 @@ public class Hme extends javax.swing.JFrame {
                         dispose();
                         new logIn().show();
                     }
-                
+
                 }
-                
+
             }
         });
     }
-    
-    private void setForm(JComponent com){
+
+    private void setForm(JComponent com) {
         mainPanel.removeAll();
         mainPanel.add(com);
         mainPanel.repaint();
         mainPanel.revalidate();
     }
-    
-    public Hme(String Role) {
+
+    public home(String Role) {
         initComponents();
-        
+
         nameLbl.setText(Main.fullname);
         roleLbl.setText(Main.selectedRole);
-        
-        setBackground(new Color(0,0,0,0));
-        form0=new Form0();
-        form1=new Form1();
-        form2=new Form2();
-        form3=new Form3();
-        form7=new Form7();
+
+        setBackground(new Color(0, 0, 0, 0));
+        form0 = new Form0();
+        form1 = new Form1();
+        form2 = new Form2();
+        form3 = new Form3();
+        form7 = new Form7();
         setForm(form0); // added to be in form 0 by default
-        menu.initMoving(Hme.this);
-        menu.addEventMenuSelected(new EventMenuSelected(){
+        menu.initMoving(home.this);
+        menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
-            public void selected(int index){
+            public void selected(int index) {
                 //System.out.println(index);
-               if (Main.selectedRole.equalsIgnoreCase("Administrator")) {
+                if (Main.selectedRole.equalsIgnoreCase("Administrator")) {
                     if (index == 0) {
                         setForm(form0);
                     } else if (index == 1) {
@@ -128,7 +128,7 @@ public class Hme extends javax.swing.JFrame {
                         new logIn().show();
                     }
 
-                } else if (Main.selectedRole.equalsIgnoreCase("Employee")){
+                } else if (Main.selectedRole.equalsIgnoreCase("Employee")) {
                     if (index == 0) {
                         setForm(form0);
                     } else if (index == 1) {
@@ -136,25 +136,21 @@ public class Hme extends javax.swing.JFrame {
                     } else if (index == 2) {
                         setForm(form3);
                     } else if (index == 3) {
-                        
+
                     } else if (index == 4) {
 
                     } else if (index == 5) {
-
-                    } else if (index == 6) {
-
-                    } else if (index == 7) {
                         setForm(form7);
-                    }  else if (index == 11) {
+                    } else if (index == 11) {
                         dispose();
                         new logIn().show();
                     }
-                
+
                 }
-                
+
             }
         });
-        
+
         // Create a rounded frame
         Shape roundedRectangle = new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20);
         setShape(roundedRectangle);
@@ -200,13 +196,13 @@ public class Hme extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(824, Short.MAX_VALUE)
+                .addContainerGap(830, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nameLbl, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(roleLbl, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,9 +211,9 @@ public class Hme extends javax.swing.JFrame {
                 .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(roleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addContainerGap(12, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(imageAvatar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -244,7 +240,7 @@ public class Hme extends javax.swing.JFrame {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -283,14 +279,18 @@ public class Hme extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Hme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Hme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Hme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Hme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -299,7 +299,7 @@ public class Hme extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Hme().setVisible(true);
+                new home().setVisible(true);
             }
         });
     }

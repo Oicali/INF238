@@ -23,22 +23,20 @@ public class logIn extends javax.swing.JFrame {
     ImageIcon image = new ImageIcon("C:\\Users\\Marilou Ilacio\\Documents\\NetBeansProjects\\OOP_Project\\src\\resources\\logoSmall.png");
     public static boolean isUserEmpty = true;
     public static boolean isPassEmpty = true;
-    
-    
-    
+
     public logIn() {
         initComponents();
         setIconImage(image.getImage());
         GlassPanePopup.install(this);
         passField.setEchoChar('•');
         JDialog.setDefaultLookAndFeelDecorated(true);
-        
+
         logInBtn.setUI(new MetalButtonUI() {
             protected Color getDisabledTextColor() {
                 return new Color(15, 106, 191);
             }
         });
-        
+
         usernameField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -57,16 +55,18 @@ public class logIn extends javax.swing.JFrame {
 
             // Method to enable/disable the login button based on the PIN length
             private void updateLoginButton() {
-                
+
                 String usernameText = usernameField.getText().trim();
-                if(usernameText.length()==0){
+                if (usernameText.length() == 0) {
                     isUserEmpty = true;
-                } else isUserEmpty = false;
-                
+                } else {
+                    isUserEmpty = false;
+                }
+
                 logInBtn.setEnabled(!isUserEmpty && !isPassEmpty);
             }
         });
-        
+
         passField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -85,20 +85,21 @@ public class logIn extends javax.swing.JFrame {
 
             // Method to enable/disable the login button based on the PIN length
             private void updateLoginButton() {
-                
+
                 String passText = passField.getText().trim();
-                if(passText.length()==0){
+                if (passText.length() == 0) {
                     isPassEmpty = true;
-                } else isPassEmpty = false;
-                
+                } else {
+                    isPassEmpty = false;
+                }
+
                 logInBtn.setEnabled(!isUserEmpty && !isPassEmpty);
             }
         });
-        
+
         // Create a rounded frame
         Shape roundedRectangle = new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20);
         setShape(roundedRectangle);
-        
 
     }
 
@@ -346,9 +347,8 @@ public class logIn extends javax.swing.JFrame {
         Main.username = usernameField.getText();
         String password = passField.getText();
         Main.selectedRole = (String) selectRole.getSelectedItem();
-        
-        //Connection con = InventorySystem.getDbCon();
 
+        //Connection con = InventorySystem.getDbCon();
         boolean accountNotFound = true;
         try {
 
@@ -357,15 +357,21 @@ public class logIn extends javax.swing.JFrame {
 
             while (rs.next()) {
                 accountNotFound = false;
-                String storedPassword = rs.getString("password"); // Get the stored password from the database
+                Main.storedPassword = rs.getString("password"); // Get the stored password from the database
                 Main.fullname = rs.getString("name");
+                Main.number = rs.getString("mobileNumber");
+                Main.email = rs.getString("email");
+                //Main.birth = rs.getString("birthDate");
+                //Main.gender = rs.getString("gender");
+                Main.username = rs.getString("userName");
+                //Main.date = rs.getString("entryDate");
+            }
 
-                if (password.equals(storedPassword)) {
-                    dispose();
-                    new Hme(Main.selectedRole).show();
-                } else {
-                    logInErrorMessage.setText("Invalid Password!");
-                }
+            if (password.equals(Main.storedPassword)) {
+                dispose();
+                new home(Main.selectedRole).show();
+            } else {
+                logInErrorMessage.setText("Invalid Password!");
             }
 
             // Close the ResultSet
@@ -427,7 +433,7 @@ public class logIn extends javax.swing.JFrame {
 
     private void forgotUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotUserActionPerformed
         forgotUsernameMsg obj0 = new forgotUsernameMsg();
-        GlassPanePopup.showPopup(obj0); 
+        GlassPanePopup.showPopup(obj0);
     }//GEN-LAST:event_forgotUserActionPerformed
 
     private void forgotPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotPassActionPerformed

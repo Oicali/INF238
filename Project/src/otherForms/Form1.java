@@ -46,7 +46,7 @@ public class Form1 extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(258, 258, 258)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
