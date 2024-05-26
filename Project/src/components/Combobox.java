@@ -225,7 +225,7 @@ public class Combobox<E> extends JComboBox<E> {
         private void createHintText(Graphics2D g2) {
             Insets in = getInsets();
             g2.setColor(new Color(150, 150, 150));
-            FontMetrics ft = g2.getFontMetrics();
+            FontMetrics ft = g2.getFontMetrics(new Font("SansSerif", Font.PLAIN, 14)); // Set font size for label text
             Rectangle2D r2 = ft.getStringBounds(combo.getLabelText(), g2);
             double height = getHeight() - in.top - in.bottom;
             double textY = (height - r2.getHeight()) / 2 - 5;
@@ -240,7 +240,7 @@ public class Combobox<E> extends JComboBox<E> {
                 size = 18;
             }
             g2.setFont(new Font("SansSerif", Font.PLAIN, 12)); // Set font for label text
-            g2.drawString(combo.getLabelText(), in.right, (int) (in.top + textY + ft.getAscent() - size));
+            g2.drawString(combo.getLabelText(), in.right, (int) (in.top + textY + ft.getAscent() - 5 - size));
 
             // Set font for choices
             g2.setFont(new Font("SansSerif", Font.PLAIN, 14));

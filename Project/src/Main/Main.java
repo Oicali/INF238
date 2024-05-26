@@ -9,13 +9,16 @@ public class Main {
     
     public static String username = "";
     public static String selectedRole = "";
-    public static String fullname = "";
+    public static String fname = "";
+    public static String mname = "";
+    public static String lname = "";
     public static String gender = "";
     public static String number = "";
     public static String birth = "";
     public static String storedPassword = "";
     public static String email = "";
     public static String date = "";
+    public static byte[] imageBytes;
 
   public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {

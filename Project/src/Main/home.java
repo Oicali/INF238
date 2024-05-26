@@ -91,7 +91,7 @@ public class home extends javax.swing.JFrame {
     public home(String Role) {
         initComponents();
 
-        nameLbl.setText(Main.fullname);
+        nameLbl.setText(Main.fname + " " + Main.mname + " " +Main.lname);
         roleLbl.setText(Main.selectedRole);
 
         setBackground(new Color(0, 0, 0, 0));
@@ -170,7 +170,7 @@ public class home extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         nameLbl = new javax.swing.JLabel();
         roleLbl = new javax.swing.JLabel();
-        imageAvatar1 = new components.ImageAvatar();
+        avatar1 = new components.ImageAvatar();
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -187,9 +187,9 @@ public class home extends javax.swing.JFrame {
         roleLbl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         roleLbl.setText("Role");
 
-        imageAvatar1.setForeground(new java.awt.Color(40, 72, 102));
-        imageAvatar1.setBorderSize(1);
-        imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logInUser.png"))); // NOI18N
+        avatar1.setForeground(new java.awt.Color(40, 72, 102));
+        avatar1.setBorderSize(1);
+        avatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logInUser.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -201,7 +201,7 @@ public class home extends javax.swing.JFrame {
                     .addComponent(nameLbl, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(roleLbl, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(avatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
@@ -211,10 +211,10 @@ public class home extends javax.swing.JFrame {
                 .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(roleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(imageAvatar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(avatar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -305,7 +305,7 @@ public class home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private components.ImageAvatar imageAvatar1;
+    public static components.ImageAvatar avatar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
     private otherForms.Menu menu;

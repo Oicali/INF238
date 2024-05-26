@@ -167,7 +167,7 @@ public class PasswordField extends JPasswordField {
     private void createHintText(Graphics2D g2) {
         Insets in = getInsets();
         g2.setColor(new Color(150, 150, 150));
-        FontMetrics ft = g2.getFontMetrics(new Font("SansSerif", Font.PLAIN, 12));
+        FontMetrics ft = g2.getFontMetrics(new Font("SansSerif", Font.PLAIN, 14));
         Rectangle2D r2 = ft.getStringBounds(labelText, g2);
         double height = getHeight() - in.top - in.bottom;
         double textY = (height - r2.getHeight()) / 2 - 3; 
@@ -181,7 +181,7 @@ public class PasswordField extends JPasswordField {
         } else {
             size = 18;
         }
-        g2.drawString(labelText, in.left, (int) (in.top + textY + ft.getAscent() - size));
+        g2.drawString(labelText, in.left, (int) (in.top + textY + ft.getAscent() - 5 - size));
     }
 
     private void createLineStyle(Graphics2D g2) {

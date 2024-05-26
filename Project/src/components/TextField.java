@@ -50,7 +50,7 @@ public class TextField extends JTextField {
 
     public TextField() {
         setBorder(new EmptyBorder(20, 3, 10, 3)); // Adjust padding here
-        setFont(new Font("SansSerif", Font.PLAIN, 14)); // Set font for text field
+        setFont(new Font("SansSerif", Font.PLAIN, 18)); // Set font for text field
         setSelectionColor(new Color(76, 204, 255));
         addMouseListener(new MouseAdapter() {
             @Override
@@ -129,7 +129,7 @@ public class TextField extends JTextField {
     private void createHintText(Graphics2D g2) {
         Insets in = getInsets();
         g2.setColor(new Color(150, 150, 150));
-        FontMetrics ft = g2.getFontMetrics(new Font("SansSerif", Font.PLAIN, 12)); // Set font size for label text
+        FontMetrics ft = g2.getFontMetrics(new Font("SansSerif", Font.PLAIN, 18)); // Set font size for label text
         Rectangle2D r2 = ft.getStringBounds(labelText, g2);
         double height = getHeight() - in.top - in.bottom;
         double textY = (height - r2.getHeight()) / 2 - 3;
@@ -143,7 +143,7 @@ public class TextField extends JTextField {
         } else {
             size = 18;
         }
-        g2.drawString(labelText, in.right, (int) (in.top + textY + ft.getAscent() - size));
+        g2.drawString(labelText, in.right, (int) (in.top + textY + ft.getAscent() - 5 - size));
     }
 
     private void createLineStyle(Graphics2D g2) {

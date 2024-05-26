@@ -17,9 +17,9 @@ public class Form7 extends javax.swing.JPanel {
     public Form7() {
         initComponents();
         
-        fullNameLbl.setText(Main.fullname);
+        fullNameLbl.setText(Main.fname + " " + Main.mname + " " +Main.lname);
         roleLbl.setText(Main.selectedRole);
-        fullNameField.setText(" " + Main.fullname);
+        fullNameField.setText(" " + Main.fname + " " + Main.mname + " " +Main.lname);
         roleField.setText(" " + Main.selectedRole);
         genderField.setText(" " + Main.gender);
         birthField.setText(" " + Main.birth);
@@ -30,13 +30,14 @@ public class Form7 extends javax.swing.JPanel {
         dateField.setText(Main.date);
         
     }
+   
 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        imageAvatar1 = new components.ImageAvatar();
+        avatar = new components.ImageAvatar();
         fullNameLbl = new javax.swing.JLabel();
         roleLbl = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -63,9 +64,9 @@ public class Form7 extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        imageAvatar1.setForeground(new java.awt.Color(40, 72, 102));
-        imageAvatar1.setBorderSize(1);
-        imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logInUser.png"))); // NOI18N
+        avatar.setForeground(new java.awt.Color(40, 72, 102));
+        avatar.setBorderSize(1);
+        avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logInUser.png"))); // NOI18N
 
         fullNameLbl.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
         fullNameLbl.setText("User Full Name");
@@ -188,7 +189,7 @@ public class Form7 extends javax.swing.JPanel {
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -257,7 +258,7 @@ public class Form7 extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addComponent(roleLbl))))
-                    .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -308,13 +309,13 @@ public class Form7 extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static components.ImageAvatar avatar;
     private javax.swing.JTextField birthField;
     private javax.swing.JLabel dateField;
     private javax.swing.JTextField emailField;
     private javax.swing.JTextField fullNameField;
     private javax.swing.JLabel fullNameLbl;
     private javax.swing.JTextField genderField;
-    private components.ImageAvatar imageAvatar1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
