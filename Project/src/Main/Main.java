@@ -10,6 +10,7 @@ public class Main {
     public static String username = "";
     public static String selectedRole = "";
     public static String fname = "";
+    public static String fullname = "";
     public static String mname = "";
     public static String lname = "";
     public static String gender = "";

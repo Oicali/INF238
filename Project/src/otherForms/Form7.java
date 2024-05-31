@@ -17,9 +17,9 @@ public class Form7 extends javax.swing.JPanel {
     public Form7() {
         initComponents();
         
-        fullNameLbl.setText(Main.fname + " " + Main.mname + " " +Main.lname);
+        fullNameLbl.setText(Main.fullname);
         roleLbl.setText(Main.selectedRole);
-        fullNameField.setText(" " + Main.fname + " " + Main.mname + " " +Main.lname);
+        fullNameField.setText(" " + Main.fullname);
         roleField.setText(" " + Main.selectedRole);
         genderField.setText(" " + Main.gender);
         birthField.setText(" " + Main.birth);

@@ -103,7 +103,7 @@ public class forgotUsernameMsg extends javax.swing.JPanel {
 
                 while (rs.next()) {
                     storedUsername = rs.getString("userName");
-                    storedName = rs.getString("name");
+                    storedName = rs.getString("lname");
                 }
 
                 // Close the ResultSet
@@ -139,13 +139,14 @@ public class forgotUsernameMsg extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         sendUsernameBtn = new components.RoundedButtons();
-        txt = new javax.swing.JLabel();
         field = new javax.swing.JTextField();
-        cmdCancel = new components.RoundedButtons();
+        cmdCancel = new javax.swing.JButton();
+        txt = new javax.swing.JLabel();
+        txt1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(15, 106, 191));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Forgot your username?");
@@ -159,19 +160,14 @@ public class forgotUsernameMsg extends javax.swing.JPanel {
         sendUsernameBtn.setColorClick(new java.awt.Color(70, 191, 50));
         sendUsernameBtn.setColorOver(new java.awt.Color(70, 191, 50));
         sendUsernameBtn.setFocusPainted(false);
-        sendUsernameBtn.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        sendUsernameBtn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         sendUsernameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendUsernameBtnActionPerformed(evt);
             }
         });
 
-        txt.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
-        txt.setForeground(new java.awt.Color(102, 102, 102));
-        txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txt.setText("Enter your registered email address to receive your username.");
-
-        field.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        field.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         field.setForeground(new java.awt.Color(153, 153, 153));
         field.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         field.setText("Enter Email Address");
@@ -190,55 +186,67 @@ public class forgotUsernameMsg extends javax.swing.JPanel {
             }
         });
 
-        cmdCancel.setBackground(new java.awt.Color(191, 50, 50));
-        cmdCancel.setForeground(new java.awt.Color(255, 255, 255));
-        cmdCancel.setText("Cancel");
-        cmdCancel.setBorderColor(new java.awt.Color(191, 50, 50));
+        cmdCancel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        cmdCancel.setForeground(new java.awt.Color(15, 106, 191));
+        cmdCancel.setText("X");
         cmdCancel.setBorderPainted(false);
-        cmdCancel.setColor(new java.awt.Color(191, 50, 50));
-        cmdCancel.setColorClick(new java.awt.Color(191, 50, 50));
-        cmdCancel.setColorOver(new java.awt.Color(191, 50, 50));
+        cmdCancel.setContentAreaFilled(false);
         cmdCancel.setFocusPainted(false);
-        cmdCancel.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         cmdCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdCancelActionPerformed(evt);
             }
         });
 
+        txt.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        txt.setForeground(new java.awt.Color(102, 102, 102));
+        txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt.setText("Enter your registered email address and receive");
+
+        txt1.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        txt1.setForeground(new java.awt.Color(102, 102, 102));
+        txt1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt1.setText("an email to get your username.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(119, 119, 119))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(sendUsernameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txt1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txt, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                     .addComponent(field))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(96, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(94, 94, 94))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(sendUsernameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(170, 170, 170))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt)
-                .addGap(18, 18, 18)
-                .addComponent(field, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(txt1)
+                .addGap(12, 12, 12)
+                .addComponent(field, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sendUsernameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addComponent(sendUsernameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -318,20 +326,21 @@ public class forgotUsernameMsg extends javax.swing.JPanel {
 
     }//GEN-LAST:event_fieldFocusLost
 
+    private void fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldActionPerformed
+        // TODO add your handling code here: 
+    }//GEN-LAST:event_fieldActionPerformed
+
     private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
         GlassPanePopup.closePopupLast();
     }//GEN-LAST:event_cmdCancelActionPerformed
 
-    private void fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private components.RoundedButtons cmdCancel;
+    private javax.swing.JButton cmdCancel;
     private javax.swing.JTextField field;
     private javax.swing.JLabel jLabel1;
     private components.RoundedButtons sendUsernameBtn;
     private javax.swing.JLabel txt;
+    private javax.swing.JLabel txt1;
     // End of variables declaration//GEN-END:variables
 }

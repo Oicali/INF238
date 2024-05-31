@@ -107,7 +107,7 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
                 ResultSet rs = s.executeQuery("SELECT * FROM users WHERE email = '" + recipient + "'");
 
                 while (rs.next()) {
-                    storedName = rs.getString("name");
+                    storedName = rs.getString("lname");
                 }
 
                 // Close the ResultSet
@@ -148,13 +148,13 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txt = new javax.swing.JLabel();
         field = new javax.swing.JTextField();
-        cancelBtn = new components.RoundedButtons();
         sendVCBtn = new components.RoundedButtons();
         txt1 = new javax.swing.JLabel();
+        cmdCancel = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(15, 106, 191));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Forgot your password?");
@@ -164,7 +164,7 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
         txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt.setText("Enter your registered email address and receive");
 
-        field.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        field.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         field.setForeground(new java.awt.Color(153, 153, 153));
         field.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         field.setText("Enter Email Address");
@@ -183,22 +183,6 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
             }
         });
 
-        cancelBtn.setBackground(new java.awt.Color(191, 50, 50));
-        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
-        cancelBtn.setText("Cancel");
-        cancelBtn.setBorderColor(new java.awt.Color(191, 50, 50));
-        cancelBtn.setBorderPainted(false);
-        cancelBtn.setColor(new java.awt.Color(191, 50, 50));
-        cancelBtn.setColorClick(new java.awt.Color(191, 50, 50));
-        cancelBtn.setColorOver(new java.awt.Color(191, 50, 50));
-        cancelBtn.setFocusPainted(false);
-        cancelBtn.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelBtnActionPerformed(evt);
-            }
-        });
-
         sendVCBtn.setBackground(new java.awt.Color(70, 191, 50));
         sendVCBtn.setForeground(new java.awt.Color(255, 255, 255));
         sendVCBtn.setText("Send");
@@ -208,7 +192,7 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
         sendVCBtn.setColorClick(new java.awt.Color(70, 191, 50));
         sendVCBtn.setColorOver(new java.awt.Color(70, 191, 50));
         sendVCBtn.setFocusPainted(false);
-        sendVCBtn.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        sendVCBtn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         sendVCBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendVCBtnActionPerformed(evt);
@@ -220,47 +204,59 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
         txt1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt1.setText("a verification code to reset your password.");
 
+        cmdCancel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        cmdCancel.setForeground(new java.awt.Color(15, 106, 191));
+        cmdCancel.setText("X");
+        cmdCancel.setBorderPainted(false);
+        cmdCancel.setContentAreaFilled(false);
+        cmdCancel.setFocusPainted(false);
+        cmdCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txt, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                    .addComponent(txt1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(96, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(sendVCBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(field, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                    .addComponent(cmdCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(94, 94, 94))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(field, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sendVCBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(170, 170, 170))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel1)
-                .addGap(25, 25, 25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt)
                 .addGap(3, 3, 3)
                 .addComponent(txt1)
-                .addGap(15, 15, 15)
-                .addComponent(field, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(field, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sendVCBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addComponent(sendVCBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -280,10 +276,6 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
     private void fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldActionPerformed
-
-    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-        GlassPanePopup.closePopupLast();
-    }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void sendVCBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendVCBtnActionPerformed
         if (!field.getText().isEmpty() && !field.getText().trim().equalsIgnoreCase("Enter Email Address")) {
@@ -344,9 +336,13 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_sendVCBtnActionPerformed
 
+    private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
+        GlassPanePopup.closePopupLast();
+    }//GEN-LAST:event_cmdCancelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private components.RoundedButtons cancelBtn;
+    private javax.swing.JButton cmdCancel;
     private javax.swing.JTextField field;
     private javax.swing.JLabel jLabel1;
     private components.RoundedButtons sendVCBtn;
