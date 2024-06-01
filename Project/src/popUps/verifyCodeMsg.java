@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package msgPopup;
+package popUps;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -53,10 +53,10 @@ public class verifyCodeMsg extends javax.swing.JPanel {
                     txt1.setText("Enter the code before it expires in " + secondsLeft + " seconds.");
 
                 } else {
-                    forgotPasswordMsg.Code = "";
+                    forgotPasswordMsg.setCode("");
                     timer.stop();
                     GlassPanePopup.closePopupLast();
-                    System.out.println("Code :" + forgotPasswordMsg.Code);
+                    System.out.println("Code :" + forgotPasswordMsg.getCode());
                 }
             }
         });
@@ -173,7 +173,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
         txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt.setText("We have sent the verification code through email.");
 
-        code1.setBackground(new java.awt.Color(238, 238, 238));
+        code1.setBackground(new java.awt.Color(204, 204, 204));
         code1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         code1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         code1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -188,7 +188,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
             }
         });
 
-        code2.setBackground(new java.awt.Color(238, 238, 238));
+        code2.setBackground(new java.awt.Color(204, 204, 204));
         code2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         code2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         code2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -198,7 +198,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
             }
         });
 
-        code3.setBackground(new java.awt.Color(238, 238, 238));
+        code3.setBackground(new java.awt.Color(204, 204, 204));
         code3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         code3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         code3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -208,7 +208,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
             }
         });
 
-        code4.setBackground(new java.awt.Color(238, 238, 238));
+        code4.setBackground(new java.awt.Color(204, 204, 204));
         code4.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         code4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         code4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -218,7 +218,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
             }
         });
 
-        code5.setBackground(new java.awt.Color(238, 238, 238));
+        code5.setBackground(new java.awt.Color(204, 204, 204));
         code5.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         code5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         code5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -228,7 +228,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
             }
         });
 
-        code6.setBackground(new java.awt.Color(238, 238, 238));
+        code6.setBackground(new java.awt.Color(204, 204, 204));
         code6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         code6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         code6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -272,7 +272,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
         });
 
         cmdCancel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        cmdCancel.setForeground(new java.awt.Color(15, 106, 191));
+        cmdCancel.setForeground(new java.awt.Color(153, 153, 153));
         cmdCancel.setText("X");
         cmdCancel.setBorderPainted(false);
         cmdCancel.setContentAreaFilled(false);
@@ -329,7 +329,9 @@ public class verifyCodeMsg extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jLabel1))
-                    .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(txt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -358,12 +360,12 @@ public class verifyCodeMsg extends javax.swing.JPanel {
 
         System.out.println(enteredVC);
 
-        if (enteredVC.equals(forgotPasswordMsg.Code)) {
+        if (enteredVC.equals(forgotPasswordMsg.getCode())) {
             timer.stop();
             GlassPanePopup.closePopupLast();
             resetPasswordMsg obj8 = new resetPasswordMsg();
             GlassPanePopup.showPopup(obj8);
-            forgotPasswordMsg.Code = "";
+            forgotPasswordMsg.setCode("");
         } else {
             JOptionPane.showMessageDialog(null, "Invalid Verification Code!", "", JOptionPane.ERROR_MESSAGE);
         }
@@ -434,7 +436,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
         }
 
         JOptionPane.showMessageDialog(null, "     We have sent a new email for the\nverification code. Kindly check your email.", "", JOptionPane.INFORMATION_MESSAGE);
-        System.out.println("Resend a new code: " + forgotPasswordMsg.Code);
+        System.out.println("Resend a new code: " + forgotPasswordMsg.getCode());
     }//GEN-LAST:event_resendCodeBtnActionPerformed
 
     private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed

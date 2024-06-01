@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.plaf.metal.MetalButtonUI;
-import msgPopup.forgotPasswordMsg;
-import msgPopup.forgotUsernameMsg;
+import popUps.forgotPasswordMsg;
+import popUps.forgotUsernameMsg;
 import otherForms.Form7;
 import settings.GlassPanePopup;
 
@@ -173,25 +173,22 @@ public class logIn extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(selectRole, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(logInErrorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(66, 66, 66))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(userIcon))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(showPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(passField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(selectRole, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 4, Short.MAX_VALUE))
-                                    .addComponent(logInErrorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(5, 5, 5)))))
+                            .addComponent(showPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 68, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(userIcon)
                 .addGap(61, 61, 61))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -286,31 +283,36 @@ public class logIn extends javax.swing.JFrame {
     }//GEN-LAST:event_closeBtnActionPerformed
 
     private void logInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInBtnActionPerformed
+
         if (usernameField.getText().isEmpty() & passField.getText().isEmpty()) {
             logInErrorMessage.setText("Please fill up all required fields!");
+            
         } else if (usernameField.getText().isEmpty()) {
             logInErrorMessage.setText("Please fill up username field!");
+            
         } else if (passField.getText().isEmpty()) {
             logInErrorMessage.setText("Please fill up password field!");
+            
         } else {
 
-            Main.username = usernameField.getText();
+            String username = usernameField.getText();
             String password = passField.getText();
-            Main.selectedRole = (String) selectRole.getSelectedItem();
+            String selectedRole = (String) selectRole.getSelectedItem();
 
             //Connection con = InventorySystem.getDbCon();
             boolean accountNotFound = true;
             try {
 
                 Statement s = Main.getDbCon().createStatement();
-                ResultSet rs = s.executeQuery("SELECT * FROM users WHERE userName = '" + Main.username + "' AND userRole = '" + Main.selectedRole + "' AND status = 'Active'");
+                ResultSet rs = s.executeQuery("SELECT * FROM users WHERE userName = '" + username + "' AND userRole = '" + selectedRole + "' AND status = 'Active'");
 
                 while (rs.next()) {
                     accountNotFound = false;
-                    Main.storedPassword = rs.getString("password"); // Get the stored password from the database
+                    Main.setStoredPassword(rs.getString("password")); // Get the stored password from the database
                     Main.fname = rs.getString("fname");
                     Main.mname = rs.getString("mname");
                     Main.lname = rs.getString("lname");
+                    Main.sname = rs.getString("Sname");
                     Main.fullname = rs.getString("fullname");
                     Main.number = rs.getString("mobileNumber");
                     Main.email = rs.getString("email");
@@ -318,27 +320,31 @@ public class logIn extends javax.swing.JFrame {
                     Main.gender = rs.getString("gender");
                     Main.username = rs.getString("userName");
                     Main.date = rs.getString("entryDate");
+                    Main.selectedRole = rs.getString("userRole");
                     Main.imageBytes = rs.getBytes("img");
                 }
 
-                if (password.equals(Main.storedPassword)) {
-                    ImageIcon Icon = new ImageIcon(Main.imageBytes);
-
-                    dispose();
-                    new home(Main.selectedRole).show();
-                    home.avatar1.setIcon(Icon);
-                    Form7.avatar.setIcon(Icon);
+                if (accountNotFound) {
+                    logInErrorMessage.setText("Account not found!");
+                    
                 } else {
-                    logInErrorMessage.setText("Invalid Password!");
+                    if (password.equals(Main.getStoredPassword())) {
+                        ImageIcon Icon = new ImageIcon(Main.imageBytes);
+
+                        dispose();
+                        new home(Main.selectedRole).show();
+                        home.avatar1.setIcon(Icon);
+                        Form7.avatar.setIcon(Icon);
+                    } else {
+                        logInErrorMessage.setText("Invalid Password!");
+                        
+                    }
                 }
 
                 // Close the ResultSet
                 rs.close();
                 s.close();
 
-                if (accountNotFound) {
-                    logInErrorMessage.setText("Account not found!");
-                }
             } catch (SQLException e) {
                 e.printStackTrace(); // Print the exception details for debugging
                 JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -362,12 +368,14 @@ public class logIn extends javax.swing.JFrame {
         forgotPasswordMsg obj5 = new forgotPasswordMsg();
         GlassPanePopup.showPopup(obj5);
         logInErrorMessage.setText("");
+        
     }//GEN-LAST:event_forgotPassActionPerformed
 
     private void forgotUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotUserActionPerformed
         forgotUsernameMsg obj0 = new forgotUsernameMsg();
         GlassPanePopup.showPopup(obj0);
         logInErrorMessage.setText("");
+        
     }//GEN-LAST:event_forgotUserActionPerformed
 
     private void showPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPassActionPerformed
@@ -377,18 +385,22 @@ public class logIn extends javax.swing.JFrame {
             passField.setEchoChar('•');
         }
         logInErrorMessage.setText("");
+        
     }//GEN-LAST:event_showPassActionPerformed
 
     private void selectRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectRoleMouseClicked
         logInErrorMessage.setText("");
+        
     }//GEN-LAST:event_selectRoleMouseClicked
 
     private void usernameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameFieldMouseClicked
         logInErrorMessage.setText("");
+        
     }//GEN-LAST:event_usernameFieldMouseClicked
 
     private void passFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passFieldMouseClicked
         logInErrorMessage.setText("");
+        
     }//GEN-LAST:event_passFieldMouseClicked
 
     public static void main(String args[]) {

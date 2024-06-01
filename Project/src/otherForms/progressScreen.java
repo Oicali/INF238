@@ -54,7 +54,7 @@ public class progressScreen extends javax.swing.JDialog {
         curvesPanel1.add(jLabel1);
         jLabel1.setBounds(220, 50, 100, 100);
 
-        jLabel2.setFont(new java.awt.Font("Goudy Old Style", 1, 48)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Century Schoolbook", 3, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Mark-It!");

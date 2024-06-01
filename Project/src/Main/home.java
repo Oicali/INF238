@@ -7,9 +7,15 @@ package Main;
 import interfaces.EventMenuSelected;
 import java.awt.Color;
 import java.awt.Shape;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import otherForms.*;
+import popUps.changePassword;
+import settings.GlassPanePopup;
 
 /**
  *
@@ -25,9 +31,11 @@ public class home extends javax.swing.JFrame {
     private Form2 form2;
     private Form3 form3;
     private Form7 form7;
+    public static int lastSelected;
 
     public home() {
         initComponents();
+        JDialog.setDefaultLookAndFeelDecorated(true);
         setBackground(new Color(0, 0, 0, 0));
         setForm(form0); // added to be in form 0 by default
         menu.initMoving(home.this);
@@ -90,9 +98,12 @@ public class home extends javax.swing.JFrame {
 
     public home(String Role) {
         initComponents();
+        GlassPanePopup.install(this);
+        JDialog.setDefaultLookAndFeelDecorated(true);
 
-        nameLbl.setText(Main.fname + " " + Main.mname + " " +Main.lname);
+        nameLbl.setText(Main.fname + " " + Main.mname + " " + Main.lname);
         roleLbl.setText(Main.selectedRole);
+        lastSelected = 0;
 
         setBackground(new Color(0, 0, 0, 0));
         form0 = new Form0();
@@ -108,42 +119,52 @@ public class home extends javax.swing.JFrame {
                 //System.out.println(index);
                 if (Main.selectedRole.equalsIgnoreCase("Administrator")) {
                     if (index == 0) {
+                        lastSelected = 0;
                         setForm(form0);
                     } else if (index == 1) {
+                        lastSelected = 1;
                         setForm(form1);
                     } else if (index == 2) {
+                        lastSelected = 2;
                         setForm(form2);
                     } else if (index == 3) {
+                        lastSelected = 3;
                         setForm(form3);
                     } else if (index == 4) {
-
+                        lastSelected = 4;
                     } else if (index == 5) {
-
+                        lastSelected = 5;
                     } else if (index == 6) {
-
+                        lastSelected = 6;
                     } else if (index == 7) {
+                        lastSelected = 7;
                         setForm(form7);
+
                     } else if (index == 11) {
-                        dispose();
-                        new logIn().show();
+                        logout();
                     }
 
                 } else if (Main.selectedRole.equalsIgnoreCase("Employee")) {
                     if (index == 0) {
+                        lastSelected = 0;
                         setForm(form0);
                     } else if (index == 1) {
+                        lastSelected = 1;
                         setForm(form2);
                     } else if (index == 2) {
+                        lastSelected = 2;
                         setForm(form3);
                     } else if (index == 3) {
+                        lastSelected = 3;
 
                     } else if (index == 4) {
-
+                        lastSelected = 4;
+                        
                     } else if (index == 5) {
+                        lastSelected = 5;
                         setForm(form7);
                     } else if (index == 11) {
-                        dispose();
-                        new logIn().show();
+                        logout();
                     }
 
                 }
@@ -166,24 +187,26 @@ public class home extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new otherForms.PanelBorder();
-        menu = new otherForms.Menu();
         jPanel1 = new javax.swing.JPanel();
         nameLbl = new javax.swing.JLabel();
         roleLbl = new javax.swing.JLabel();
         avatar1 = new components.ImageAvatar();
         mainPanel = new javax.swing.JPanel();
+        menu = new otherForms.Menu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1250, 750));
         setUndecorated(true);
 
+        panelBorder1.setBackground(new java.awt.Color(204, 204, 204));
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        nameLbl.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
+        nameLbl.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         nameLbl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         nameLbl.setText("User Name");
 
-        roleLbl.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        roleLbl.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         roleLbl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         roleLbl.setText("Role");
 
@@ -196,7 +219,7 @@ public class home extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(1023, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nameLbl, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(roleLbl, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -207,11 +230,11 @@ public class home extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(20, 20, 20)
                 .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(roleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(avatar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -226,22 +249,22 @@ public class home extends javax.swing.JFrame {
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -262,9 +285,18 @@ public class home extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    public void logout() {
+        int choice = JOptionPane.showConfirmDialog(this, "Do you want to log out?", "Log Out", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            Main.username = "";
+            Main.setStoredPassword("");
+            Main.selectedRole = "";
+            dispose();
+            new logIn().show();;
+
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -276,16 +308,24 @@ public class home extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(home.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(home.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(home.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(home.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

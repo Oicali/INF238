@@ -13,10 +13,11 @@ public class Main {
     public static String fullname = "";
     public static String mname = "";
     public static String lname = "";
+    public static String sname = "";
     public static String gender = "";
     public static String number = "";
     public static String birth = "";
-    public static String storedPassword = "";
+    private static String storedPassword = "";
     public static String email = "";
     public static String date = "";
     public static byte[] imageBytes;
@@ -56,6 +57,20 @@ public class Main {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    /**
+     * @return the storedPassword
+     */
+    public static String getStoredPassword() {
+        return storedPassword;
+    }
+
+    /**
+     * @param aStoredPassword the storedPassword to set
+     */
+    public static void setStoredPassword(String aStoredPassword) {
+        storedPassword = aStoredPassword;
     }
 }
 

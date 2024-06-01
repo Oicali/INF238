@@ -6,6 +6,10 @@
 package otherForms;
 
 import Main.*;
+import java.awt.event.ActionListener;
+import java.util.Collections;
+import popUps.changePassword;
+import settings.GlassPanePopup;
 
 /**
  *
@@ -13,25 +17,50 @@ import Main.*;
  */
 public class Form7 extends javax.swing.JPanel {
 
-
     public Form7() {
         initComponents();
-        
-        fullNameLbl.setText(Main.fullname);
-        roleLbl.setText(Main.selectedRole);
-        fullNameField.setText(" " + Main.fullname);
-        roleField.setText(" " + Main.selectedRole);
-        genderField.setText(" " + Main.gender);
-        birthField.setText(" " + Main.birth);
-        numberField.setText(" " + Main.number);
-        usernameField.setText(" " + Main.username);
-        passwordField.setText(" " + Main.storedPassword);
-        emailField.setText(" " + Main.email);
-        dateField.setText(Main.date);
-        
-    }
-   
 
+        String censoredPass = String.join("", Collections.nCopies(Main.getStoredPassword().length(), "*"));
+
+        String str1 = Main.number.substring(0, 7);
+        String str2 = Main.number.substring(7);
+        String maskedCN = String.join("", Collections.nCopies(str1.length(), "*"));
+        String censoredCN = maskedCN + str2;
+
+        String str3 = Main.email.substring(0, 5);
+        String str4 = Main.email.substring(5);
+        String maskedEmail = String.join("", Collections.nCopies(str4.length(), "*"));
+        String censoredEmail = str3 + maskedEmail;
+
+        fullNameLbl.setText(Main.fname + " "+ Main.mname + " " +Main.lname + " " + Main.sname);
+
+        roleLbl.setText(Main.selectedRole);
+
+        fNameField.setText(
+                " " + Main.fname);
+        mNameField.setText(
+                " " + Main.mname);
+        lNameField.setText(
+                " " + Main.lname);
+        sNameField.setText(
+                " " + Main.sname);
+        roleField.setText(
+                " " + Main.selectedRole);
+        genderField.setText(
+                " " + Main.gender);
+        birthField.setText(
+                " " + Main.birth);
+        numberField.setText(
+                " " + censoredCN);
+        usernameField.setText(
+                " " + Main.username);
+        passwordField.setText(
+                " " + censoredPass);
+        emailField.setText(
+                " " + censoredEmail);
+        dateField.setText(Main.date);
+
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -42,7 +71,7 @@ public class Form7 extends javax.swing.JPanel {
         roleLbl = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        fullNameField = new javax.swing.JTextField();
+        fNameField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         genderField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -59,8 +88,14 @@ public class Form7 extends javax.swing.JPanel {
         dateField = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        roundedButtons2 = new components.RoundedButtons();
+        changePassBtn = new components.RoundedButtons();
         roundedButtons3 = new components.RoundedButtons();
+        jLabel8 = new javax.swing.JLabel();
+        mNameField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        lNameField = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        sNameField = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -68,46 +103,55 @@ public class Form7 extends javax.swing.JPanel {
         avatar.setBorderSize(1);
         avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logInUser.png"))); // NOI18N
 
-        fullNameLbl.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
+        fullNameLbl.setFont(new java.awt.Font("SansSerif", 1, 40)); // NOI18N
         fullNameLbl.setText("User Full Name");
 
         roleLbl.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         roleLbl.setText("User Role ");
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel4.setText("Full Name: ");
+        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel4.setText("First Name: ");
 
-        jLabel5.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel5.setText("User Information");
         jLabel5.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
-        fullNameField.setEditable(false);
-        fullNameField.setBackground(new java.awt.Color(255, 255, 255));
-        fullNameField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        fullNameField.setForeground(new java.awt.Color(153, 153, 153));
-        fullNameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        fNameField.setEditable(false);
+        fNameField.setBackground(new java.awt.Color(255, 255, 255));
+        fNameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
+        fNameField.setForeground(new java.awt.Color(153, 153, 153));
+        fNameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        fNameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
-        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel6.setText("Gender: ");
 
         genderField.setEditable(false);
         genderField.setBackground(new java.awt.Color(255, 255, 255));
-        genderField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        genderField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         genderField.setForeground(new java.awt.Color(153, 153, 153));
         genderField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        genderField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
-        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel7.setText("Birth Date: ");
 
         birthField.setEditable(false);
         birthField.setBackground(new java.awt.Color(255, 255, 255));
-        birthField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        birthField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         birthField.setForeground(new java.awt.Color(153, 153, 153));
         birthField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        birthField.setSelectionColor(new java.awt.Color(204, 204, 204));
+        birthField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                birthFieldActionPerformed(evt);
+            }
+        });
 
-        numberField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        numberField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         numberField.setForeground(new java.awt.Color(153, 153, 153));
         numberField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        numberField.setSelectionColor(new java.awt.Color(204, 204, 204));
         numberField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numberFieldActionPerformed(evt);
@@ -116,60 +160,69 @@ public class Form7 extends javax.swing.JPanel {
 
         emailField.setEditable(false);
         emailField.setBackground(new java.awt.Color(255, 255, 255));
-        emailField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        emailField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         emailField.setForeground(new java.awt.Color(153, 153, 153));
         emailField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        emailField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
-        jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel10.setText("Username: ");
 
         usernameField.setEditable(false);
         usernameField.setBackground(new java.awt.Color(255, 255, 255));
-        usernameField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        usernameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         usernameField.setForeground(new java.awt.Color(153, 153, 153));
         usernameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        usernameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
-        jLabel11.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel11.setText("Password: ");
 
         passwordField.setEditable(false);
         passwordField.setBackground(new java.awt.Color(255, 255, 255));
-        passwordField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        passwordField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         passwordField.setForeground(new java.awt.Color(153, 153, 153));
         passwordField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        passwordField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
-        jLabel12.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(102, 102, 102));
         jLabel12.setText("Entry Date: ");
 
-        jLabel13.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel13.setText("User Role: ");
 
         roleField.setEditable(false);
         roleField.setBackground(new java.awt.Color(255, 255, 255));
-        roleField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        roleField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         roleField.setForeground(new java.awt.Color(153, 153, 153));
         roleField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        roleField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
-        dateField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        dateField.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         dateField.setForeground(new java.awt.Color(102, 102, 102));
-        dateField.setText("Date ");
+        dateField.setText("00-00-0000");
 
-        jLabel14.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel14.setText("Contact Number:");
 
-        jLabel15.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel15.setText("Registered Email:");
 
-        roundedButtons2.setForeground(new java.awt.Color(255, 255, 255));
-        roundedButtons2.setText("Change Password");
-        roundedButtons2.setBorderColor(new java.awt.Color(15, 106, 191));
-        roundedButtons2.setBorderPainted(false);
-        roundedButtons2.setColor(new java.awt.Color(15, 106, 191));
-        roundedButtons2.setColorClick(new java.awt.Color(51, 102, 255));
-        roundedButtons2.setColorOver(new java.awt.Color(15, 106, 191));
-        roundedButtons2.setFocusPainted(false);
-        roundedButtons2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        changePassBtn.setForeground(new java.awt.Color(255, 255, 255));
+        changePassBtn.setText("Change Password");
+        changePassBtn.setBorderColor(new java.awt.Color(15, 106, 191));
+        changePassBtn.setBorderPainted(false);
+        changePassBtn.setColor(new java.awt.Color(15, 106, 191));
+        changePassBtn.setColorClick(new java.awt.Color(51, 102, 255));
+        changePassBtn.setColorOver(new java.awt.Color(15, 106, 191));
+        changePassBtn.setFocusPainted(false);
+        changePassBtn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        changePassBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changePassBtnActionPerformed(evt);
+            }
+        });
 
         roundedButtons3.setForeground(new java.awt.Color(255, 255, 255));
         roundedButtons3.setText("Upload Image");
@@ -179,127 +232,164 @@ public class Form7 extends javax.swing.JPanel {
         roundedButtons3.setColorClick(new java.awt.Color(51, 102, 255));
         roundedButtons3.setColorOver(new java.awt.Color(15, 106, 191));
         roundedButtons3.setFocusPainted(false);
-        roundedButtons3.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        roundedButtons3.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel8.setText("Middle Name: ");
+
+        mNameField.setEditable(false);
+        mNameField.setBackground(new java.awt.Color(255, 255, 255));
+        mNameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
+        mNameField.setForeground(new java.awt.Color(153, 153, 153));
+        mNameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mNameField.setSelectionColor(new java.awt.Color(204, 204, 204));
+
+        jLabel9.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel9.setText("Last Name: ");
+
+        lNameField.setEditable(false);
+        lNameField.setBackground(new java.awt.Color(255, 255, 255));
+        lNameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
+        lNameField.setForeground(new java.awt.Color(153, 153, 153));
+        lNameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lNameField.setSelectionColor(new java.awt.Color(204, 204, 204));
+
+        jLabel16.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel16.setText("Suffix: ");
+
+        sNameField.setEditable(false);
+        sNameField.setBackground(new java.awt.Color(255, 255, 255));
+        sNameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
+        sNameField.setForeground(new java.awt.Color(153, 153, 153));
+        sNameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sNameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(roleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dateField))
-                            .addComponent(fullNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(roundedButtons2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(roundedButtons3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(changePassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addComponent(roundedButtons3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addGap(51, 51, 51))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(genderField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fullNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(birthField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(fNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                                    .addComponent(mNameField)
+                                    .addComponent(lNameField)
+                                    .addComponent(sNameField)
+                                    .addComponent(genderField)
+                                    .addComponent(birthField))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel13)
-                                    .addGap(52, 52, 52)
-                                    .addComponent(roleField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel10)
-                                        .addComponent(jLabel11))
-                                    .addGap(50, 50, 50)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(passwordField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jLabel14))
+                                    .addGap(20, 20, 20))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel15)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel13))
+                                .addGap(71, 71, 71)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(emailField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(numberField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                            .addComponent(passwordField)
+                            .addComponent(roleField)
+                            .addComponent(usernameField)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(fullNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(roleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(dateField))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(12, 12, 12)
                         .addComponent(fullNameLbl)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(dateField)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(roleLbl))))
-                    .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(roleLbl)
+                            .addComponent(jLabel12)
+                            .addComponent(dateField))))
+                .addGap(40, 40, 40)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(fullNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(genderField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(birthField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(roleField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roundedButtons3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(roundedButtons2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41))
+                    .addComponent(jLabel4)
+                    .addComponent(fNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(mNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel13))
+                    .addComponent(roleField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(lNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16)
+                    .addComponent(sNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(genderField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(birthField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(115, 115, 115)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(changePassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(roundedButtons3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -307,13 +397,23 @@ public class Form7 extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_numberFieldActionPerformed
 
+    private void birthFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_birthFieldActionPerformed
+
+    private void changePassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePassBtnActionPerformed
+        changePassword obj11 = new changePassword();
+        GlassPanePopup.showPopup(obj11);
+    }//GEN-LAST:event_changePassBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static components.ImageAvatar avatar;
     private javax.swing.JTextField birthField;
+    public components.RoundedButtons changePassBtn;
     private javax.swing.JLabel dateField;
     private javax.swing.JTextField emailField;
-    private javax.swing.JTextField fullNameField;
+    private javax.swing.JTextField fNameField;
     private javax.swing.JLabel fullNameLbl;
     private javax.swing.JTextField genderField;
     private javax.swing.JLabel jLabel10;
@@ -322,16 +422,21 @@ public class Form7 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField lNameField;
+    private javax.swing.JTextField mNameField;
     private javax.swing.JTextField numberField;
-    private javax.swing.JTextField passwordField;
+    public static javax.swing.JTextField passwordField;
     private javax.swing.JTextField roleField;
     private javax.swing.JLabel roleLbl;
-    private components.RoundedButtons roundedButtons2;
     private components.RoundedButtons roundedButtons3;
+    private javax.swing.JTextField sNameField;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }
