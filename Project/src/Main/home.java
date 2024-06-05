@@ -31,7 +31,7 @@ public class home extends javax.swing.JFrame {
     private Form3 form3;
     private Form7 form7;
     public static int lastSelected;
-    public static Notifications successChangePassword;
+    public static Notifications successChangePassword, successChangeImg;
 
     public home() {
         initComponents();
@@ -106,7 +106,8 @@ public class home extends javax.swing.JFrame {
         roleLbl.setText(Main.selectedRole);
         lastSelected = 0;
         
-        successChangePassword = new Notifications (this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password!");
+        successChangePassword = new Notifications (this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password");
+        successChangeImg = new Notifications (this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Profile Image Changed", "Log in to see changes");
         
 
         //Set up forms

@@ -49,20 +49,19 @@
                           <Component id="lbIcon" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="lbMessageText" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="lbMessage" min="-2" pref="81" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="307" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="lbMessageText" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbMessage" min="-2" pref="336" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace pref="52" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="pnl1" alignment="0" pref="443" max="32767" attributes="0"/>
-                      <Component id="pnl2" pref="443" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="pnl1" alignment="0" pref="443" max="32767" attributes="0"/>
+                              <Component id="pnl2" pref="443" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="pnl3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>

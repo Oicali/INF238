@@ -6,8 +6,21 @@
 package otherForms;
 
 import Main.*;
+import java.awt.Graphics2D;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collections;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import popUps.changePassword;
 import settings.GlassPanePopup;
 
@@ -16,6 +29,8 @@ import settings.GlassPanePopup;
  * @author Marilou Ilacio
  */
 public class Form7 extends javax.swing.JPanel {
+
+    JFileChooser file = new JFileChooser();
 
     public Form7() {
         initComponents();
@@ -32,7 +47,7 @@ public class Form7 extends javax.swing.JPanel {
         String maskedEmail = String.join("", Collections.nCopies(str4.length(), "*"));
         String censoredEmail = str3 + maskedEmail;
 
-        fullNameLbl.setText(Main.fname + " "+ Main.mname + " " +Main.lname + " " + Main.sname);
+        fullNameLbl.setText(Main.fname + " " + Main.mname + " " + Main.lname + " " + Main.sname);
 
         roleLbl.setText(Main.selectedRole);
 
@@ -412,11 +427,93 @@ public class Form7 extends javax.swing.JPanel {
     }//GEN-LAST:event_changePassBtnActionPerformed
 
     private void uploadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadBtnActionPerformed
-        home.successChangePassword.showNotification();
+        // Set the current directory
+        file.setCurrentDirectory(new File(System.getProperty("user.dir")));
+
+        // Set the file filter for image files
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("All Pic", "png", "jpg");
+        file.setFileFilter(filter);
+
+        // Show the save dialog
+        int result = file.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = file.getSelectedFile();
+            String filePath = selectedFile.getAbsolutePath();
+
+            // Validate file extension
+            if (!filePath.toLowerCase().endsWith(".png") && !filePath.toLowerCase().endsWith(".jpg")) {
+                JOptionPane.showMessageDialog(null, "Please select a valid image file (PNG, JPG).", "Invalid File", JOptionPane.ERROR_MESSAGE);
+            } else {
+
+                // Destination directory
+                String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads";
+                File destinationFile = new File(destinationDir, selectedFile.getName());
+
+                // Copy the file to the destination
+                try {
+                    resizeAndCopyImage(selectedFile, destinationFile, 125, 125);
+                    
+
+                    System.out.println(destinationFile.getName());
+                    String file = destinationFile.getName();
+
+                    try {
+                        // Create a statement
+                        Statement s = Main.getDbCon().createStatement();
+                        String query = "UPDATE users SET img = LOAD_FILE('" + destinationFile.getAbsolutePath().replace("\\", "\\\\") + "') WHERE username = '" + Main.username + "'";
+
+                        int rowsAffected = s.executeUpdate(query);
+
+                        if (rowsAffected > 0) {
+                           
+                            home.successChangeImg.showNotification();
+                            
+                            
+
+                        } else {
+                            System.out.println("No rows were updated to change image");
+                        }
+
+                        // Close the statement
+                        s.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace(); // Print the exception details for debugging
+                        JOptionPane.showMessageDialog(null, "An error occurred with Mysql. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+                    } finally {
+                        Main.closeCon(); // Ensure the connection is closed
+                    }
+
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "File upload failed!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+        }
+
+        //System.out.println(file.getSelectedFile().getAbsolutePath());
+
     }//GEN-LAST:event_uploadBtnActionPerformed
 
+    private static void resizeAndCopyImage(File sourceFile, File destFile, int width, int height) throws IOException {
+        // Read the source image
+        BufferedImage originalImage = ImageIO.read(sourceFile);
+        
+        // Create a new buffered image with the desired dimensions
+        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-    
+        // Draw the original image into the new image with the new dimensions
+        Graphics2D g2d = resizedImage.createGraphics();
+        g2d.drawImage(originalImage, 0, 0, width, height, null);
+        g2d.dispose();
+
+        // Extract the file extension
+        String formatName = destFile.getName().substring(destFile.getName().lastIndexOf(".") + 1);
+
+        // Write the resized image to the destination file
+        ImageIO.write(resizedImage, formatName, destFile);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static components.ImageAvatar avatar;
     private javax.swing.JTextField birthField;

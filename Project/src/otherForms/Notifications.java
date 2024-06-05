@@ -194,11 +194,11 @@ public class Notifications extends javax.swing.JPanel {
         g2.fillRect(x, y, width, height);
         if (type == Type.SUCCESS) {
             g2.setColor(new Color(18, 163, 24));
-            line1.setBackground(new Color(0,153,0));
-            line2.setBackground(new Color(0,153,0));
-            pnl1.setBackground(new Color(0,153,0));
-            pnl2.setBackground(new Color(0,153,0));
-            pnl3.setBackground(new Color(0,153,0));
+            line1.setBackground(new Color(70,191,50));
+            line2.setBackground(new Color(70,191,50));
+            pnl1.setBackground(new Color(70,191,50));
+            pnl2.setBackground(new Color(70,191,50));
+            pnl3.setBackground(new Color(70,191,50));
         } else if (type == Type.INFO) {
             g2.setColor(new Color(28, 139, 206));
             line1.setBackground(new Color(15,106,191));
@@ -350,15 +350,14 @@ public class Notifications extends javax.swing.JPanel {
                         .addComponent(lbIcon)
                         .addGap(15, 15, 15)
                         .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelBorder2Layout.createSequentialGroup()
-                                .addComponent(lbMessageText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(panelBorder2Layout.createSequentialGroup()
-                                .addComponent(lbMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 307, Short.MAX_VALUE))))
-                    .addComponent(pnl1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
-                    .addComponent(pnl2, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbMessageText)
+                            .addComponent(lbMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE))
+                    .addGroup(panelBorder2Layout.createSequentialGroup()
+                        .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnl1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                            .addComponent(pnl2, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
+                        .addGap(0, 0, 0)))
                 .addComponent(pnl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
@@ -403,14 +402,11 @@ public class Notifications extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbIcon;
     private javax.swing.JLabel lbMessage;
     private javax.swing.JLabel lbMessageText;
     private otherForms.PanelBorder line1;
     private javax.swing.JPanel line2;
-    private otherForms.PanelBorder line3;
-    private javax.swing.JPanel line4;
     private otherForms.PanelBorder panelBorder2;
     private javax.swing.JPanel pnl1;
     private javax.swing.JPanel pnl2;

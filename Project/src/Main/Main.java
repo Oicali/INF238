@@ -21,6 +21,7 @@ public class Main {
     public static String email = "";
     public static String date = "";
     public static byte[] imageBytes;
+    
 
   public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
