@@ -90,7 +90,11 @@ public class ListMenu<E extends Object> extends JList<E> {
                 }
                 MenuItem item = new MenuItem(data);
 
-                //item.setSelected(selectedIndex == index); 
+                /* This original!!!
+                item.setSelected(selectedIndex == index); 
+                item.setOver(overIndex == index);
+                */
+                
                 item.setOver(overIndex == index);
                 
                 // This is added!!!

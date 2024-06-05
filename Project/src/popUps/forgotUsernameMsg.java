@@ -198,12 +198,12 @@ public class forgotUsernameMsg extends javax.swing.JPanel {
             }
         });
 
-        txt.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        txt.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt.setForeground(new java.awt.Color(102, 102, 102));
         txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt.setText("Enter your registered email address and receive");
 
-        txt1.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        txt1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt1.setForeground(new java.awt.Color(102, 102, 102));
         txt1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt1.setText("an email to get your username.");
@@ -248,7 +248,7 @@ public class forgotUsernameMsg extends javax.swing.JPanel {
                 .addComponent(field, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(sendUsernameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -58,12 +58,12 @@ public class resetPasswordMsg extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(15, 106, 191));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Reset your password!");
 
-        txt.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        txt.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt.setForeground(new java.awt.Color(102, 102, 102));
         txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt.setText("Enter your new password for the account:");
@@ -77,7 +77,7 @@ public class resetPasswordMsg extends javax.swing.JPanel {
         cmdCancel.setColorClick(new java.awt.Color(191, 50, 50));
         cmdCancel.setColorOver(new java.awt.Color(191, 50, 50));
         cmdCancel.setFocusPainted(false);
-        cmdCancel.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        cmdCancel.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         cmdCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdCancelActionPerformed(evt);
@@ -93,18 +93,19 @@ public class resetPasswordMsg extends javax.swing.JPanel {
         setNewPassBtn.setColorClick(new java.awt.Color(70, 191, 50));
         setNewPassBtn.setColorOver(new java.awt.Color(70, 191, 50));
         setNewPassBtn.setFocusPainted(false);
-        setNewPassBtn.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        setNewPassBtn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         setNewPassBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 setNewPassBtnActionPerformed(evt);
             }
         });
 
-        txt1.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
+        txt1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         txt1.setForeground(new java.awt.Color(102, 102, 102));
         txt1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt1.setText("@gmail.com");
 
+        newPassField.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         newPassField.setLabelText("");
         newPassField.setSelectionColor(new java.awt.Color(204, 204, 204));
         newPassField.addActionListener(new java.awt.event.ActionListener() {
@@ -132,49 +133,47 @@ public class resetPasswordMsg extends javax.swing.JPanel {
                 .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(jLabel1))
+                        .addComponent(showNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(newPassField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(showNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 5, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(setNewPassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(53, 53, 53))
+                                .addComponent(setNewPassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(53, 53, 53))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt)
                 .addGap(3, 3, 3)
                 .addComponent(txt1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(newPassField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(newPassField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(showNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(setNewPassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(setNewPassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
-        GlassPanePopup.closePopupLast();
-    }//GEN-LAST:event_cmdCancelActionPerformed
 
     private void setNewPassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setNewPassBtnActionPerformed
         if (!newPassField.getText().isEmpty()) {
@@ -218,6 +217,10 @@ public class resetPasswordMsg extends javax.swing.JPanel {
             newPassField.setEchoChar('•');
         }
     }//GEN-LAST:event_showNewPassActionPerformed
+
+    private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
+        GlassPanePopup.closePopupLast();
+    }//GEN-LAST:event_cmdCancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

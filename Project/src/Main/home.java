@@ -10,6 +10,7 @@ import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -23,15 +24,14 @@ import settings.GlassPanePopup;
  */
 public class home extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Main
-     */
+    ImageIcon image = new ImageIcon(getClass().getResource("/resources/logoSmall.png"));
     private Form0 form0;
     private Form1 form1;
     private Form2 form2;
     private Form3 form3;
     private Form7 form7;
     public static int lastSelected;
+    public static Notifications successChangePassword;
 
     public home() {
         initComponents();
@@ -99,12 +99,17 @@ public class home extends javax.swing.JFrame {
     public home(String Role) {
         initComponents();
         GlassPanePopup.install(this);
-        JDialog.setDefaultLookAndFeelDecorated(true);
+        setIconImage(image.getImage());
+        //JDialog.setDefaultLookAndFeelDecorated(true);
 
         nameLbl.setText(Main.fname + " " + Main.mname + " " + Main.lname);
         roleLbl.setText(Main.selectedRole);
         lastSelected = 0;
+        
+        successChangePassword = new Notifications (this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password!");
+        
 
+        //Set up forms
         setBackground(new Color(0, 0, 0, 0));
         form0 = new Form0();
         form1 = new Form1();
@@ -296,6 +301,7 @@ public class home extends javax.swing.JFrame {
 
         }
     }
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

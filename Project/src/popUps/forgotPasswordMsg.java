@@ -160,7 +160,7 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Forgot your password?");
 
-        txt.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        txt.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt.setForeground(new java.awt.Color(102, 102, 102));
         txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt.setText("Enter your registered email address and receive");
@@ -199,7 +199,7 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
             }
         });
 
-        txt1.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        txt1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt1.setForeground(new java.awt.Color(102, 102, 102));
         txt1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt1.setText("a verification code to reset your password.");
@@ -245,7 +245,7 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                        .addGap(48, 48, 48)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)

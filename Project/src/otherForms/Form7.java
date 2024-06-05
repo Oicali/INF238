@@ -89,7 +89,7 @@ public class Form7 extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         changePassBtn = new components.RoundedButtons();
-        roundedButtons3 = new components.RoundedButtons();
+        uploadBtn = new components.RoundedButtons();
         jLabel8 = new javax.swing.JLabel();
         mNameField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -224,15 +224,20 @@ public class Form7 extends javax.swing.JPanel {
             }
         });
 
-        roundedButtons3.setForeground(new java.awt.Color(255, 255, 255));
-        roundedButtons3.setText("Upload Image");
-        roundedButtons3.setBorderColor(new java.awt.Color(15, 106, 191));
-        roundedButtons3.setBorderPainted(false);
-        roundedButtons3.setColor(new java.awt.Color(15, 106, 191));
-        roundedButtons3.setColorClick(new java.awt.Color(51, 102, 255));
-        roundedButtons3.setColorOver(new java.awt.Color(15, 106, 191));
-        roundedButtons3.setFocusPainted(false);
-        roundedButtons3.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        uploadBtn.setForeground(new java.awt.Color(255, 255, 255));
+        uploadBtn.setText("Upload Image");
+        uploadBtn.setBorderColor(new java.awt.Color(15, 106, 191));
+        uploadBtn.setBorderPainted(false);
+        uploadBtn.setColor(new java.awt.Color(15, 106, 191));
+        uploadBtn.setColorClick(new java.awt.Color(51, 102, 255));
+        uploadBtn.setColorOver(new java.awt.Color(15, 106, 191));
+        uploadBtn.setFocusPainted(false);
+        uploadBtn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        uploadBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uploadBtnActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel8.setText("Middle Name: ");
@@ -274,7 +279,7 @@ public class Form7 extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(changePassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(59, 59, 59)
-                        .addComponent(roundedButtons3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(uploadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -388,7 +393,7 @@ public class Form7 extends javax.swing.JPanel {
                 .addGap(115, 115, 115)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(changePassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(roundedButtons3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(uploadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -406,7 +411,12 @@ public class Form7 extends javax.swing.JPanel {
         GlassPanePopup.showPopup(obj11);
     }//GEN-LAST:event_changePassBtnActionPerformed
 
+    private void uploadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadBtnActionPerformed
+        home.successChangePassword.showNotification();
+    }//GEN-LAST:event_uploadBtnActionPerformed
 
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static components.ImageAvatar avatar;
     private javax.swing.JTextField birthField;
@@ -435,8 +445,8 @@ public class Form7 extends javax.swing.JPanel {
     public static javax.swing.JTextField passwordField;
     private javax.swing.JTextField roleField;
     private javax.swing.JLabel roleLbl;
-    private components.RoundedButtons roundedButtons3;
     private javax.swing.JTextField sNameField;
+    private components.RoundedButtons uploadBtn;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }

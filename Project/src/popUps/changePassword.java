@@ -6,6 +6,7 @@
 package popUps;
 
 import Main.Main;
+import Main.home;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -55,6 +56,9 @@ public class changePassword extends javax.swing.JPanel {
         CPField = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         changePassBtn = new components.RoundedButtons();
+        lbl = new javax.swing.JLabel();
+        lbl2 = new javax.swing.JLabel();
+        lbl3 = new javax.swing.JLabel();
 
         cmdCancel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         cmdCancel.setForeground(new java.awt.Color(153, 153, 153));
@@ -74,18 +78,36 @@ public class changePassword extends javax.swing.JPanel {
         jLabel1.setText("Change your Password!");
 
         OPField.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        OPField.setSelectionColor(new java.awt.Color(204, 204, 204));
+        OPField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                OPFieldMouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Old Password:");
 
         NPField.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        NPField.setSelectionColor(new java.awt.Color(204, 204, 204));
+        NPField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NPFieldMouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("New Password:");
 
         CPField.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        CPField.setSelectionColor(new java.awt.Color(204, 204, 204));
+        CPField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CPFieldMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -108,10 +130,29 @@ public class changePassword extends javax.swing.JPanel {
             }
         });
 
+        lbl.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lbl.setForeground(new java.awt.Color(255, 0, 0));
+        lbl.setText(" ");
+
+        lbl2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lbl2.setForeground(new java.awt.Color(255, 51, 51));
+        lbl2.setText(" ");
+
+        lbl3.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lbl3.setForeground(new java.awt.Color(255, 51, 0));
+        lbl3.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmdCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(129, 129, 129))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -124,22 +165,20 @@ public class changePassword extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(OPField, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl)
+                                    .addComponent(OPField, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CPField, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(CPField, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                                    .addComponent(lbl3)
+                                    .addComponent(lbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(211, 211, 211)
+                        .addGap(210, 210, 210)
                         .addComponent(changePassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 43, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmdCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(129, 129, 129))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,17 +191,23 @@ public class changePassword extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(OPField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
+                .addComponent(lbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(NPField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
+                .addComponent(lbl2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(CPField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl3)
+                .addGap(18, 18, 18)
                 .addComponent(changePassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -171,51 +216,101 @@ public class changePassword extends javax.swing.JPanel {
     }//GEN-LAST:event_cmdCancelActionPerformed
 
     private void changePassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePassBtnActionPerformed
+        lbl.setText(" ");
+        lbl2.setText(" ");
+        lbl3.setText(" ");
+
         String oldPassword = OPField.getText();
         String newPassword = NPField.getText();
         String confirmPassword = CPField.getText();
 
-        if (OPField.getText().isEmpty() || NPField.getText().isEmpty() || CPField.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please complete all fields!", "", JOptionPane.ERROR_MESSAGE);
+        if (OPField.getText().isEmpty() & NPField.getText().isEmpty() & CPField.getText().isEmpty()) {
+            //JOptionPane.showMessageDialog(null, "Please complete all fields!", "", JOptionPane.ERROR_MESSAGE);
+            lbl.setText("Please complete this field!");
+            lbl2.setText("Please complete this field!");
+            lbl3.setText("Please complete this field!");
+        } else if (NPField.getText().isEmpty() & CPField.getText().isEmpty()) {
+            lbl2.setText("Please complete this field!");
+            lbl3.setText("Please complete this field!");
+        } else if (OPField.getText().isEmpty() & CPField.getText().isEmpty()) {
+            lbl.setText("Please complete this field!");
+            lbl3.setText("Please complete this field!");
+        } else if (OPField.getText().isEmpty() & NPField.getText().isEmpty()) {
+            lbl.setText("Please complete this field!");
+            lbl2.setText("Please complete this field!");
+        } else if (OPField.getText().isEmpty()) {
+            lbl.setText("Please complete this field!");
+        } else if (NPField.getText().isEmpty()) {
+            lbl2.setText("Please complete this field!");
+        } else if (CPField.getText().isEmpty()) {
+            lbl3.setText("Please complete this field!");
         } else {
             if (oldPassword.equals(Main.getStoredPassword())) {
                 if (!oldPassword.equals(newPassword)) {
-                    if (newPassword.equals(confirmPassword)) {
-                        try {
-                            // Create a statement
-                            Statement s = Main.getDbCon().createStatement();
-                            int rowsAffected = s.executeUpdate("UPDATE users SET password = '" + newPassword + "' WHERE username = '" + Main.username +"'");
-
-                            if (rowsAffected > 0) {
-                                Main.setStoredPassword(newPassword);
-                                String censoredPass = String.join("", Collections.nCopies(Main.getStoredPassword().length(), "*"));
-                                Form7.passwordField.setText(" " +censoredPass);
-                                GlassPanePopup.closePopupLast();
-                            } else {
-                                System.out.println("No rows were updated. Check if the password is correct.");
-                            }
-
-                            // Close the statement
-                            s.close();
-                        } catch (SQLException e) {
-                            e.printStackTrace(); // Print the exception details for debugging
-                            JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
-                        } finally {
-                            Main.closeCon(); // Ensure the connection is closed
-                        }
+                    if (NPField.getText().trim().length() < 8) {
+                        lbl2.setText("Password must be at least 8 Characters!");
+                        NPField.requestFocus();
                     } else {
-                        JOptionPane.showMessageDialog(null, "New Password does not match!", "Invalid Password", JOptionPane.ERROR_MESSAGE);
+
+                        if (newPassword.equals(confirmPassword)) {
+                            try {
+                                // Create a statement
+                                Statement s = Main.getDbCon().createStatement();
+                                int rowsAffected = s.executeUpdate("UPDATE users SET password = '" + newPassword + "' WHERE username = '" + Main.username + "'");
+
+                                if (rowsAffected > 0) {
+                                    Main.setStoredPassword(newPassword);
+                                    String censoredPass = String.join("", Collections.nCopies(Main.getStoredPassword().length(), "*"));
+                                    Form7.passwordField.setText(" " + censoredPass);
+                                    GlassPanePopup.closePopupLast();
+                                    home.successChangePassword.showNotification();
+
+                                } else {
+                                    System.out.println("No rows were updated. Check if the password is correct.");
+                                }
+
+                                // Close the statement
+                                s.close();
+                            } catch (SQLException e) {
+                                e.printStackTrace(); // Print the exception details for debugging
+                                JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+                            } finally {
+                                Main.closeCon(); // Ensure the connection is closed
+                            }
+                        } else {
+                            lbl3.setText("New password does not match!");
+                            //JOptionPane.showMessageDialog(null, "New Password does not match!", "Invalid Password", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "New password must not be the\n  same as your old password!", "Invalid Password", JOptionPane.ERROR_MESSAGE);
+                    lbl2.setText("Cannot be the same as old password!");
+                    //JOptionPane.showMessageDialog(null, "New password must not be the\n  same as your old password!", "Invalid Password", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Wrong Old Password!", "Invalid Password", JOptionPane.ERROR_MESSAGE);
+                lbl.setText("Wrong Old Password!");
             }
         }
 
-        
+
     }//GEN-LAST:event_changePassBtnActionPerformed
+
+    private void OPFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OPFieldMouseClicked
+        lbl.setText(" ");
+        lbl2.setText(" ");
+        lbl3.setText(" ");
+    }//GEN-LAST:event_OPFieldMouseClicked
+
+    private void NPFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NPFieldMouseClicked
+        lbl.setText(" ");
+        lbl2.setText(" ");
+        lbl3.setText(" ");
+    }//GEN-LAST:event_NPFieldMouseClicked
+
+    private void CPFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CPFieldMouseClicked
+        lbl.setText(" ");
+        lbl2.setText(" ");
+        lbl3.setText(" ");
+    }//GEN-LAST:event_CPFieldMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -228,5 +323,8 @@ public class changePassword extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lbl;
+    private javax.swing.JLabel lbl2;
+    private javax.swing.JLabel lbl3;
     // End of variables declaration//GEN-END:variables
 }
