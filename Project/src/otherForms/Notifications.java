@@ -39,7 +39,7 @@ public class Notifications extends javax.swing.JPanel {
         init(message, submsg);
         initAnimator(); 
         setBackground(new Color(0, 0, 0, 0));
-        
+        setOpaque(false);
     }
 
     private void init(String message, String submsg) {
@@ -194,18 +194,16 @@ public class Notifications extends javax.swing.JPanel {
         g2.fillRect(x, y, width, height);
         if (type == Type.SUCCESS) {
             g2.setColor(new Color(18, 163, 24));
-            line1.setBackground(new Color(70,191,50));
-            line2.setBackground(new Color(70,191,50));
-            pnl1.setBackground(new Color(70,191,50));
-            pnl2.setBackground(new Color(70,191,50));
-            pnl3.setBackground(new Color(70,191,50));
+            line1.setBackground(new Color(170,237,166));
+            line2.setBackground(new Color(210,239,211));
+            line3.setBackground(new Color(210,239,211));
+            pnl1.setBackground(new Color(106,144,95));
         } else if (type == Type.INFO) {
             g2.setColor(new Color(28, 139, 206));
             line1.setBackground(new Color(15,106,191));
             line2.setBackground(new Color(15,106,191));
+            line3.setBackground(new Color(15,106,191));
             pnl1.setBackground(new Color(15,106,191));
-            pnl2.setBackground(new Color(15,106,191));
-            pnl3.setBackground(new Color(15,106,191));
             
         } else {
             g2.setColor(new Color(241, 196, 15));
@@ -242,151 +240,103 @@ public class Notifications extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelBorder2 = new otherForms.PanelBorder();
-        line1 = new otherForms.PanelBorder();
+        pnl1 = new otherForms.PanelBorder();
         line2 = new javax.swing.JPanel();
+        line1 = new otherForms.PanelBorder();
         lbMessage = new javax.swing.JLabel();
+        line3 = new otherForms.PanelBorder();
         lbIcon = new javax.swing.JLabel();
         lbMessageText = new javax.swing.JLabel();
-        pnl1 = new javax.swing.JPanel();
-        pnl2 = new javax.swing.JPanel();
-        pnl3 = new otherForms.PanelBorder();
 
         setBackground(new java.awt.Color(204, 204, 204));
+        setPreferredSize(new java.awt.Dimension(450, 100));
 
-        panelBorder2.setBackground(new java.awt.Color(255, 255, 255));
+        pnl1.setBackground(new java.awt.Color(106, 144, 95));
+        pnl1.setPreferredSize(new java.awt.Dimension(450, 100));
+        pnl1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        line1.setBackground(new java.awt.Color(51, 51, 51));
-        line1.setPreferredSize(new java.awt.Dimension(8, 80));
-
-        line2.setBackground(new java.awt.Color(0, 153, 0));
-        line2.setPreferredSize(new java.awt.Dimension(4, 80));
+        line2.setBackground(new java.awt.Color(210, 239, 211));
 
         javax.swing.GroupLayout line2Layout = new javax.swing.GroupLayout(line2);
         line2.setLayout(line2Layout);
         line2Layout.setHorizontalGroup(
             line2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 4, Short.MAX_VALUE)
+            .addGap(0, 448, Short.MAX_VALUE)
         );
         line2Layout.setVerticalGroup(
             line2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
+            .addGap(0, 15, Short.MAX_VALUE)
         );
+
+        pnl1.add(line2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 42, 448, 15));
+
+        line1.setBackground(new java.awt.Color(170, 237, 166));
+
+        lbMessage.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        lbMessage.setForeground(new java.awt.Color(0, 0, 0));
+        lbMessage.setText("Message");
 
         javax.swing.GroupLayout line1Layout = new javax.swing.GroupLayout(line1);
         line1.setLayout(line1Layout);
         line1Layout.setHorizontalGroup(
             line1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, line1Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(line2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(line1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(lbMessage)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         line1Layout.setVerticalGroup(
             line1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(line2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(line1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(lbMessage)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lbMessage.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        lbMessage.setForeground(new java.awt.Color(0, 0, 0));
-        lbMessage.setText("Message");
+        pnl1.add(line1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 448, -1));
+
+        line3.setBackground(new java.awt.Color(210, 239, 211));
 
         lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/sucess.png"))); // NOI18N
 
         lbMessageText.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        lbMessageText.setForeground(new java.awt.Color(153, 153, 153));
         lbMessageText.setText("jLabel2");
 
-        pnl1.setBackground(new java.awt.Color(153, 153, 153));
-        pnl1.setPreferredSize(new java.awt.Dimension(0, 1));
-
-        javax.swing.GroupLayout pnl1Layout = new javax.swing.GroupLayout(pnl1);
-        pnl1.setLayout(pnl1Layout);
-        pnl1Layout.setHorizontalGroup(
-            pnl1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        javax.swing.GroupLayout line3Layout = new javax.swing.GroupLayout(line3);
+        line3.setLayout(line3Layout);
+        line3Layout.setHorizontalGroup(
+            line3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(line3Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(lbIcon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbMessageText)
+                .addContainerGap(345, Short.MAX_VALUE))
         );
-        pnl1Layout.setVerticalGroup(
-            pnl1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1, Short.MAX_VALUE)
-        );
-
-        pnl2.setBackground(new java.awt.Color(102, 102, 102));
-        pnl2.setPreferredSize(new java.awt.Dimension(0, 1));
-
-        javax.swing.GroupLayout pnl2Layout = new javax.swing.GroupLayout(pnl2);
-        pnl2.setLayout(pnl2Layout);
-        pnl2Layout.setHorizontalGroup(
-            pnl2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pnl2Layout.setVerticalGroup(
-            pnl2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1, Short.MAX_VALUE)
-        );
-
-        pnl3.setBackground(new java.awt.Color(153, 153, 153));
-        pnl3.setPreferredSize(new java.awt.Dimension(1, 80));
-
-        javax.swing.GroupLayout pnl3Layout = new javax.swing.GroupLayout(pnl3);
-        pnl3.setLayout(pnl3Layout);
-        pnl3Layout.setHorizontalGroup(
-            pnl3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1, Short.MAX_VALUE)
-        );
-        pnl3Layout.setVerticalGroup(
-            pnl3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
-        panelBorder2.setLayout(panelBorder2Layout);
-        panelBorder2Layout.setHorizontalGroup(
-            panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder2Layout.createSequentialGroup()
-                .addComponent(line1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder2Layout.createSequentialGroup()
+        line3Layout.setVerticalGroup(
+            line3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(line3Layout.createSequentialGroup()
+                .addGroup(line3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(line3Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lbIcon))
+                    .addGroup(line3Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(lbIcon)
-                        .addGap(15, 15, 15)
-                        .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbMessageText)
-                            .addComponent(lbMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE))
-                    .addGroup(panelBorder2Layout.createSequentialGroup()
-                        .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnl1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
-                            .addComponent(pnl2, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
-                        .addGap(0, 0, 0)))
-                .addComponent(pnl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                        .addComponent(lbMessageText)))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
-        panelBorder2Layout.setVerticalGroup(
-            panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(line1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(panelBorder2Layout.createSequentialGroup()
-                .addComponent(pnl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder2Layout.createSequentialGroup()
-                        .addComponent(lbMessage)
-                        .addGap(5, 5, 5)
-                        .addComponent(lbMessageText))
-                    .addComponent(lbIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(pnl3, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-        );
+
+        pnl1.add(line3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 50, 448, 49));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnl1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
     private void cmdCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCloseActionPerformed
@@ -407,9 +357,7 @@ public class Notifications extends javax.swing.JPanel {
     private javax.swing.JLabel lbMessageText;
     private otherForms.PanelBorder line1;
     private javax.swing.JPanel line2;
-    private otherForms.PanelBorder panelBorder2;
-    private javax.swing.JPanel pnl1;
-    private javax.swing.JPanel pnl2;
-    private otherForms.PanelBorder pnl3;
+    private otherForms.PanelBorder line3;
+    private otherForms.PanelBorder pnl1;
     // End of variables declaration//GEN-END:variables
 }

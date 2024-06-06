@@ -29,86 +29,23 @@ public class home extends javax.swing.JFrame {
     private Form1 form1;
     private Form2 form2;
     private Form3 form3;
-    private Form7 form7;
+    public static Form6 form6;
+    public static Form7 form7;
     public static int lastSelected;
     public static Notifications successChangePassword, successChangeImg;
 
     public home() {
         initComponents();
-        JDialog.setDefaultLookAndFeelDecorated(true);
-        setBackground(new Color(0, 0, 0, 0));
-        setForm(form0); // added to be in form 0 by default
-        menu.initMoving(home.this);
-        menu.addEventMenuSelected(new EventMenuSelected() {
-            @Override
-            public void selected(int index) {
-                //System.out.println(index);
-                if (Main.selectedRole.equalsIgnoreCase("Administrator")) {
-                    if (index == 0) {
-                        setForm(form0);
-                    } else if (index == 1) {
-                        setForm(form1);
-                    } else if (index == 2) {
-                        setForm(form2);
-                    } else if (index == 3) {
-                        setForm(form3);
-                    } else if (index == 4) {
-
-                    } else if (index == 5) {
-
-                    } else if (index == 6) {
-
-                    } else if (index == 11) {
-                        dispose();
-                        new logIn().show();
-                    }
-
-                } else if (Main.selectedRole.equalsIgnoreCase("Employee")) {
-                    if (index == 0) {
-                        setForm(form0);
-                    } else if (index == 1) {
-                        setForm(form2);
-                    } else if (index == 2) {
-                        setForm(form3);
-                    } else if (index == 3) {
-
-                    } else if (index == 4) {
-
-                    } else if (index == 5) {
-
-                    } else if (index == 6) {
-
-                    } else if (index == 11) {
-                        dispose();
-                        new logIn().show();
-                    }
-
-                }
-
-            }
-        });
-    }
-
-    private void setForm(JComponent com) {
-        mainPanel.removeAll();
-        mainPanel.add(com);
-        mainPanel.repaint();
-        mainPanel.revalidate();
-    }
-
-    public home(String Role) {
-        initComponents();
         GlassPanePopup.install(this);
         setIconImage(image.getImage());
         //JDialog.setDefaultLookAndFeelDecorated(true);
 
-        nameLbl.setText(Main.fname + " " + Main.mname + " " + Main.lname);
+        nameLbl.setText(Main.fname + " " + Main.lname);
         roleLbl.setText(Main.selectedRole);
         lastSelected = 0;
-        
-        successChangePassword = new Notifications (this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password");
-        successChangeImg = new Notifications (this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Profile Image Changed", "Log in to see changes");
-        
+
+        successChangePassword = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password");
+        successChangeImg = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Profile Image Changed", "New profile picture uploaded");
 
         //Set up forms
         setBackground(new Color(0, 0, 0, 0));
@@ -116,6 +53,7 @@ public class home extends javax.swing.JFrame {
         form1 = new Form1();
         form2 = new Form2();
         form3 = new Form3();
+        form6 = new Form6();
         form7 = new Form7();
         setForm(form0); // added to be in form 0 by default
         menu.initMoving(home.this);
@@ -142,6 +80,7 @@ public class home extends javax.swing.JFrame {
                         lastSelected = 5;
                     } else if (index == 6) {
                         lastSelected = 6;
+                        setForm(form6);
                     } else if (index == 7) {
                         lastSelected = 7;
                         setForm(form7);
@@ -165,7 +104,110 @@ public class home extends javax.swing.JFrame {
 
                     } else if (index == 4) {
                         lastSelected = 4;
-                        
+
+                    } else if (index == 5) {
+                        lastSelected = 5;
+                        setForm(form7);
+                    } else if (index == 11) {
+                        logout();
+                    }
+
+                }
+
+            }
+        });
+
+        // Create a rounded frame
+        Shape roundedRectangle = new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20);
+        setShape(roundedRectangle);
+    }
+
+    // private void setForm
+    // mainPanel is private only
+    public static void setForm(JComponent com) {
+        mainPanel.removeAll();
+        mainPanel.add(com);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }
+
+    //jPanel1 is private only
+    public static void setHeader(JComponent com) {
+        jPanel1.repaint();
+        jPanel1.revalidate();
+    }
+
+    public home(String Role) {
+        initComponents();
+        GlassPanePopup.install(this);
+        setIconImage(image.getImage());
+        //JDialog.setDefaultLookAndFeelDecorated(true);
+
+        nameLbl.setText(Main.fname + " " + Main.lname);
+        roleLbl.setText(Main.selectedRole);
+        lastSelected = 0;
+
+        successChangePassword = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password");
+        successChangeImg = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Profile Image Changed", "Log in to see changes");
+
+        //Set up forms
+        setBackground(new Color(0, 0, 0, 0));
+        form0 = new Form0();
+        form1 = new Form1();
+        form2 = new Form2();
+        form3 = new Form3();
+        form6 = new Form6();
+        form7 = new Form7();
+        setForm(form0); // added to be in form 0 by default
+        menu.initMoving(home.this);
+        menu.addEventMenuSelected(new EventMenuSelected() {
+            @Override
+            public void selected(int index) {
+                //System.out.println(index);
+                if (Main.selectedRole.equalsIgnoreCase("Administrator")) {
+                    if (index == 0) {
+                        lastSelected = 0;
+                        setForm(form0);
+                    } else if (index == 1) {
+                        lastSelected = 1;
+                        setForm(form1);
+                    } else if (index == 2) {
+                        lastSelected = 2;
+                        setForm(form2);
+                    } else if (index == 3) {
+                        lastSelected = 3;
+                        setForm(form3);
+                    } else if (index == 4) {
+                        lastSelected = 4;
+                    } else if (index == 5) {
+                        lastSelected = 5;
+                    } else if (index == 6) {
+                        lastSelected = 6;
+                        setForm(form6);
+                    } else if (index == 7) {
+                        lastSelected = 7;
+                        setForm(form7);
+
+                    } else if (index == 11) {
+                        logout();
+                    }
+
+                } else if (Main.selectedRole.equalsIgnoreCase("Employee")) {
+                    if (index == 0) {
+                        lastSelected = 0;
+                        setForm(form0);
+                    } else if (index == 1) {
+                        lastSelected = 1;
+                        setForm(form2);
+                    } else if (index == 2) {
+                        lastSelected = 2;
+                        setForm(form3);
+                    } else if (index == 3) {
+                        lastSelected = 3;
+
+                    } else if (index == 4) {
+                        lastSelected = 4;
+
                     } else if (index == 5) {
                         lastSelected = 5;
                         setForm(form7);
@@ -302,7 +344,6 @@ public class home extends javax.swing.JFrame {
 
         }
     }
-    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -353,8 +394,8 @@ public class home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static components.ImageAvatar avatar1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel mainPanel;
+    public static javax.swing.JPanel jPanel1;
+    public static javax.swing.JPanel mainPanel;
     private otherForms.Menu menu;
     public javax.swing.JLabel nameLbl;
     private otherForms.PanelBorder panelBorder1;

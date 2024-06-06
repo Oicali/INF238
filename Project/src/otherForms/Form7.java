@@ -6,7 +6,10 @@
 package otherForms;
 
 import Main.*;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -34,6 +37,7 @@ public class Form7 extends javax.swing.JPanel {
 
     public Form7() {
         initComponents();
+        setOpaque(false);
 
         String censoredPass = String.join("", Collections.nCopies(Main.getStoredPassword().length(), "*"));
 
@@ -47,7 +51,7 @@ public class Form7 extends javax.swing.JPanel {
         String maskedEmail = String.join("", Collections.nCopies(str4.length(), "*"));
         String censoredEmail = str3 + maskedEmail;
 
-        fullNameLbl.setText(Main.fname + " " + Main.mname + " " + Main.lname + " " + Main.sname);
+        fullNameLbl.setText(Main.fullname);
 
         roleLbl.setText(Main.selectedRole);
 
@@ -75,6 +79,15 @@ public class Form7 extends javax.swing.JPanel {
                 " " + censoredEmail);
         dateField.setText(Main.date);
 
+    }
+
+    @Override
+    protected void paintComponent(Graphics grphcs) {
+        Graphics2D g2 = (Graphics2D) grphcs;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(getBackground());
+        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
+        super.paintComponent(grphcs);
     }
 
     @SuppressWarnings("unchecked")
@@ -134,7 +147,7 @@ public class Form7 extends javax.swing.JPanel {
         fNameField.setEditable(false);
         fNameField.setBackground(new java.awt.Color(255, 255, 255));
         fNameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
-        fNameField.setForeground(new java.awt.Color(153, 153, 153));
+        fNameField.setForeground(new java.awt.Color(102, 102, 102));
         fNameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         fNameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
@@ -144,7 +157,7 @@ public class Form7 extends javax.swing.JPanel {
         genderField.setEditable(false);
         genderField.setBackground(new java.awt.Color(255, 255, 255));
         genderField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
-        genderField.setForeground(new java.awt.Color(153, 153, 153));
+        genderField.setForeground(new java.awt.Color(102, 102, 102));
         genderField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         genderField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
@@ -154,7 +167,7 @@ public class Form7 extends javax.swing.JPanel {
         birthField.setEditable(false);
         birthField.setBackground(new java.awt.Color(255, 255, 255));
         birthField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
-        birthField.setForeground(new java.awt.Color(153, 153, 153));
+        birthField.setForeground(new java.awt.Color(102, 102, 102));
         birthField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         birthField.setSelectionColor(new java.awt.Color(204, 204, 204));
         birthField.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +189,7 @@ public class Form7 extends javax.swing.JPanel {
         emailField.setEditable(false);
         emailField.setBackground(new java.awt.Color(255, 255, 255));
         emailField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
-        emailField.setForeground(new java.awt.Color(153, 153, 153));
+        emailField.setForeground(new java.awt.Color(102, 102, 102));
         emailField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         emailField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
@@ -186,7 +199,7 @@ public class Form7 extends javax.swing.JPanel {
         usernameField.setEditable(false);
         usernameField.setBackground(new java.awt.Color(255, 255, 255));
         usernameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
-        usernameField.setForeground(new java.awt.Color(153, 153, 153));
+        usernameField.setForeground(new java.awt.Color(102, 102, 102));
         usernameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         usernameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
@@ -196,7 +209,7 @@ public class Form7 extends javax.swing.JPanel {
         passwordField.setEditable(false);
         passwordField.setBackground(new java.awt.Color(255, 255, 255));
         passwordField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
-        passwordField.setForeground(new java.awt.Color(153, 153, 153));
+        passwordField.setForeground(new java.awt.Color(102, 102, 102));
         passwordField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         passwordField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
@@ -210,7 +223,7 @@ public class Form7 extends javax.swing.JPanel {
         roleField.setEditable(false);
         roleField.setBackground(new java.awt.Color(255, 255, 255));
         roleField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
-        roleField.setForeground(new java.awt.Color(153, 153, 153));
+        roleField.setForeground(new java.awt.Color(102, 102, 102));
         roleField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         roleField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
@@ -260,7 +273,7 @@ public class Form7 extends javax.swing.JPanel {
         mNameField.setEditable(false);
         mNameField.setBackground(new java.awt.Color(255, 255, 255));
         mNameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
-        mNameField.setForeground(new java.awt.Color(153, 153, 153));
+        mNameField.setForeground(new java.awt.Color(102, 102, 102));
         mNameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         mNameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
@@ -270,7 +283,7 @@ public class Form7 extends javax.swing.JPanel {
         lNameField.setEditable(false);
         lNameField.setBackground(new java.awt.Color(255, 255, 255));
         lNameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
-        lNameField.setForeground(new java.awt.Color(153, 153, 153));
+        lNameField.setForeground(new java.awt.Color(102, 102, 102));
         lNameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lNameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
@@ -280,7 +293,7 @@ public class Form7 extends javax.swing.JPanel {
         sNameField.setEditable(false);
         sNameField.setBackground(new java.awt.Color(255, 255, 255));
         sNameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
-        sNameField.setForeground(new java.awt.Color(153, 153, 153));
+        sNameField.setForeground(new java.awt.Color(102, 102, 102));
         sNameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sNameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
@@ -428,7 +441,7 @@ public class Form7 extends javax.swing.JPanel {
 
     private void uploadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadBtnActionPerformed
         // Set the current directory
-        file.setCurrentDirectory(new File(System.getProperty("user.dir")));
+        file.setCurrentDirectory(new File("user.dir"));
 
         // Set the file filter for image files
         FileNameExtensionFilter filter = new FileNameExtensionFilter("All Pic", "png", "jpg");
@@ -452,7 +465,6 @@ public class Form7 extends javax.swing.JPanel {
                 // Copy the file to the destination
                 try {
                     resizeAndCopyImage(selectedFile, destinationFile, 125, 125);
-                    
 
                     System.out.println(destinationFile.getName());
                     String file = destinationFile.getName();
@@ -465,11 +477,16 @@ public class Form7 extends javax.swing.JPanel {
                         int rowsAffected = s.executeUpdate(query);
 
                         if (rowsAffected > 0) {
-                           
                             home.successChangeImg.showNotification();
+                            this.setVisible(false);
+                            home.form7 = new Form7();
+                            ImageIcon icon = new ImageIcon(selectedFile.getAbsolutePath());
+                            avatar.setIcon(icon);
+                            home.avatar1.setIcon(icon);
+                            home.setHeader(home.jPanel1);
+                            home.setForm(home.form7);
                             
                             
-
                         } else {
                             System.out.println("No rows were updated to change image");
                         }
@@ -498,7 +515,7 @@ public class Form7 extends javax.swing.JPanel {
     private static void resizeAndCopyImage(File sourceFile, File destFile, int width, int height) throws IOException {
         // Read the source image
         BufferedImage originalImage = ImageIO.read(sourceFile);
-        
+
         // Create a new buffered image with the desired dimensions
         BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 

@@ -10,6 +10,7 @@ import Main.home;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,6 +61,8 @@ public class changePassword extends javax.swing.JPanel {
         lbl2 = new javax.swing.JLabel();
         lbl3 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         cmdCancel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         cmdCancel.setForeground(new java.awt.Color(153, 153, 153));
         cmdCancel.setText("X");
@@ -84,6 +87,11 @@ public class changePassword extends javax.swing.JPanel {
                 OPFieldMouseClicked(evt);
             }
         });
+        OPField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                OPFieldKeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -96,6 +104,11 @@ public class changePassword extends javax.swing.JPanel {
                 NPFieldMouseClicked(evt);
             }
         });
+        NPField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NPFieldKeyPressed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -106,6 +119,11 @@ public class changePassword extends javax.swing.JPanel {
         CPField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CPFieldMouseClicked(evt);
+            }
+        });
+        CPField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CPFieldKeyPressed(evt);
             }
         });
 
@@ -312,7 +330,40 @@ public class changePassword extends javax.swing.JPanel {
         lbl3.setText(" ");
     }//GEN-LAST:event_CPFieldMouseClicked
 
+    private void OPFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_OPFieldKeyPressed
+        char keyChar = evt.getKeyChar();
+        // Allow only valid password characters: digits, letters, and special characters
+        if (Character.isDigit(keyChar) || Character.isLetter(keyChar) || isSpecialCharacter(keyChar) || keyChar == KeyEvent.VK_BACK_SPACE) {
+            OPField.setEditable(true);
+        } else {
+            OPField.setEditable(false);
+        }
+    }//GEN-LAST:event_OPFieldKeyPressed
 
+    private void NPFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NPFieldKeyPressed
+        char keyChar = evt.getKeyChar();
+        // Allow only valid password characters: digits, letters, and special characters
+        if (Character.isDigit(keyChar) || Character.isLetter(keyChar) || isSpecialCharacter(keyChar) || keyChar == KeyEvent.VK_BACK_SPACE) {
+            NPField.setEditable(true);
+        } else {
+            NPField.setEditable(false);
+        }
+    }//GEN-LAST:event_NPFieldKeyPressed
+
+    private void CPFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CPFieldKeyPressed
+        char keyChar = evt.getKeyChar();
+        // Allow only valid password characters: digits, letters, and special characters
+        if (Character.isDigit(keyChar) || Character.isLetter(keyChar) || isSpecialCharacter(keyChar) || keyChar == KeyEvent.VK_BACK_SPACE) {
+            CPField.setEditable(true);
+        } else {
+            CPField.setEditable(false);
+        }
+    }//GEN-LAST:event_CPFieldKeyPressed
+
+    private boolean isSpecialCharacter(char c) {
+        String specialChars = "!@#$%^&*()-_+=<>?/|\\{}[]~`";
+        return specialChars.indexOf(c) >= 0;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField CPField;
     private javax.swing.JPasswordField NPField;
