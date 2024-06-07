@@ -19,6 +19,7 @@ public class Main {
     public static String birth = "";
     private static String storedPassword = "";
     public static String email = "";
+    public static String status = "";
     public static String date = "";
     public static byte[] imageBytes;
     

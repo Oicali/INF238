@@ -321,7 +321,7 @@ public class logIn extends javax.swing.JFrame {
 
                 Statement s = Main.getDbCon().createStatement();
                 //ResultSet rs = s.executeQuery("SELECT * FROM users WHERE userName = '" + username + "' AND userRole = '" + selectedRole + "' AND status = 'Active'");
-                ResultSet rs = s.executeQuery("SELECT * FROM users WHERE userName = '" + username + "' AND status = 'Active'");
+                ResultSet rs = s.executeQuery("SELECT * FROM users WHERE userName = '" + username + "'");
                 
                 while (rs.next()) {
                     accountNotFound = false;
@@ -338,12 +338,15 @@ public class logIn extends javax.swing.JFrame {
                     Main.username = rs.getString("userName");
                     Main.date = rs.getString("entryDate");
                     Main.selectedRole = rs.getString("userRole");
+                    Main.status = rs.getString("status");
                     Main.imageBytes = rs.getBytes("img");
                 }
 
                 if (accountNotFound) {
                     logInErrorMessage.setText("Account not found!");
                     
+                } else if (Main.status.equals("Inactive")){
+                    logInErrorMessage.setText("Account currently deactivated!");
                 } else {
                     if (password.equals(Main.getStoredPassword())) {
                         ImageIcon Icon = new ImageIcon(Main.imageBytes);
