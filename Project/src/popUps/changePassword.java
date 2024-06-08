@@ -25,7 +25,6 @@ public class changePassword extends javax.swing.JPanel {
 //    private boolean isOPShowing = false;
 //    private boolean isNPShowing = false;
 //    private boolean isCPShowing = false;
-
     public changePassword() {
         initComponents();
         setOpaque(false);
@@ -103,6 +102,11 @@ public class changePassword extends javax.swing.JPanel {
                 NPFieldMouseClicked(evt);
             }
         });
+        NPField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NPFieldActionPerformed(evt);
+            }
+        });
         NPField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 NPFieldKeyPressed(evt);
@@ -177,25 +181,22 @@ public class changePassword extends javax.swing.JPanel {
                         .addGap(100, 100, 100)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(changePassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl)
-                                .addGap(61, 61, 61))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lbl3)
-                                    .addComponent(lbl2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                                    .addComponent(CPField)
-                                    .addComponent(NPField)
-                                    .addComponent(OPField)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(changePassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lbl2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                                .addComponent(CPField)
+                                .addComponent(NPField)
+                                .addComponent(OPField)
+                                .addComponent(lbl3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(0, 43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -278,8 +279,8 @@ public class changePassword extends javax.swing.JPanel {
 
                                 if (rowsAffected > 0) {
                                     Main.setStoredPassword(newPassword);
-                                    String censoredPass = String.join("", Collections.nCopies(Main.getStoredPassword().length(), "*"));
-                                    Form7.passwordField.setText(" " + censoredPass);
+                                    home.form7 = new Form7(Main.username);
+                                    home.setForm(home.form7);
                                     GlassPanePopup.closePopupLast();
                                     home.successChangePassword.showNotification();
 
@@ -359,6 +360,10 @@ public class changePassword extends javax.swing.JPanel {
             CPField.setEditable(false);
         }
     }//GEN-LAST:event_CPFieldKeyPressed
+
+    private void NPFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NPFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NPFieldActionPerformed
 
     private boolean isSpecialCharacter(char c) {
         String specialChars = "!@#$%^&*()-_+=<>?/|\\{}[]~`";

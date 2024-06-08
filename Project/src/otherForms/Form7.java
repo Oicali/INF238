@@ -37,41 +37,6 @@ public class Form7 extends javax.swing.JPanel {
 
     JFileChooser file = new JFileChooser();
 
-    public Form7() {
-        initComponents();
-        setOpaque(false);
-
-        String censoredPass = String.join("", Collections.nCopies(Main.getStoredPassword().length(), "*"));
-
-        String str1 = Main.number.substring(0, 7);
-        String str2 = Main.number.substring(7);
-        String maskedCN = String.join("", Collections.nCopies(str1.length(), "*"));
-        String censoredCN = maskedCN + str2;
-
-        String str3 = Main.email.substring(0, 5);
-        String str4 = Main.email.substring(5);
-        String maskedEmail = String.join("", Collections.nCopies(str4.length(), "*"));
-        String censoredEmail = str3 + maskedEmail;
-
-        fullNameLbl.setText(Main.fullname);
-
-        roleLbl.setText(Main.selectedRole);
-
-        fNameField.setText(Main.fname);
-        mNameField.setText(Main.mname);
-        lNameField.setText(Main.lname);
-        sNameField.setText(Main.sname);
-        roleField.setText(Main.selectedRole);
-        genderField.setText(Main.gender);
-        birthField.setText(Main.birth);
-        numberField.setText(censoredCN);
-        usernameField.setText(Main.username);
-        passwordField.setText(censoredPass);
-        emailField.setText(censoredEmail);
-        dateField.setText("Entry date: " + Main.date);
-
-    }
-
     public Form7(String username) {
         initComponents();
         setOpaque(false);
@@ -172,8 +137,8 @@ public class Form7 extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        avatar.setForeground(new java.awt.Color(40, 72, 102));
-        avatar.setBorderSize(1);
+        avatar.setForeground(new java.awt.Color(15, 106, 191));
+        avatar.setBorderSize(2);
         avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logInUser.png"))); // NOI18N
 
         fullNameLbl.setFont(new java.awt.Font("SansSerif", 1, 40)); // NOI18N
@@ -284,7 +249,7 @@ public class Form7 extends javax.swing.JPanel {
         changePassBtn.setBorderColor(new java.awt.Color(15, 106, 191));
         changePassBtn.setBorderPainted(false);
         changePassBtn.setColor(new java.awt.Color(15, 106, 191));
-        changePassBtn.setColorClick(new java.awt.Color(51, 102, 255));
+        changePassBtn.setColorClick(new java.awt.Color(15, 106, 191));
         changePassBtn.setColorOver(new java.awt.Color(15, 106, 191));
         changePassBtn.setFocusPainted(false);
         changePassBtn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
@@ -299,7 +264,7 @@ public class Form7 extends javax.swing.JPanel {
         uploadBtn.setBorderColor(new java.awt.Color(15, 106, 191));
         uploadBtn.setBorderPainted(false);
         uploadBtn.setColor(new java.awt.Color(15, 106, 191));
-        uploadBtn.setColorClick(new java.awt.Color(51, 102, 255));
+        uploadBtn.setColorClick(new java.awt.Color(15, 106, 191));
         uploadBtn.setColorOver(new java.awt.Color(15, 106, 191));
         uploadBtn.setFocusPainted(false);
         uploadBtn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
@@ -504,7 +469,7 @@ public class Form7 extends javax.swing.JPanel {
 
                 // Copy the file to the destination
                 try {
-                    resizeAndCopyImage(selectedFile, destinationFile, 125, 125);
+                    resizeAndCopyImage(selectedFile, destinationFile, 150, 150);
 
                     System.out.println(destinationFile.getName());
                     String file = destinationFile.getName();
@@ -519,14 +484,13 @@ public class Form7 extends javax.swing.JPanel {
                         int rowsAffected = s.executeUpdate(query);
 
                         if (rowsAffected > 0) {
-                            home.successChangeImg.showNotification();
-                            this.setVisible(false);
+                            home.setHeader(home.jPanel1, Main.username);
                             home.form7 = new Form7(Main.username);
                             home.setForm(home.form7);
-                            ImageIcon icon = new ImageIcon(selectedFile.getAbsolutePath());
-                            //avatar.setIcon(icon);
-                            home.avatar1.setIcon(icon);
-                            home.setHeader(home.jPanel1);
+                            home.form6 = new Form6();
+                            this.setVisible(false);
+                            home.successChangeImg.showNotification();
+                            
                             
 
                         } else {
@@ -571,6 +535,50 @@ public class Form7 extends javax.swing.JPanel {
 
         // Write the resized image to the destination file
         ImageIO.write(resizedImage, formatName, destFile);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public Form7() {
+        initComponents();
+        setOpaque(false);
+
+        String censoredPass = String.join("", Collections.nCopies(Main.getStoredPassword().length(), "*"));
+
+        String str1 = Main.number.substring(0, 7);
+        String str2 = Main.number.substring(7);
+        String maskedCN = String.join("", Collections.nCopies(str1.length(), "*"));
+        String censoredCN = maskedCN + str2;
+
+        String str3 = Main.email.substring(0, 5);
+        String str4 = Main.email.substring(5);
+        String maskedEmail = String.join("", Collections.nCopies(str4.length(), "*"));
+        String censoredEmail = str3 + maskedEmail;
+
+        fullNameLbl.setText(Main.fullname);
+
+        roleLbl.setText(Main.userPosition);
+
+        fNameField.setText(Main.fname);
+        mNameField.setText(Main.mname);
+        lNameField.setText(Main.lname);
+        sNameField.setText(Main.sname);
+        roleField.setText(Main.userPosition);
+        genderField.setText(Main.gender);
+        birthField.setText(Main.birth);
+        numberField.setText(censoredCN);
+        usernameField.setText(Main.username);
+        passwordField.setText(censoredPass);
+        emailField.setText(censoredEmail);
+        dateField.setText("Entry date: " + Main.date);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

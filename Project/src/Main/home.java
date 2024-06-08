@@ -10,6 +10,9 @@ import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -34,20 +37,25 @@ public class home extends javax.swing.JFrame {
     public static Form6 form6;
     public static Form7 form7;
     public static int lastSelected;
-    public static Notifications successChangePassword, successChangeImg;
+    public static Notifications successChangePassword, successChangeImg, successPrintUsers, successAddUser, successUpdateUser,
+            successDeleteUser;
 
     public home() {
         initComponents();
         GlassPanePopup.install(this);
         setIconImage(image.getImage());
+        setHeader(jPanel1, Main.username);
         //JDialog.setDefaultLookAndFeelDecorated(true);
-
-        nameLbl.setText(Main.fname + " " + Main.lname);
-        roleLbl.setText(Main.selectedRole);
+        //nameLbl.setText(Main.fname + " " + Main.lname);
+        //roleLbl.setText(Main.selectedRole);
         lastSelected = 0;
 
         successChangePassword = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password");
         successChangeImg = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Profile Image Changed", "New profile picture uploaded");
+        successPrintUsers = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "File Exported", "Created a file for users");
+        successAddUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New User", "You have successfully added a new user");
+        successUpdateUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Updated User Information", "You have successfully updated user information");
+        successDeleteUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "User Account Deleted", "You have successfully deleted a user account");
 
         //Set up forms
         setBackground(new Color(0, 0, 0, 0));
@@ -63,7 +71,7 @@ public class home extends javax.swing.JFrame {
             @Override
             public void selected(int index) {
                 //System.out.println(index);
-                if (Main.selectedRole.equalsIgnoreCase("Administrator")) {
+                if (Main.userPosition.equalsIgnoreCase("Administrator")) {
                     if (index == 0) {
                         lastSelected = 0;
                         setForm(form0);
@@ -91,7 +99,7 @@ public class home extends javax.swing.JFrame {
                         logout();
                     }
 
-                } else if (Main.selectedRole.equalsIgnoreCase("Employee")) {
+                } else if (Main.userPosition.equalsIgnoreCase("Employee")) {
                     if (index == 0) {
                         lastSelected = 0;
                         setForm(form0);
@@ -134,10 +142,45 @@ public class home extends javax.swing.JFrame {
     }
 
     //jPanel1 is private only
-    public static void setHeader(JComponent com) {
+    public static void setHeader(JComponent com, String username) {
+        try {
+            Statement s = Main.getDbCon().createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM users WHERE userName = '" + username + "'");
+
+            while (rs.next()) {
+                nameLbl.setText(rs.getString("fname") + " " + rs.getString("lname"));
+                roleLbl.setText(rs.getString("userRole"));
+                avatar1.setIcon(new ImageIcon(rs.getBytes("img")));
+            }
+
+            // Close the ResultSet
+            rs.close();
+            s.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print the exception details for debugging
+            JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            Main.closeCon();
+
+        }
+
         jPanel1.repaint();
         jPanel1.revalidate();
     }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     public home(String Role) {
         initComponents();
@@ -146,7 +189,7 @@ public class home extends javax.swing.JFrame {
         //JDialog.setDefaultLookAndFeelDecorated(true);
 
         nameLbl.setText(Main.fname + " " + Main.lname);
-        roleLbl.setText(Main.selectedRole);
+        roleLbl.setText(Main.userPosition);
         lastSelected = 0;
 
         successChangePassword = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password");
@@ -166,7 +209,7 @@ public class home extends javax.swing.JFrame {
             @Override
             public void selected(int index) {
                 //System.out.println(index);
-                if (Main.selectedRole.equalsIgnoreCase("Administrator")) {
+                if (Main.userPosition.equalsIgnoreCase("Administrator")) {
                     if (index == 0) {
                         lastSelected = 0;
                         setForm(form0);
@@ -194,7 +237,7 @@ public class home extends javax.swing.JFrame {
                         logout();
                     }
 
-                } else if (Main.selectedRole.equalsIgnoreCase("Employee")) {
+                } else if (Main.userPosition.equalsIgnoreCase("Employee")) {
                     if (index == 0) {
                         lastSelected = 0;
                         setForm(form0);
@@ -340,7 +383,7 @@ public class home extends javax.swing.JFrame {
         if (choice == JOptionPane.YES_OPTION) {
             Main.username = "";
             Main.setStoredPassword("");
-            Main.selectedRole = "";
+            Main.userPosition = "";
             Main.fname = "";
             Main.mname = "";
             Main.lname = "";
@@ -405,16 +448,15 @@ public class home extends javax.swing.JFrame {
             }
         });
     }
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static components.ImageAvatar avatar1;
+    private static components.ImageAvatar avatar1;
     public static javax.swing.JPanel jPanel1;
     public static javax.swing.JPanel mainPanel;
     private otherForms.Menu menu;
-    public javax.swing.JLabel nameLbl;
+    private static javax.swing.JLabel nameLbl;
     private otherForms.PanelBorder panelBorder1;
-    public javax.swing.JLabel roleLbl;
+    private static javax.swing.JLabel roleLbl;
     // End of variables declaration//GEN-END:variables
 }

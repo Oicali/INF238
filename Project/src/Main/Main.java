@@ -8,7 +8,7 @@ import otherForms.*;
 public class Main {
     
     public static String username = "";
-    public static String selectedRole = "";
+    public static String userPosition = "";
     public static String fname = "";
     public static String fullname = "";
     public static String mname = "";

@@ -299,7 +299,7 @@ public class Notifications extends javax.swing.JPanel {
 
         lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/sucess.png"))); // NOI18N
 
-        lbMessageText.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lbMessageText.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         lbMessageText.setText("jLabel2");
 
         javax.swing.GroupLayout line3Layout = new javax.swing.GroupLayout(line3);
@@ -311,7 +311,7 @@ public class Notifications extends javax.swing.JPanel {
                 .addComponent(lbIcon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbMessageText)
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addContainerGap(340, Short.MAX_VALUE))
         );
         line3Layout.setVerticalGroup(
             line3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,7 +321,7 @@ public class Notifications extends javax.swing.JPanel {
                         .addGap(6, 6, 6)
                         .addComponent(lbIcon))
                     .addGroup(line3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(8, 8, 8)
                         .addComponent(lbMessageText)))
                 .addContainerGap(13, Short.MAX_VALUE))
         );

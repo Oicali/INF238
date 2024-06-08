@@ -331,20 +331,9 @@ public class logIn extends javax.swing.JFrame {
                 while (rs.next()) {
                     accountNotFound = false;
                     Main.setStoredPassword(rs.getString("password")); // Get the stored password from the database
-                    Main.fname = rs.getString("fname");
-                    Main.mname = rs.getString("mname");
-                    Main.lname = rs.getString("lname");
-                    Main.sname = rs.getString("Sname");
-                    Main.fullname = rs.getString("fullname");
-                    Main.number = rs.getString("mobileNumber");
-                    Main.email = rs.getString("email");
-                    Main.birth = rs.getString("birthDate");
-                    Main.gender = rs.getString("gender");
                     Main.username = rs.getString("userName");
-                    Main.date = rs.getString("entryDate");
-                    Main.selectedRole = rs.getString("userRole");
+                    Main.userPosition = rs.getString("userRole");
                     Main.status = rs.getString("status");
-                    Main.imageBytes = rs.getBytes("img");
                 }
 
                 if (accountNotFound) {
@@ -354,11 +343,12 @@ public class logIn extends javax.swing.JFrame {
                     logInErrorMessage.setText("Account currently deactivated!");
                 } else {
                     if (password.equals(Main.getStoredPassword())) {
-                        ImageIcon Icon = new ImageIcon(Main.imageBytes);
-
-                        dispose();
-                        //new home(Main.selectedRole).show();
+                        
                         new home().show();
+                        dispose();
+                        
+                        //new home(Main.selectedRole).show();
+                        //ImageIcon Icon = new ImageIcon(Main.imageBytes);
                         //home.avatar1.setIcon(Icon);
                         //Form7.avatar.setIcon(Icon);
                         //Main.homepage.avatar1.setIcon(Icon);
