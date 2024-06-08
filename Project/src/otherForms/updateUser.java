@@ -9,6 +9,7 @@ import Main.Main;
 import Main.home;
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
@@ -24,6 +25,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.imageio.ImageIO;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -45,10 +48,19 @@ public class updateUser extends javax.swing.JDialog {
         Shape roundedRectangle = new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20);
         setShape(roundedRectangle);
     }
+    
+    
+    
+    
 
     public updateUser(java.awt.Frame parent, boolean modal, String username) {
         super(parent, modal);
         initComponents();
+        uploadBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        showDateBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        delBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        updateBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
         selectedAccount = username;
         if (Main.userPosition.equals("Administrator")) {
             passwordField.setEditable(true);
@@ -57,6 +69,10 @@ public class updateUser extends javax.swing.JDialog {
         } else {
             passwordField.setEditable(false);
             usernameField.setEditable(false);
+            delBtn.setEnabled(false);
+        }
+        
+        if(Main.username.equals(username)){
             delBtn.setEnabled(false);
         }
 
@@ -240,6 +256,16 @@ public class updateUser extends javax.swing.JDialog {
 
         emailField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         emailField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        emailField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                emailFieldMouseClicked(evt);
+            }
+        });
+        emailField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailFieldActionPerformed(evt);
+            }
+        });
 
         usernameField.setEditable(false);
         usernameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
@@ -302,7 +328,7 @@ public class updateUser extends javax.swing.JDialog {
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel17.setText("Birthday:");
 
-        roleField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrator", "Supervisor", "Employee" }));
+        roleField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrator", "Supervisor", "Sales Associate", "Warehouse Staff" }));
         roleField.setSelectedIndex(2);
         roleField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         roleField.setLabelText("");
@@ -498,15 +524,15 @@ public class updateUser extends javax.swing.JDialog {
                                 .addGap(76, 76, 76)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(entryField))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel21)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(imgField, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(12, 12, 12)
-                                        .addComponent(uploadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(entryField))))
+                                        .addComponent(uploadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -514,9 +540,9 @@ public class updateUser extends javax.swing.JDialog {
                                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(roleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(jLabel16)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel16)
+                                        .addGap(3, 3, 3)
                                         .addComponent(statusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(54, Short.MAX_VALUE))
@@ -566,11 +592,11 @@ public class updateUser extends javax.swing.JDialog {
                             .addComponent(snameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
-                            .addComponent(roleField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15)
                             .addComponent(statusField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16)
-                            .addComponent(genderField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(genderField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(roleField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -638,8 +664,8 @@ public class updateUser extends javax.swing.JDialog {
                     }
 
                     home.setHeader(home.jPanel1, Main.username);
-                    home.form6 = new Form6();
-                    home.setForm(home.form6);
+                    home.form6Users = new Form6();
+                    home.setForm(home.form6Users);
                     GlassPanePopup.closePopupLast();
                     dispose();
                     home.successDeleteUser.showNotification();
@@ -673,6 +699,15 @@ public class updateUser extends javax.swing.JDialog {
             } else if (passwordField.getText().trim().length() < 8) {
                 ErrorMessage.setText("Password must be at least 8 characters!");
             } else {
+                if (!emailField.getText().trim().isEmpty()) {
+                    try {
+                        new InternetAddress(emailField.getText().trim()).validate();
+                    } catch (AddressException ex) {
+                        ErrorMessage.setText("Invalid email address!");
+                        return;
+                    }
+                }
+
                 int choice = JOptionPane.showConfirmDialog(this, "Save your current changes?", "Save Task", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     String fname = fnameField.getText().trim();
@@ -754,9 +789,9 @@ public class updateUser extends javax.swing.JDialog {
                     }
 
                     home.setHeader(home.jPanel1, Main.username);
-                    home.form6 = new Form6();
-                    home.setForm(home.form6);
-                    home.form7 = new Form7(Main.username);
+                    home.form6Users = new Form6();
+                    home.setForm(home.form6Users);
+                    home.form7Profile = new Form7(Main.username);
                     GlassPanePopup.closePopupLast();
                     dispose();
                     home.successUpdateUser.showNotification();
@@ -873,6 +908,14 @@ public class updateUser extends javax.swing.JDialog {
     private void numberFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_numberFieldActionPerformed
+
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFieldActionPerformed
+
+    private void emailFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailFieldMouseClicked
+        ErrorMessage.setText(" ");
+    }//GEN-LAST:event_emailFieldMouseClicked
 
     private static void resizeAndCopyImage(File sourceFile, File destFile, int width, int height) throws IOException {
         // Read the source image

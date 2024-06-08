@@ -279,8 +279,8 @@ public class changePassword extends javax.swing.JPanel {
 
                                 if (rowsAffected > 0) {
                                     Main.setStoredPassword(newPassword);
-                                    home.form7 = new Form7(Main.username);
-                                    home.setForm(home.form7);
+                                    home.form7Profile = new Form7(Main.username);
+                                    home.setForm(home.form7Profile);
                                     GlassPanePopup.closePopupLast();
                                     home.successChangePassword.showNotification();
 

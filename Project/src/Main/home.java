@@ -30,12 +30,15 @@ import settings.GlassPanePopup;
 public class home extends javax.swing.JFrame {
 
     ImageIcon image = new ImageIcon(getClass().getResource("/resources/logoSmall.png"));
-    private Form0 form0;
-    private Form1 form1;
-    private Form2 form2;
-    private Form3 form3;
-    public static Form6 form6;
-    public static Form7 form7;
+    private Form0 form0DashBoard;
+    private Form1 form1Categories;
+    private Form2 form2Products;
+    private Form3 form3Order;
+    public static Form4 form4ViewOrder;
+    public static Form5 form5Customers;
+    public static Form6 form6Users;
+    public static Form7 form7Profile;
+
     public static int lastSelected;
     public static Notifications successChangePassword, successChangeImg, successPrintUsers, successAddUser, successUpdateUser,
             successDeleteUser;
@@ -59,13 +62,15 @@ public class home extends javax.swing.JFrame {
 
         //Set up forms
         setBackground(new Color(0, 0, 0, 0));
-        form0 = new Form0();
-        form1 = new Form1();
-        form2 = new Form2();
-        form3 = new Form3();
-        form6 = new Form6();
-        form7 = new Form7(Main.username);
-        setForm(form0); // added to be in form 0 by default
+        form0DashBoard = new Form0();
+        form1Categories = new Form1();
+        form2Products = new Form2();
+        form3Order = new Form3();
+        form4ViewOrder = new Form4();
+        form5Customers = new Form5();
+        form6Users = new Form6();
+        form7Profile = new Form7(Main.username);
+        setForm(form0DashBoard); // added to be in form 0 by default
         menu.initMoving(home.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -74,54 +79,99 @@ public class home extends javax.swing.JFrame {
                 if (Main.userPosition.equalsIgnoreCase("Administrator")) {
                     if (index == 0) {
                         lastSelected = 0;
-                        setForm(form0);
+                        setForm(form0DashBoard);
                     } else if (index == 1) {
                         lastSelected = 1;
-                        setForm(form1);
+                        setForm(form1Categories);
                     } else if (index == 2) {
                         lastSelected = 2;
-                        setForm(form2);
+                        setForm(form2Products);
                     } else if (index == 3) {
                         lastSelected = 3;
-                        setForm(form3);
+                        setForm(form3Order);
                     } else if (index == 4) {
                         lastSelected = 4;
+                        setForm(form4ViewOrder);
                     } else if (index == 5) {
                         lastSelected = 5;
+                        setForm(form5Customers);
                     } else if (index == 6) {
                         lastSelected = 6;
-                        setForm(form6);
+                        setForm(form6Users);
                     } else if (index == 7) {
                         lastSelected = 7;
-                        setForm(form7);
+                        setForm(form7Profile);
 
                     } else if (index == 11) {
                         logout();
                     }
 
-                } else if (Main.userPosition.equalsIgnoreCase("Employee")) {
+                } else if (Main.userPosition.equalsIgnoreCase("Supervisor")) {
                     if (index == 0) {
                         lastSelected = 0;
-                        setForm(form0);
+                        setForm(form0DashBoard);
                     } else if (index == 1) {
                         lastSelected = 1;
-                        setForm(form2);
+                        setForm(form1Categories);
                     } else if (index == 2) {
                         lastSelected = 2;
-                        setForm(form3);
+                        setForm(form2Products);
                     } else if (index == 3) {
                         lastSelected = 3;
-
+                        setForm(form3Order);
                     } else if (index == 4) {
                         lastSelected = 4;
-
+                        setForm(form4ViewOrder);
                     } else if (index == 5) {
                         lastSelected = 5;
-                        setForm(form7);
+                        setForm(form5Customers);
+                    } else if (index == 6) {
+                        lastSelected = 6;
+                        setForm(form7Profile);
                     } else if (index == 11) {
                         logout();
                     }
 
+                } else if (Main.userPosition.equalsIgnoreCase("Sales Associate")) {
+                    if (index == 0) {
+                        lastSelected = 0;
+                        setForm(form0DashBoard);
+                    } else if (index == 1) {
+                        lastSelected = 1;
+                        setForm(form3Order);
+                    } else if (index == 2) {
+                        lastSelected = 2;
+                        setForm(form4ViewOrder);
+                    } else if (index == 3) {
+                        lastSelected = 3;
+                        setForm(form5Customers);
+                    } else if (index == 4) {
+                        lastSelected = 4;
+                        setForm(form7Profile);
+
+                    } else if (index == 11) {
+                        logout();
+                    }
+                } else if (Main.userPosition.equalsIgnoreCase("Warehouse Staff")) {
+                    if (index == 0) {
+                        lastSelected = 0;
+                        setForm(form0DashBoard);
+                    } else if (index == 1) {
+                        lastSelected = 1;
+                        setForm(form1Categories);
+                    } else if (index == 2) {
+                        lastSelected = 2;
+                        setForm(form2Products);
+                    } else if (index == 3) {
+                        lastSelected = 3;
+                        setForm(form4ViewOrder);
+                    } else if (index == 4) {
+                        lastSelected = 4;
+                        setForm(form7Profile);
+
+                    } else if (index == 11) {
+                        logout();
+                    }
                 }
 
             }
@@ -169,19 +219,6 @@ public class home extends javax.swing.JFrame {
         jPanel1.revalidate();
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
     public home(String Role) {
         initComponents();
         GlassPanePopup.install(this);
@@ -197,13 +234,13 @@ public class home extends javax.swing.JFrame {
 
         //Set up forms
         setBackground(new Color(0, 0, 0, 0));
-        form0 = new Form0();
-        form1 = new Form1();
-        form2 = new Form2();
-        form3 = new Form3();
-        form6 = new Form6();
-        form7 = new Form7();
-        setForm(form0); // added to be in form 0 by default
+        form0DashBoard = new Form0();
+        form1Categories = new Form1();
+        form2Products = new Form2();
+        form3Order = new Form3();
+        form6Users = new Form6();
+        form7Profile = new Form7();
+        setForm(form0DashBoard); // added to be in form 0 by default
         menu.initMoving(home.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -212,26 +249,26 @@ public class home extends javax.swing.JFrame {
                 if (Main.userPosition.equalsIgnoreCase("Administrator")) {
                     if (index == 0) {
                         lastSelected = 0;
-                        setForm(form0);
+                        setForm(form0DashBoard);
                     } else if (index == 1) {
                         lastSelected = 1;
-                        setForm(form1);
+                        setForm(form1Categories);
                     } else if (index == 2) {
                         lastSelected = 2;
-                        setForm(form2);
+                        setForm(form2Products);
                     } else if (index == 3) {
                         lastSelected = 3;
-                        setForm(form3);
+                        setForm(form3Order);
                     } else if (index == 4) {
                         lastSelected = 4;
                     } else if (index == 5) {
                         lastSelected = 5;
                     } else if (index == 6) {
                         lastSelected = 6;
-                        setForm(form6);
+                        setForm(form6Users);
                     } else if (index == 7) {
                         lastSelected = 7;
-                        setForm(form7);
+                        setForm(form7Profile);
 
                     } else if (index == 11) {
                         logout();
@@ -240,13 +277,13 @@ public class home extends javax.swing.JFrame {
                 } else if (Main.userPosition.equalsIgnoreCase("Employee")) {
                     if (index == 0) {
                         lastSelected = 0;
-                        setForm(form0);
+                        setForm(form0DashBoard);
                     } else if (index == 1) {
                         lastSelected = 1;
-                        setForm(form2);
+                        setForm(form2Products);
                     } else if (index == 2) {
                         lastSelected = 2;
-                        setForm(form3);
+                        setForm(form3Order);
                     } else if (index == 3) {
                         lastSelected = 3;
 
@@ -255,7 +292,7 @@ public class home extends javax.swing.JFrame {
 
                     } else if (index == 5) {
                         lastSelected = 5;
-                        setForm(form7);
+                        setForm(form7Profile);
                     } else if (index == 11) {
                         logout();
                     }

@@ -12,6 +12,7 @@ import components.ScrollBarCustom;
 import interfaces.EventCallBack;
 import interfaces.EventTextField;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -42,6 +43,8 @@ public class Form6 extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         initData();
+        addBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        exportBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         searchField.addEvent(new EventTextField() {
             @Override

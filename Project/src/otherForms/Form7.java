@@ -6,6 +6,7 @@
 package otherForms;
 
 import Main.*;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -41,6 +42,8 @@ public class Form7 extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         initData(username);
+        changePassBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        uploadBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     public void initData(String username) {
@@ -72,8 +75,8 @@ public class Form7 extends javax.swing.JPanel {
                 String censoredCN = maskedCN + str2;
                 numberField.setText(censoredCN);
 
-                String str3 = rs.getString("email").substring(0, 5);
-                String str4 = rs.getString("email").substring(5);
+                String str3 = rs.getString("email").substring(0, 4);
+                String str4 = rs.getString("email").substring(4);
                 String maskedEmail = String.join("", Collections.nCopies(str4.length(), "*"));
                 String censoredEmail = str3 + maskedEmail;
                 emailField.setText(censoredEmail);
@@ -485,9 +488,9 @@ public class Form7 extends javax.swing.JPanel {
 
                         if (rowsAffected > 0) {
                             home.setHeader(home.jPanel1, Main.username);
-                            home.form7 = new Form7(Main.username);
-                            home.setForm(home.form7);
-                            home.form6 = new Form6();
+                            home.form7Profile = new Form7(Main.username);
+                            home.setForm(home.form7Profile);
+                            home.form6Users = new Form6();
                             this.setVisible(false);
                             home.successChangeImg.showNotification();
                             
