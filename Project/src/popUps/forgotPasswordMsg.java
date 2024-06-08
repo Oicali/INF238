@@ -169,6 +169,7 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
         field.setForeground(new java.awt.Color(153, 153, 153));
         field.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         field.setText("Enter Email Address");
+        field.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
         field.setOpaque(false);
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {

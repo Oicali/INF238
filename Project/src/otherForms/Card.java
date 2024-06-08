@@ -2,6 +2,7 @@
 package otherForms;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -40,6 +41,7 @@ public class Card extends javax.swing.JPanel {
     public Card() {
         initComponents();
         setOpaque(false);
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     
@@ -61,11 +63,11 @@ public class Card extends javax.swing.JPanel {
 
         pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logInUser.png"))); // NOI18N
 
-        userFNameLbl.setFont(new java.awt.Font("SansSerif", 1, 17)); // NOI18N
+        userFNameLbl.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         userFNameLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         userFNameLbl.setText("First Name");
 
-        userLNameLbl.setFont(new java.awt.Font("SansSerif", 1, 17)); // NOI18N
+        userLNameLbl.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         userLNameLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         userLNameLbl.setText("Last Name");
 
@@ -97,15 +99,6 @@ public class Card extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(110, 110, 110)
-                                .addComponent(RoleLbl))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addComponent(pic, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 51, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(userNameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -114,8 +107,15 @@ public class Card extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(statusPnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(userLNameLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(userFNameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(userFNameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(RoleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pic, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,17 +124,17 @@ public class Card extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(userID)
                     .addComponent(statusPnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(pic, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
+                .addComponent(pic, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(userFNameLbl)
-                .addGap(3, 3, 3)
+                .addGap(1, 1, 1)
                 .addComponent(userLNameLbl)
-                .addGap(20, 20, 20)
+                .addGap(16, 16, 16)
                 .addComponent(userNameLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(3, 3, 3)
                 .addComponent(RoleLbl)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -153,14 +153,6 @@ public class Card extends javax.swing.JPanel {
     } 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel RoleLbl;
-    private otherForms.CircularPanel circularPanel1;
-    private otherForms.CircularPanel circularPanel2;
-    private otherForms.CircularPanel circularPanel3;
-    private otherForms.CircularPanel circularPanel4;
-    private otherForms.CircularPanel circularPanel5;
-    private otherForms.CircularPanel circularPanel6;
-    private otherForms.CircularPanel circularPanel8;
-    private otherForms.CircularPanel circularPanel9;
     private components.ImageAvatar pic;
     private otherForms.CircularPanel statusPnl;
     private javax.swing.JLabel userFNameLbl;
@@ -175,4 +167,6 @@ public class Card extends javax.swing.JPanel {
     public Model_User getData() {
         return data;
     }
+    
+    
 }

@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collections;
@@ -26,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import popUps.changePassword;
 import settings.GlassPanePopup;
+import settings.Model_User;
 
 /**
  *
@@ -55,30 +57,74 @@ public class Form7 extends javax.swing.JPanel {
 
         roleLbl.setText(Main.selectedRole);
 
-        fNameField.setText(
-                " " + Main.fname);
-        mNameField.setText(
-                " " + Main.mname);
-        lNameField.setText(
-                " " + Main.lname);
-        sNameField.setText(
-                " " + Main.sname);
-        roleField.setText(
-                " " + Main.selectedRole);
-        genderField.setText(
-                " " + Main.gender);
-        birthField.setText(
-                " " + Main.birth);
-        numberField.setText(
-                " " + censoredCN);
-        usernameField.setText(
-                " " + Main.username);
-        passwordField.setText(
-                " " + censoredPass);
-        emailField.setText(
-                " " + censoredEmail);
-        dateField.setText(Main.date);
+        fNameField.setText(Main.fname);
+        mNameField.setText(Main.mname);
+        lNameField.setText(Main.lname);
+        sNameField.setText(Main.sname);
+        roleField.setText(Main.selectedRole);
+        genderField.setText(Main.gender);
+        birthField.setText(Main.birth);
+        numberField.setText(censoredCN);
+        usernameField.setText(Main.username);
+        passwordField.setText(censoredPass);
+        emailField.setText(censoredEmail);
+        dateField.setText("Entry date: " + Main.date);
 
+    }
+
+    public Form7(String username) {
+        initComponents();
+        setOpaque(false);
+        initData(username);
+    }
+
+    public void initData(String username) {
+        try {
+            Statement s = Main.getDbCon().createStatement();
+
+            ResultSet rs = s.executeQuery("select * from users where userName = '" + username + "'");
+
+            while (rs.next()) {
+                fNameField.setText(rs.getString("fname"));
+                mNameField.setText(rs.getString("mname"));
+                lNameField.setText(rs.getString("lname"));
+                sNameField.setText(rs.getString("Sname"));
+                fullNameLbl.setText(rs.getString("fullname"));
+                roleLbl.setText(rs.getString("userRole"));
+                roleField.setText(rs.getString("userRole"));
+                genderField.setText(rs.getString("gender"));
+                birthField.setText(rs.getString("birthDate"));
+                usernameField.setText(rs.getString("userName"));
+                dateField.setText("Entry date: " +rs.getString("entryDate"));
+                avatar.setIcon(new ImageIcon(rs.getBytes("img")));
+                
+                String censoredPass = String.join("", Collections.nCopies(rs.getString("password").length(), "*"));
+                passwordField.setText(censoredPass);
+
+                String str1 = rs.getString("mobileNumber").substring(0, 7);
+                String str2 = rs.getString("mobileNumber").substring(7);
+                String maskedCN = String.join("", Collections.nCopies(str1.length(), "*"));
+                String censoredCN = maskedCN + str2;
+                numberField.setText(censoredCN);
+
+                String str3 = rs.getString("email").substring(0, 5);
+                String str4 = rs.getString("email").substring(5);
+                String maskedEmail = String.join("", Collections.nCopies(str4.length(), "*"));
+                String censoredEmail = str3 + maskedEmail;
+                emailField.setText(censoredEmail);
+                         
+            }
+
+            // Close the ResultSet
+            rs.close();
+            s.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print the exception details for debugging
+            JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            Main.closeCon();
+        }
     }
 
     @Override
@@ -110,7 +156,6 @@ public class Form7 extends javax.swing.JPanel {
         usernameField = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         passwordField = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         roleField = new javax.swing.JTextField();
         dateField = new javax.swing.JLabel();
@@ -148,7 +193,7 @@ public class Form7 extends javax.swing.JPanel {
         fNameField.setBackground(new java.awt.Color(255, 255, 255));
         fNameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         fNameField.setForeground(new java.awt.Color(102, 102, 102));
-        fNameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        fNameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         fNameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -158,7 +203,7 @@ public class Form7 extends javax.swing.JPanel {
         genderField.setBackground(new java.awt.Color(255, 255, 255));
         genderField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         genderField.setForeground(new java.awt.Color(102, 102, 102));
-        genderField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        genderField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         genderField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -168,7 +213,7 @@ public class Form7 extends javax.swing.JPanel {
         birthField.setBackground(new java.awt.Color(255, 255, 255));
         birthField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         birthField.setForeground(new java.awt.Color(102, 102, 102));
-        birthField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        birthField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         birthField.setSelectionColor(new java.awt.Color(204, 204, 204));
         birthField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +223,7 @@ public class Form7 extends javax.swing.JPanel {
 
         numberField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         numberField.setForeground(new java.awt.Color(153, 153, 153));
-        numberField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        numberField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         numberField.setSelectionColor(new java.awt.Color(204, 204, 204));
         numberField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,7 +235,7 @@ public class Form7 extends javax.swing.JPanel {
         emailField.setBackground(new java.awt.Color(255, 255, 255));
         emailField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         emailField.setForeground(new java.awt.Color(102, 102, 102));
-        emailField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        emailField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         emailField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -200,7 +245,7 @@ public class Form7 extends javax.swing.JPanel {
         usernameField.setBackground(new java.awt.Color(255, 255, 255));
         usernameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         usernameField.setForeground(new java.awt.Color(102, 102, 102));
-        usernameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        usernameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         usernameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         jLabel11.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -210,12 +255,8 @@ public class Form7 extends javax.swing.JPanel {
         passwordField.setBackground(new java.awt.Color(255, 255, 255));
         passwordField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         passwordField.setForeground(new java.awt.Color(102, 102, 102));
-        passwordField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        passwordField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         passwordField.setSelectionColor(new java.awt.Color(204, 204, 204));
-
-        jLabel12.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel12.setText("Entry Date: ");
 
         jLabel13.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel13.setText("User Role: ");
@@ -224,15 +265,16 @@ public class Form7 extends javax.swing.JPanel {
         roleField.setBackground(new java.awt.Color(255, 255, 255));
         roleField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         roleField.setForeground(new java.awt.Color(102, 102, 102));
-        roleField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        roleField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         roleField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         dateField.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         dateField.setForeground(new java.awt.Color(102, 102, 102));
-        dateField.setText("00-00-0000");
+        dateField.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        dateField.setText("September-00-0000");
 
         jLabel14.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jLabel14.setText("Contact Number:");
+        jLabel14.setText("Mobile Number:");
 
         jLabel15.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel15.setText("Registered Email:");
@@ -274,7 +316,7 @@ public class Form7 extends javax.swing.JPanel {
         mNameField.setBackground(new java.awt.Color(255, 255, 255));
         mNameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         mNameField.setForeground(new java.awt.Color(102, 102, 102));
-        mNameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mNameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         mNameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -284,7 +326,7 @@ public class Form7 extends javax.swing.JPanel {
         lNameField.setBackground(new java.awt.Color(255, 255, 255));
         lNameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         lNameField.setForeground(new java.awt.Color(102, 102, 102));
-        lNameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lNameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         lNameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         jLabel16.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -294,7 +336,7 @@ public class Form7 extends javax.swing.JPanel {
         sNameField.setBackground(new java.awt.Color(255, 255, 255));
         sNameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         sNameField.setForeground(new java.awt.Color(102, 102, 102));
-        sNameField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sNameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         sNameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -350,21 +392,20 @@ public class Form7 extends javax.swing.JPanel {
                             .addComponent(usernameField)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(43, 43, 43)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(fullNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(roleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(fullNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(170, 170, 170))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(roleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(dateField))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
@@ -379,7 +420,6 @@ public class Form7 extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(roleLbl)
-                            .addComponent(jLabel12)
                             .addComponent(dateField))))
                 .addGap(40, 40, 40)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -472,21 +512,23 @@ public class Form7 extends javax.swing.JPanel {
                     try {
                         // Create a statement
                         Statement s = Main.getDbCon().createStatement();
-                        String query = "UPDATE users SET img = LOAD_FILE('" + destinationFile.getAbsolutePath().replace("\\", "\\\\") + "') WHERE username = '" + Main.username + "'";
+                        String query = "UPDATE users "
+                                + "SET img = LOAD_FILE('" + destinationFile.getAbsolutePath().replace("\\", "\\\\") + "'), fileName = '" + destinationFile.getName()
+                                + "' WHERE username = '" + Main.username + "'";
 
                         int rowsAffected = s.executeUpdate(query);
 
                         if (rowsAffected > 0) {
                             home.successChangeImg.showNotification();
                             this.setVisible(false);
-                            home.form7 = new Form7();
+                            home.form7 = new Form7(Main.username);
+                            home.setForm(home.form7);
                             ImageIcon icon = new ImageIcon(selectedFile.getAbsolutePath());
-                            avatar.setIcon(icon);
+                            //avatar.setIcon(icon);
                             home.avatar1.setIcon(icon);
                             home.setHeader(home.jPanel1);
-                            home.setForm(home.form7);
                             
-                            
+
                         } else {
                             System.out.println("No rows were updated to change image");
                         }
@@ -542,7 +584,6 @@ public class Form7 extends javax.swing.JPanel {
     private javax.swing.JTextField genderField;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;

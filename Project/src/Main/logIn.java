@@ -158,6 +158,11 @@ public class logIn extends javax.swing.JFrame {
                 usernameFieldMouseClicked(evt);
             }
         });
+        usernameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameFieldActionPerformed(evt);
+            }
+        });
 
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logInUser.png"))); // NOI18N
 
@@ -354,8 +359,8 @@ public class logIn extends javax.swing.JFrame {
                         dispose();
                         //new home(Main.selectedRole).show();
                         new home().show();
-                        home.avatar1.setIcon(Icon);
-                        Form7.avatar.setIcon(Icon);
+                        //home.avatar1.setIcon(Icon);
+                        //Form7.avatar.setIcon(Icon);
                         //Main.homepage.avatar1.setIcon(Icon);
                         
                     } else {
@@ -436,6 +441,10 @@ public class logIn extends javax.swing.JFrame {
             passField.setBackground(Color.WHITE);
         }
     }//GEN-LAST:event_passFieldKeyPressed
+
+    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameFieldActionPerformed
 
     private boolean isSpecialCharacter(char c) {
         String specialChars = "!@#$%^&*()-_+=<>?/|\\{}[]~`";

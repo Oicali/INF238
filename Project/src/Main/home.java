@@ -13,7 +13,9 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import otherForms.*;
 import popUps.changePassword;
 import settings.GlassPanePopup;
@@ -54,7 +56,7 @@ public class home extends javax.swing.JFrame {
         form2 = new Form2();
         form3 = new Form3();
         form6 = new Form6();
-        form7 = new Form7();
+        form7 = new Form7(Main.username);
         setForm(form0); // added to be in form 0 by default
         menu.initMoving(home.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
@@ -403,6 +405,8 @@ public class home extends javax.swing.JFrame {
             }
         });
     }
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static components.ImageAvatar avatar1;
