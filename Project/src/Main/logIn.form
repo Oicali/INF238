@@ -152,7 +152,7 @@
                   <Component id="forgotUser" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="passField" min="-2" pref="56" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="forgotPass" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="showPass" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
@@ -161,7 +161,7 @@
                   <Component id="logInErrorMessage" min="-2" pref="26" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   <Component id="logInBtn" min="-2" pref="48" max="-2" attributes="0"/>
-                  <EmptySpace pref="112" max="32767" attributes="0"/>
+                  <EmptySpace pref="110" max="32767" attributes="0"/>
                   <Component id="License" min="-2" pref="16" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

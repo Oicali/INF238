@@ -82,26 +82,6 @@ public class updateUser extends javax.swing.JDialog {
                 imgField.setText(rs.getString("fileName"));
                 entryField.setText(rs.getString("entryDate"));
 
-//                byte[] bytes = rs.getBytes("img");
-//
-//                try {
-//                    // Convert bytes to a string using UTF-8 encoding
-//                    String filename = new String(bytes, "UTF-8");
-//
-//                    // Extract filename from the full path
-//                    int lastSlashIndex = filename.lastIndexOf('/');
-//                    if (lastSlashIndex != -1) {
-//                        filename = filename.substring(lastSlashIndex + 1);
-//                    }
-//
-//                    // Set the filename in the text field
-//                    System.out.println(filename);
-//                    System.out.println("Oh oh");
-//                    imgField.setText(filename);
-//                } catch (UnsupportedEncodingException e) {
-//                    // Handle encoding exception
-//                    e.printStackTrace();
-//                }
             }
             // Close the ResultSet
             rs.close();
@@ -637,7 +617,7 @@ public class updateUser extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void delBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delBtnActionPerformed
-        int choice = JOptionPane.showConfirmDialog(this, "Are you sure to delete this account?", "Delete", JOptionPane.YES_NO_OPTION);
+        int choice = JOptionPane.showConfirmDialog(this, "Are you sure to delete this account?", "Delete User", JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
 
             String password = JOptionPane.showInputDialog(this, "Enter your password:");

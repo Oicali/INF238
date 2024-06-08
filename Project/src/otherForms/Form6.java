@@ -9,6 +9,9 @@ import Main.Main;
 import Main.home;
 import popUps.*;
 import components.ScrollBarCustom;
+import interfaces.EventCallBack;
+import interfaces.EventTextField;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -26,15 +29,13 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import popUps.placeholder;
 import settings.GlassPanePopup;
 import settings.Model_User;
 
-/**
- *
- * @author ASUS
- */
 public class Form6 extends javax.swing.JPanel {
 
     public Form6() {
@@ -42,27 +43,54 @@ public class Form6 extends javax.swing.JPanel {
         setOpaque(false);
         initData();
 
-        /*DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        searchField.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                try {
+                    String data = searchField.getText();
+                    for (int i = 1; i <= 100; i++) {
+                        Thread.sleep(10);
+                    }
+                    call.done();
+                    searchData(data);
 
-        try {
-            Statement s = Main.getDbCon().createStatement();
-            //ResultSet rs = s.executeQuery("SELECT * FROM users WHERE userName = '" + username + "' AND userRole = '" + selectedRole + "' AND status = 'Active'");
-            //ResultSet rs = s.executeQuery("SELECT * FROM users WHERE userName = '" + username + "' AND status = 'Active'");
-            ResultSet rs = s.executeQuery("select * from users");
-
-            while (rs.next()) {
-                model.addRow(new Object[]{rs.getString("users_pk"), rs.getString("fullname"), rs.getString("userRole"), rs.getString("gender")});
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    System.err.println("Thread was interrupted: " + e);
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
             }
-            // Close the ResultSet
-            rs.close();
-            s.close();
 
-        } catch (SQLException e) {
-            e.printStackTrace(); // Print the exception details for debugging
-            JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            Main.closeCon();
-        }*/
+            @Override
+            public void onCancel() {
+                searchField.setText("");
+            }
+        });
+        
+        // Add a DocumentListener to the searchField
+        searchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                checkIfEmpty();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                checkIfEmpty();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                checkIfEmpty();
+            }
+
+            private void checkIfEmpty() {
+                if (searchField.getText().trim().isEmpty()) {
+                    initData();
+                }
+            }
+        });
     }
 
     @Override
@@ -80,9 +108,10 @@ public class Form6 extends javax.swing.JPanel {
 
         scroll = new javax.swing.JScrollPane();
         panelItem2 = new components.PanelItem();
-        jTextField1 = new javax.swing.JTextField();
         addBtn = new components.RoundedButtons();
         exportBtn = new components.RoundedButtons();
+        searchField = new components.TextFieldAnimation();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -95,8 +124,6 @@ public class Form6 extends javax.swing.JPanel {
         scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setVerticalScrollBar(new ScrollBarCustom());
         scroll.setViewportView(panelItem2);
-
-        jTextField1.setText("jTextField1");
 
         addBtn.setForeground(new java.awt.Color(255, 255, 255));
         addBtn.setText("Add");
@@ -128,33 +155,46 @@ public class Form6 extends javax.swing.JPanel {
             }
         });
 
+        searchField.setBackground(new java.awt.Color(240, 240, 240));
+        searchField.setAnimationColor(new java.awt.Color(15, 106, 191));
+        searchField.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        searchField.setHintText("Search a user...");
+        searchField.setSelectionColor(new java.awt.Color(204, 204, 204));
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
+        jLabel1.setText("Users Information Page");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(exportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 1071, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 30, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(28, 28, 28)
+                            .addComponent(exportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(scroll, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1061, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(exportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -219,6 +259,8 @@ public class Form6 extends javax.swing.JPanel {
     }
 
     public void initData() {
+        panelItem2.removeAll();
+        
         try {
             Statement s = Main.getDbCon().createStatement();
 
@@ -267,13 +309,46 @@ public class Form6 extends javax.swing.JPanel {
         fileWriter.close();
     }
 
+    private void searchData(String data) {
+        panelItem2.removeAll();
+
+        try {
+            Statement s = Main.getDbCon().createStatement();
+
+            ResultSet rs = s.executeQuery("SELECT * FROM users WHERE fullname LIKE '%" + data + "%'");
+
+            if (rs.isBeforeFirst()) { // Check if the ResultSet is not empty
+                while (rs.next()) {
+                    addUser(new Model_User(
+                            rs.getString("users_pk"),
+                            rs.getString("fname"),
+                            rs.getString("lname"),
+                            rs.getString("userRole"),
+                            rs.getString("userName"),
+                            new ImageIcon(rs.getBytes("img")),
+                            rs.getString("status")
+                    ));
+                }
+            }
+            // Close the ResultSet
+            rs.close();
+            s.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print the exception details for debugging
+            JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            Main.closeCon();
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private components.RoundedButtons addBtn;
     private components.RoundedButtons exportBtn;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel1;
     private components.PanelItem panelItem2;
     private javax.swing.JScrollPane scroll;
-    private javax.swing.JButton uploadBtn;
+    private components.TextFieldAnimation searchField;
     // End of variables declaration//GEN-END:variables
 }

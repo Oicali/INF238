@@ -2,5 +2,10 @@ fname,mname,lname,Sname,userName,userRole,email,gender,mobileNumber,birthDate,en
 Jairus Miguel,Boco,Ilacio,,ilaciojb2341@invsys.mark-it,Administrator,ilaciojairusmiguel@gmail.com,Male,09471210799,October-05-2003,May-26-2024,Active
 Juan,,Dela Cruz,,delacruzj2013@invsys.mark-it,Employee,delacruzj2013@gmail.com,Male,09123412346,February-15-1996,May-26-2024,Active
 Narda,,Custodio,,custodion6791@invsys.mark-it,Supervisor,Darna@gmail.com,Female,09015028401,March-10-2003,June-06-2024,Active
-Anthony Edward,,Stark,,starkt3000@invsys.mark-it,Administrator,Stark@gmail.com,Male,09103957392,May-29-1970,June-07-2024,Active
-Kriston Kraish,Balane,Roan,,roankb6853@invsys.mark-it,Employee,,Male,09,October-14-2004,June-08-2024,Active
+Anthony Edward,,Stark,,starkae3000@invsys.mark-it,Administrator,Stark@gmail.com,Male,09103957392,May-29-1970,June-07-2024,Inactive
+Angelo Gabriel,Tagaamo,Nuñez,,nuñezat6278@invsys.mark-it,Supervisor,angelo.nunez@sdca.edu.ph,Male,09235123412,January-10-2004,June-08-2024,Active
+Kriston Kraish,Balane,Roan,,roankb6853@invsys.mark-it,Employee,,Male,09123412341,October-14-2004,June-08-2024,Inactive
+Heinrich Timothy,,Jamito,,jamitoh0131@invsys.mark-it,Employee,trolololololololololol917@gmail.com,Male,09123412342,January-04-2003,June-08-2024,Active
+Jaira Angela,Boco,Ilacio,,ilaciojb1842@invsys.mark-it,Supervisor,,Female,09123412341,April-08-2011,June-08-2024,Active
+Allanah Ember,,Faniega,,faniegaa6443@invsys.mark-it,Employee,,Female,09,June-08-2024,June-08-2024,Inactive
+Luffy,D,Monkey,,monkeyld1725@invsys.mark-it,Administrator,,Male,09,May-05-1997,June-08-2024,Active

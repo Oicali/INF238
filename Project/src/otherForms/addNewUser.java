@@ -12,12 +12,16 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,13 +30,26 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.mail.Authenticator;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import popUps.noWiFiMsg;
 import settings.GlassPanePopup;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class addNewUser extends javax.swing.JDialog {
 
@@ -86,6 +103,7 @@ public class addNewUser extends javax.swing.JDialog {
         ErrorMessage = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
 
         date.setForeground(new java.awt.Color(48, 144, 216));
         date.setDateFormat("MMMM-dd-yyyy");
@@ -155,6 +173,16 @@ public class addNewUser extends javax.swing.JDialog {
 
         emailField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         emailField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        emailField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                emailFieldMouseClicked(evt);
+            }
+        });
+        emailField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailFieldActionPerformed(evt);
+            }
+        });
 
         mnameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         mnameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
@@ -284,6 +312,11 @@ public class addNewUser extends javax.swing.JDialog {
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel22.setText("*");
 
+        jLabel23.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel23.setText("*");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -298,16 +331,6 @@ public class addNewUser extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bdayField, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(showDateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -350,7 +373,20 @@ public class addNewUser extends javax.swing.JDialog {
                                             .addComponent(roleField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(imgField, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
-                                        .addComponent(uploadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(uploadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(3, 3, 3)
+                                    .addComponent(jLabel18)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(bdayField, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(showDateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(103, 103, 103)
                         .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -394,7 +430,8 @@ public class addNewUser extends javax.swing.JDialog {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel23))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(showDateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -439,99 +476,117 @@ public class addNewUser extends javax.swing.JDialog {
 
     private void generateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateBtnActionPerformed
 
-        if (fnameField.getText().isEmpty() || lnameField.getText().isEmpty()) {
+        if (fnameField.getText().isEmpty() || lnameField.getText().isEmpty() || emailField.getText().isEmpty()) {
             ErrorMessage.setText("Please complete all required fields with *");
         } else {
             if (numberField.getText().trim().length() < 9 && !numberField.getText().trim().isEmpty()) {
                 ErrorMessage.setText("Invalid mobile number!");
             } else {
-                int choice = JOptionPane.showConfirmDialog(this, "Click yes to confirm.", "Add New User", JOptionPane.YES_NO_OPTION);
-                if (choice == JOptionPane.YES_OPTION) {
-                    String fname = fnameField.getText().trim();
-                    String mname = mnameField.getText().trim();
-                    String lname = lnameField.getText().trim();
-                    String sname = snameField.getText().trim();
-                    String gender = (String) genderField.getSelectedItem();
-                    String email = emailField.getText().trim();
-                    String bday = bdayField.getText();
-                    String number = "09" + numberField.getText().trim();
-                    String imgname = imgField.getText().trim();
-                    String role = (String) roleField.getSelectedItem();
-
-                    LocalDateTime now = LocalDateTime.now();
-                    String entry = dtf.format(now);
-
-                    try {
-                        Connection con = Main.getDbCon();
-
-                        File selectedFile;
-                        if (imgname.isEmpty()) {
-                            selectedFile = new File("C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\default.png");
-                        } else {
-                            selectedFile = file.getSelectedFile();
-                        }
-
-                        String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads";
-                        File destinationFile = new File(destinationDir, selectedFile.getName());
-
-                        try {
-                            resizeAndCopyImage(selectedFile, destinationFile, 150, 150);
-                            System.out.println(destinationFile.getName());
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            JOptionPane.showMessageDialog(null, "File upload failed!", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-
-                        String query = "INSERT INTO users (img, fname, mname, lname, Sname, fullname, userName, userRole, password, email, gender, mobileNumber, birthDate, entryDate, status, fileName) "
-                                + "VALUES (LOAD_FILE(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                        PreparedStatement ps = con.prepareStatement(query);
-                        ps.setString(1, destinationFile.getAbsolutePath());
-                        ps.setString(2, fname);
-                        ps.setString(3, mname);
-                        ps.setString(4, lname);
-                        ps.setString(5, sname);
-                        if (mname.isEmpty()) {
-                            ps.setString(6, fname + " " + lname + " " + sname);
-                            String username = lname.replaceAll("\\s+", "").toLowerCase() + fname.substring(0, 1).toLowerCase() + RNG() + "@invsys.mark-it";
-                            ps.setString(7, username);
-                        } else {
-                            ps.setString(6, fname + " " + mname + " " + lname + " " + sname);
-                            String username = lname.replaceAll("\\s+", "").toLowerCase() + fname.substring(0, 1).toLowerCase() + mname.substring(0, 1).toLowerCase() + RNG() + "@invsys.mark-it";
-                            ps.setString(7, username);
-                        }
-
-                        ps.setString(8, role);
-                        ps.setString(9, randomPass());
-                        ps.setString(10, email);
-                        ps.setString(11, gender);
-                        ps.setString(12, number);
-                        ps.setString(13, bday);
-                        ps.setString(14, entry);
-                        ps.setString(15, "Active");
-                        ps.setString(16, destinationFile.getName());
-                        ps.executeUpdate();
-
-                        ErrorMessage.setText(" ");
-
-                        ps.close();
-                        con.close();
-
-                    } catch (SQLException e) {
-                        e.printStackTrace(); // Print the exception details for debugging
-                        JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
-                    } finally {
-                        Main.closeCon();
-                    }
-
-                    home.setHeader(home.jPanel1, Main.username);
-                    home.form6 = new Form6();
-                    home.setForm(home.form6);
-                    home.form7 = new Form7(Main.username);
-                    GlassPanePopup.closePopupLast();
-                    dispose();
-                    home.successAddUser.showNotification();
+                // Validate email address
+                try {
+                    new InternetAddress(emailField.getText().trim()).validate();
+                } catch (AddressException ex) {
+                    ErrorMessage.setText("Invalid email address!");
+                    return;
                 }
 
+                int choice = JOptionPane.showConfirmDialog(this, "Click yes to confirm.", "Add New User", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    try {
+                        // Check internet connection
+                        URL url = new URL("http://www.google.com");
+                        URLConnection connection = url.openConnection();
+                        connection.connect();
+
+                        String fname = fnameField.getText().trim();
+                        String mname = mnameField.getText().trim();
+                        String lname = lnameField.getText().trim();
+                        String sname = snameField.getText().trim();
+                        String gender = (String) genderField.getSelectedItem();
+                        String email = emailField.getText().trim();
+                        String bday = bdayField.getText();
+                        String number = "09" + numberField.getText().trim();
+                        String imgname = imgField.getText().trim();
+                        String role = (String) roleField.getSelectedItem();
+
+                        LocalDateTime now = LocalDateTime.now();
+                        String entry = dtf.format(now);
+
+                        try {
+                            Connection con = Main.getDbCon();
+
+                            File selectedFile;
+                            if (imgname.isEmpty()) {
+                                selectedFile = new File("C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\default.png");
+                            } else {
+                                selectedFile = file.getSelectedFile();
+                            }
+
+                            String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads";
+                            File destinationFile = new File(destinationDir, selectedFile.getName());
+
+                            try {
+                                resizeAndCopyImage(selectedFile, destinationFile, 150, 150);
+                                System.out.println(destinationFile.getName());
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                                JOptionPane.showMessageDialog(null, "File upload failed!", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+
+                            String query = "INSERT INTO users (img, fname, mname, lname, Sname, fullname, userName, userRole, password, email, gender, mobileNumber, birthDate, entryDate, status, fileName) "
+                                    + "VALUES (LOAD_FILE(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                            PreparedStatement ps = con.prepareStatement(query);
+                            ps.setString(1, destinationFile.getAbsolutePath());
+                            ps.setString(2, fname);
+                            ps.setString(3, mname);
+                            ps.setString(4, lname);
+                            ps.setString(5, sname);
+                            if (mname.isEmpty()) {
+                                ps.setString(6, fname + " " + lname + " " + sname);
+                                String username = lname.replaceAll("\\s+", "").toLowerCase() + fname.substring(0, 1).toLowerCase() + RNG() + "@invsys.mark-it";
+                                ps.setString(7, username);
+                            } else {
+                                ps.setString(6, fname + " " + mname + " " + lname + " " + sname);
+                                String username = lname.replaceAll("\\s+", "").toLowerCase() + fname.substring(0, 1).toLowerCase() + mname.substring(0, 1).toLowerCase() + RNG() + "@invsys.mark-it";
+                                ps.setString(7, username);
+                            }
+
+                            ps.setString(8, role);
+                            ps.setString(9, randomPass());
+                            ps.setString(10, email);
+                            ps.setString(11, gender);
+                            ps.setString(12, number);
+                            ps.setString(13, bday);
+                            ps.setString(14, entry);
+                            ps.setString(15, "Active");
+                            ps.setString(16, destinationFile.getName());
+                            ps.executeUpdate();
+
+                            ErrorMessage.setText(" ");
+
+                            ps.close();
+                            con.close();
+
+                        } catch (SQLException e) {
+                            e.printStackTrace(); // Print the exception details for debugging
+                            JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+                        } finally {
+                            Main.closeCon();
+                        }
+
+                        emailNewUser(email);
+                        home.setHeader(home.jPanel1, Main.username);
+                        home.form6 = new Form6();
+                        home.setForm(home.form6);
+                        home.form7 = new Form7(Main.username);
+                        GlassPanePopup.closePopupLast();
+                        dispose();
+                        home.successAddUser.showNotification();
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Internet Connection Occurred!", "Network Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
         }
 
@@ -629,6 +684,14 @@ public class addNewUser extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_numberFieldActionPerformed
 
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFieldActionPerformed
+
+    private void emailFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailFieldMouseClicked
+        ErrorMessage.setText(" ");
+    }//GEN-LAST:event_emailFieldMouseClicked
+
     private static void resizeAndCopyImage(File sourceFile, File destFile, int width, int height) throws IOException {
         // Read the source image
         BufferedImage originalImage = ImageIO.read(sourceFile);
@@ -663,6 +726,85 @@ public class addNewUser extends javax.swing.JDialog {
             otpBuilder.append(CHARACTERS.charAt(index));
         }
         return otpBuilder.toString();
+    }
+
+    private static Message sendCreatedUserMsg(Session session, String myAccountEmail, String recipient) throws MessagingException {
+        String storedName = "";
+        String storedUserName = "";
+        String storedRole = "";
+        String storedPass = "";
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myAccountEmail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            message.setSubject("Mark-It Inventory System Account Registered");
+
+            try {
+                Statement s = Main.getDbCon().createStatement();
+                ResultSet rs = s.executeQuery("SELECT * FROM users WHERE email = '" + recipient + "'");
+
+                while (rs.next()) {
+                    storedName = rs.getString("lname");
+                    storedUserName = rs.getString("userName");
+                    storedRole = rs.getString("userRole");
+                    storedPass = rs.getString("password");
+                }
+
+                // Close the ResultSet
+                rs.close();
+                s.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace(); // Print the exception details for debugging
+                JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                Main.closeCon();
+            }
+
+            String htmlText = "<h3 style=\"color:black;\">Welcome New User!</h3>"
+                    + "<p style=\"color:black;\">Dear Mr./Mrs. " + storedName + ", </p>"
+                    + "<p style=\"color:black;\"> We are pleased to know that you are joining our team! Please refer to the credentials below for you to access your account in our Inventory System.</p>"
+                    + "<p style=\"color:black;\"> Username:  <strong>" + storedUserName + " </strong> </p>"
+                    + "<p style=\"color:black;\"> Position:  <strong>" + storedRole + " </strong> </p>"
+                    + "<p style=\"color:black;\"> Password:  <strong>" + storedPass + " </strong> </p>"
+                    + "<p style=\"color:black;\"> Keep your credentials safe to open our Inventory System. Feel free to change your password as you log in your account.</p>"
+                    + "<p style=\"color:black;\"> This message is generated automatically, so there's no need to reply. If you have any questions or concerns, you may contact our support team.</p>"
+                    + "<p style=\"color:black;\">Best regards,</p>"
+                    + "<p style=\"color:black;\">Mark-It Inventory System </p>";
+
+            message.setContent(htmlText, "text/html");
+            return message;
+        } catch (AddressException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    // Code for email sending
+    public static void emailNewUser(String recipient) throws Exception {
+
+        System.out.println("sending...");
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+
+        String myAccountEmail = "invsysmarkitbot@gmail.com";
+        String password = "qfsb ksrp pwfw rigc";
+
+        Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(myAccountEmail, password);
+            }
+        });
+
+        Message message = sendCreatedUserMsg(session, myAccountEmail, recipient);
+        Transport.send(message);
+        System.out.println("sent!");
     }
 
     public static void main(String args[]) {
@@ -732,6 +874,7 @@ public class addNewUser extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
