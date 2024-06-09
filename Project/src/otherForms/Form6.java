@@ -40,6 +40,7 @@ public class Form6 extends javax.swing.JPanel {
         initData();
         addBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         exportBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
 
         searchField.addEvent(new EventTextField() {
             @Override

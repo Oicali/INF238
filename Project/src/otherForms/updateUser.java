@@ -60,6 +60,7 @@ public class updateUser extends javax.swing.JDialog {
             delBtn.setEnabled(false);
             passwordField.setEditable(false);
             usernameField.setEditable(false);
+            roleField.setEditable(false);
         }
 
         try {
@@ -714,6 +715,11 @@ public class updateUser extends javax.swing.JDialog {
                         ErrorMessage.setText("Invalid email address!");
                         return;
                     }
+                }
+                
+                if (!usernameField.getText().trim().endsWith("@invsys.mark-it")){
+                    ErrorMessage.setText("Invalid username!");
+                    return;
                 }
 
                 int choice = JOptionPane.showConfirmDialog(this, "Save your current changes?", "Save Task", JOptionPane.YES_NO_OPTION);

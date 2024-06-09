@@ -4,6 +4,7 @@
  */
 package Main;
 
+import components.ScrollBarWin11UI;
 import interfaces.EventMenuSelected;
 import java.awt.Color;
 import java.awt.Shape;
@@ -19,6 +20,8 @@ import javax.swing.JDialog;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import otherForms.*;
 import popUps.changePassword;
 import settings.GlassPanePopup;
@@ -355,6 +358,9 @@ public class home extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(home.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        
+        UIDefaults ui = UIManager.getDefaults();
+        ui.put("ScrollBarUI", ScrollBarWin11UI.class.getCanonicalName());
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
