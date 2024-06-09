@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package popUps;
 
 import Main.Main;
 import Main.home;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -28,6 +24,13 @@ public class changePassword extends javax.swing.JPanel {
     public changePassword() {
         initComponents();
         setOpaque(false);
+        cmdCancel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        changePassBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }
+
+    private boolean isSpecialCharacter(char c) {
+        String specialChars = "!@#$%^&*()-_+=<>?/|\\{}[]~`";
+        return specialChars.indexOf(c) >= 0;
     }
 
     @Override
@@ -85,8 +88,8 @@ public class changePassword extends javax.swing.JPanel {
             }
         });
         OPField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                OPFieldKeyPressed(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                OPFieldKeyTyped(evt);
             }
         });
 
@@ -102,14 +105,9 @@ public class changePassword extends javax.swing.JPanel {
                 NPFieldMouseClicked(evt);
             }
         });
-        NPField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NPFieldActionPerformed(evt);
-            }
-        });
         NPField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                NPFieldKeyPressed(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                NPFieldKeyTyped(evt);
             }
         });
 
@@ -126,8 +124,8 @@ public class changePassword extends javax.swing.JPanel {
             }
         });
         CPField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                CPFieldKeyPressed(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CPFieldKeyTyped(evt);
             }
         });
 
@@ -331,44 +329,31 @@ public class changePassword extends javax.swing.JPanel {
         lbl3.setText(" ");
     }//GEN-LAST:event_CPFieldMouseClicked
 
-    private void OPFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_OPFieldKeyPressed
+    private void OPFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_OPFieldKeyTyped
         char keyChar = evt.getKeyChar();
-        // Allow only valid password characters: digits, letters, and special characters
-        if (Character.isDigit(keyChar) || Character.isLetter(keyChar) || isSpecialCharacter(keyChar) || keyChar == KeyEvent.VK_BACK_SPACE) {
-            OPField.setEditable(true);
-        } else {
-            OPField.setEditable(false);
+        
+        if (!Character.isDigit(keyChar) && !Character.isLetter(keyChar) && !isSpecialCharacter(keyChar)) {
+            evt.consume();
         }
-    }//GEN-LAST:event_OPFieldKeyPressed
+    }//GEN-LAST:event_OPFieldKeyTyped
 
-    private void NPFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NPFieldKeyPressed
+    private void NPFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NPFieldKeyTyped
         char keyChar = evt.getKeyChar();
-        // Allow only valid password characters: digits, letters, and special characters
-        if (Character.isDigit(keyChar) || Character.isLetter(keyChar) || isSpecialCharacter(keyChar) || keyChar == KeyEvent.VK_BACK_SPACE) {
-            NPField.setEditable(true);
-        } else {
-            NPField.setEditable(false);
+        
+        if (!Character.isDigit(keyChar) && !Character.isLetter(keyChar) && !isSpecialCharacter(keyChar)) {
+            evt.consume();
         }
-    }//GEN-LAST:event_NPFieldKeyPressed
+    }//GEN-LAST:event_NPFieldKeyTyped
 
-    private void CPFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CPFieldKeyPressed
+    private void CPFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CPFieldKeyTyped
         char keyChar = evt.getKeyChar();
-        // Allow only valid password characters: digits, letters, and special characters
-        if (Character.isDigit(keyChar) || Character.isLetter(keyChar) || isSpecialCharacter(keyChar) || keyChar == KeyEvent.VK_BACK_SPACE) {
-            CPField.setEditable(true);
-        } else {
-            CPField.setEditable(false);
+        
+        if (!Character.isDigit(keyChar) && !Character.isLetter(keyChar) && !isSpecialCharacter(keyChar)) {
+            evt.consume();
         }
-    }//GEN-LAST:event_CPFieldKeyPressed
+    }//GEN-LAST:event_CPFieldKeyTyped
 
-    private void NPFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NPFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NPFieldActionPerformed
 
-    private boolean isSpecialCharacter(char c) {
-        String specialChars = "!@#$%^&*()-_+=<>?/|\\{}[]~`";
-        return specialChars.indexOf(c) >= 0;
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField CPField;
     private javax.swing.JPasswordField NPField;

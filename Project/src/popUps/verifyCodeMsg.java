@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package popUps;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -20,10 +17,7 @@ import javax.swing.Timer;
 import javax.swing.text.*;
 import settings.GlassPanePopup;
 
-/**
- *
- * @author jairus
- */
+
 public class verifyCodeMsg extends javax.swing.JPanel {
 
     private AtomicInteger secondsLeft = new AtomicInteger(300);
@@ -43,6 +37,8 @@ public class verifyCodeMsg extends javax.swing.JPanel {
         code4.setEchoChar((char) 0);
         code5.setEchoChar((char) 0);
         code6.setEchoChar((char) 0);
+        cmdCancel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        verifyBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         // Set up timer to update countdown label
         timer = new Timer(1000, new ActionListener() {
@@ -174,65 +170,66 @@ public class verifyCodeMsg extends javax.swing.JPanel {
         txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt.setText("We have sent the verification code through email.");
 
-        code1.setBackground(new java.awt.Color(204, 204, 204));
+        code1.setBackground(new java.awt.Color(238, 238, 238));
         code1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         code1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         code1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        code1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                code1ActionPerformed(evt);
-            }
-        });
+        code1.setSelectionColor(new java.awt.Color(204, 204, 204));
         code1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 code1KeyTyped(evt);
             }
         });
 
-        code2.setBackground(new java.awt.Color(204, 204, 204));
+        code2.setBackground(new java.awt.Color(238, 238, 238));
         code2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         code2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         code2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        code2.setSelectionColor(new java.awt.Color(204, 204, 204));
         code2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 code2KeyTyped(evt);
             }
         });
 
-        code3.setBackground(new java.awt.Color(204, 204, 204));
+        code3.setBackground(new java.awt.Color(238, 238, 238));
         code3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         code3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         code3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        code3.setSelectionColor(new java.awt.Color(204, 204, 204));
         code3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 code3KeyTyped(evt);
             }
         });
 
-        code4.setBackground(new java.awt.Color(204, 204, 204));
+        code4.setBackground(new java.awt.Color(238, 238, 238));
         code4.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         code4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         code4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        code4.setSelectionColor(new java.awt.Color(204, 204, 204));
         code4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 code4KeyTyped(evt);
             }
         });
 
-        code5.setBackground(new java.awt.Color(204, 204, 204));
+        code5.setBackground(new java.awt.Color(238, 238, 238));
         code5.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         code5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         code5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        code5.setSelectionColor(new java.awt.Color(204, 204, 204));
         code5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 code5KeyTyped(evt);
             }
         });
 
-        code6.setBackground(new java.awt.Color(204, 204, 204));
+        code6.setBackground(new java.awt.Color(238, 238, 238));
         code6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         code6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         code6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        code6.setSelectionColor(new java.awt.Color(204, 204, 204));
         code6.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 code6KeyTyped(evt);
@@ -371,10 +368,6 @@ public class verifyCodeMsg extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Invalid Verification Code!", "", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_verifyBtnActionPerformed
-
-    private void code1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_code1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_code1ActionPerformed
 
     private void code1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_code1KeyTyped
         char c = evt.getKeyChar();

@@ -6,6 +6,7 @@ package popUps;
 
 import Main.*;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -48,6 +49,8 @@ public class forgotUsernameMsg extends javax.swing.JPanel {
         setOpaque(false);
         txt.setBackground(new Color(0, 0, 0, 0));
         txt.setOpaque(false);
+        cmdCancel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        sendUsernameBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     @Override
@@ -173,6 +176,7 @@ public class forgotUsernameMsg extends javax.swing.JPanel {
         field.setText("Enter Email Address");
         field.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
         field.setOpaque(false);
+        field.setSelectionColor(new java.awt.Color(204, 204, 204));
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 fieldFocusGained(evt);

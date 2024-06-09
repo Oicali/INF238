@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package otherForms;
 
 import Main.Main;
@@ -64,12 +59,128 @@ public class addNewUser extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         generateBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        cmdCancel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         // Create a rounded frame
         Shape roundedRectangle = new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20);
         setShape(roundedRectangle);
     }
 
+    private static void resizeAndCopyImage(File sourceFile, File destFile, int width, int height) throws IOException {
+        // Read the source image
+        BufferedImage originalImage = ImageIO.read(sourceFile);
+
+        // Create a new buffered image with the desired dimensions
+        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+        // Draw the original image into the new image with the new dimensions
+        Graphics2D g2d = resizedImage.createGraphics();
+        g2d.drawImage(originalImage, 0, 0, width, height, null);
+        g2d.dispose();
+
+        // Extract the file extension
+        String formatName = destFile.getName().substring(destFile.getName().lastIndexOf(".") + 1);
+
+        // Write the resized image to the destination file
+        ImageIO.write(resizedImage, formatName, destFile);
+    }
+
+    private static String RNG() {
+        StringBuilder otpBuilder = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            otpBuilder.append((char) ((int) (Math.random() * 10) + '0'));
+        }
+        return otpBuilder.toString();
+    }
+
+    private static String randomPass() {
+        StringBuilder otpBuilder = new StringBuilder(LENGTH);
+        for (int i = 0; i < LENGTH; i++) {
+            int index = RANDOM.nextInt(CHARACTERS.length());
+            otpBuilder.append(CHARACTERS.charAt(index));
+        }
+        return otpBuilder.toString();
+    }
+
+    private static Message sendCreatedUserMsg(Session session, String myAccountEmail, String recipient) throws MessagingException {
+        String storedName = "";
+        String storedUserName = "";
+        String storedRole = "";
+        String storedPass = "";
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myAccountEmail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            message.setSubject("Mark-It Inventory System Account Registered");
+
+            try {
+                Statement s = Main.getDbCon().createStatement();
+                ResultSet rs = s.executeQuery("SELECT * FROM users WHERE email = '" + recipient + "'");
+
+                while (rs.next()) {
+                    storedName = rs.getString("lname");
+                    storedUserName = rs.getString("userName");
+                    storedRole = rs.getString("userRole");
+                    storedPass = rs.getString("password");
+                }
+
+                // Close the ResultSet
+                rs.close();
+                s.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace(); // Print the exception details for debugging
+                JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                Main.closeCon();
+            }
+
+            String htmlText = "<h3 style=\"color:black;\">Welcome New User!</h3>"
+                    + "<p style=\"color:black;\">Dear Mr./Mrs. " + storedName + ", </p>"
+                    + "<p style=\"color:black;\"> We are pleased to know that you are joining our team! Please refer to the credentials below for you to access your account in our Inventory System.</p>"
+                    + "<p style=\"color:black;\"> Username:  <strong>" + storedUserName + " </strong> </p>"
+                    + "<p style=\"color:black;\"> Position:  <strong>" + storedRole + " </strong> </p>"
+                    + "<p style=\"color:black;\"> Password:  <strong>" + storedPass + " </strong> </p>"
+                    + "<p style=\"color:black;\"> Keep your credentials safe to open our Inventory System. Feel free to change your password as you log in your account.</p>"
+                    + "<p style=\"color:black;\"> This message is generated automatically, so there's no need to reply. If you have any questions or concerns, you may contact our support team.</p>"
+                    + "<p style=\"color:black;\">Best regards,</p>"
+                    + "<p style=\"color:black;\">Mark-It Inventory System </p>";
+
+            message.setContent(htmlText, "text/html");
+            return message;
+        } catch (AddressException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    // Code for email sending
+    public static void emailNewUser(String recipient) throws Exception {
+
+        System.out.println("sending...");
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+
+        String myAccountEmail = "invsysmarkitbot@gmail.com";
+        String password = "qfsb ksrp pwfw rigc";
+
+        Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(myAccountEmail, password);
+            }
+        });
+
+        Message message = sendCreatedUserMsg(session, myAccountEmail, recipient);
+        Transport.send(message);
+        System.out.println("sent!");
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -107,7 +218,7 @@ public class addNewUser extends javax.swing.JDialog {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
 
-        date.setForeground(new java.awt.Color(48, 144, 216));
+        date.setForeground(new java.awt.Color(15, 106, 191));
         date.setDateFormat("MMMM-dd-yyyy");
         date.setTextRefernce(bdayField);
 
@@ -123,6 +234,7 @@ public class addNewUser extends javax.swing.JDialog {
 
         numberField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         numberField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        numberField.setSelectionColor(new java.awt.Color(204, 204, 204));
         numberField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 numberFieldMouseClicked(evt);
@@ -141,9 +253,11 @@ public class addNewUser extends javax.swing.JDialog {
 
         snameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         snameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        snameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         lnameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         lnameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        lnameField.setSelectionColor(new java.awt.Color(204, 204, 204));
         lnameField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lnameFieldMouseClicked(evt);
@@ -167,27 +281,20 @@ public class addNewUser extends javax.swing.JDialog {
         imgField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         imgField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(178, 178, 178)), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
         imgField.setCaretColor(new java.awt.Color(0, 0, 0));
-        imgField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                imgFieldActionPerformed(evt);
-            }
-        });
+        imgField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         emailField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         emailField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        emailField.setSelectionColor(new java.awt.Color(204, 204, 204));
         emailField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 emailFieldMouseClicked(evt);
             }
         });
-        emailField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailFieldActionPerformed(evt);
-            }
-        });
 
         mnameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         mnameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        mnameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         jLabel19.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -236,6 +343,7 @@ public class addNewUser extends javax.swing.JDialog {
 
         fnameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         fnameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        fnameField.setSelectionColor(new java.awt.Color(204, 204, 204));
         fnameField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 fnameFieldMouseClicked(evt);
@@ -285,11 +393,7 @@ public class addNewUser extends javax.swing.JDialog {
 
         bdayField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         bdayField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(178, 178, 178)), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
-        bdayField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bdayFieldActionPerformed(evt);
-            }
-        });
+        bdayField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         genderField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
         genderField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
@@ -608,14 +712,6 @@ public class addNewUser extends javax.swing.JDialog {
 
     }//GEN-LAST:event_cmdCancelActionPerformed
 
-    private void bdayFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bdayFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bdayFieldActionPerformed
-
-    private void imgFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imgFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_imgFieldActionPerformed
-
     private void uploadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadBtnActionPerformed
 
         file.setCurrentDirectory(new File("user.dir"));
@@ -681,132 +777,15 @@ public class addNewUser extends javax.swing.JDialog {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_numberFieldKeyTyped
 
-    private void numberFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_numberFieldActionPerformed
-
-    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailFieldActionPerformed
-
     private void emailFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailFieldMouseClicked
         ErrorMessage.setText(" ");
     }//GEN-LAST:event_emailFieldMouseClicked
 
-    private static void resizeAndCopyImage(File sourceFile, File destFile, int width, int height) throws IOException {
-        // Read the source image
-        BufferedImage originalImage = ImageIO.read(sourceFile);
+    private void numberFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_numberFieldActionPerformed
 
-        // Create a new buffered image with the desired dimensions
-        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-
-        // Draw the original image into the new image with the new dimensions
-        Graphics2D g2d = resizedImage.createGraphics();
-        g2d.drawImage(originalImage, 0, 0, width, height, null);
-        g2d.dispose();
-
-        // Extract the file extension
-        String formatName = destFile.getName().substring(destFile.getName().lastIndexOf(".") + 1);
-
-        // Write the resized image to the destination file
-        ImageIO.write(resizedImage, formatName, destFile);
-    }
-
-    private static String RNG() {
-        StringBuilder otpBuilder = new StringBuilder();
-        for (int i = 0; i < 4; i++) {
-            otpBuilder.append((char) ((int) (Math.random() * 10) + '0'));
-        }
-        return otpBuilder.toString();
-    }
-
-    private static String randomPass() {
-        StringBuilder otpBuilder = new StringBuilder(LENGTH);
-        for (int i = 0; i < LENGTH; i++) {
-            int index = RANDOM.nextInt(CHARACTERS.length());
-            otpBuilder.append(CHARACTERS.charAt(index));
-        }
-        return otpBuilder.toString();
-    }
-
-    private static Message sendCreatedUserMsg(Session session, String myAccountEmail, String recipient) throws MessagingException {
-        String storedName = "";
-        String storedUserName = "";
-        String storedRole = "";
-        String storedPass = "";
-
-        try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(myAccountEmail));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-            message.setSubject("Mark-It Inventory System Account Registered");
-
-            try {
-                Statement s = Main.getDbCon().createStatement();
-                ResultSet rs = s.executeQuery("SELECT * FROM users WHERE email = '" + recipient + "'");
-
-                while (rs.next()) {
-                    storedName = rs.getString("lname");
-                    storedUserName = rs.getString("userName");
-                    storedRole = rs.getString("userRole");
-                    storedPass = rs.getString("password");
-                }
-
-                // Close the ResultSet
-                rs.close();
-                s.close();
-
-            } catch (SQLException e) {
-                e.printStackTrace(); // Print the exception details for debugging
-                JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                Main.closeCon();
-            }
-
-            String htmlText = "<h3 style=\"color:black;\">Welcome New User!</h3>"
-                    + "<p style=\"color:black;\">Dear Mr./Mrs. " + storedName + ", </p>"
-                    + "<p style=\"color:black;\"> We are pleased to know that you are joining our team! Please refer to the credentials below for you to access your account in our Inventory System.</p>"
-                    + "<p style=\"color:black;\"> Username:  <strong>" + storedUserName + " </strong> </p>"
-                    + "<p style=\"color:black;\"> Position:  <strong>" + storedRole + " </strong> </p>"
-                    + "<p style=\"color:black;\"> Password:  <strong>" + storedPass + " </strong> </p>"
-                    + "<p style=\"color:black;\"> Keep your credentials safe to open our Inventory System. Feel free to change your password as you log in your account.</p>"
-                    + "<p style=\"color:black;\"> This message is generated automatically, so there's no need to reply. If you have any questions or concerns, you may contact our support team.</p>"
-                    + "<p style=\"color:black;\">Best regards,</p>"
-                    + "<p style=\"color:black;\">Mark-It Inventory System </p>";
-
-            message.setContent(htmlText, "text/html");
-            return message;
-        } catch (AddressException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    // Code for email sending
-    public static void emailNewUser(String recipient) throws Exception {
-
-        System.out.println("sending...");
-
-        Properties properties = new Properties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "587");
-
-        String myAccountEmail = "invsysmarkitbot@gmail.com";
-        String password = "qfsb ksrp pwfw rigc";
-
-        Session session = Session.getInstance(properties, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(myAccountEmail, password);
-            }
-        });
-
-        Message message = sendCreatedUserMsg(session, myAccountEmail, recipient);
-        Transport.send(message);
-        System.out.println("sent!");
-    }
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

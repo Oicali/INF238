@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package otherForms;
 
 import Main.Main;
@@ -40,19 +36,6 @@ public class updateUser extends javax.swing.JDialog {
     private String selectedAccount = "";
     JFileChooser file = new JFileChooser();
 
-    public updateUser(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-
-        // Create a rounded frame
-        Shape roundedRectangle = new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20);
-        setShape(roundedRectangle);
-    }
-    
-    
-    
-    
-
     public updateUser(java.awt.Frame parent, boolean modal, String username) {
         super(parent, modal);
         initComponents();
@@ -60,6 +43,7 @@ public class updateUser extends javax.swing.JDialog {
         showDateBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         delBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         updateBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        cmdCancel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         selectedAccount = username;
         if (Main.userPosition.equals("Administrator")) {
@@ -74,6 +58,8 @@ public class updateUser extends javax.swing.JDialog {
         
         if(Main.username.equals(username)){
             delBtn.setEnabled(false);
+            passwordField.setEditable(false);
+            usernameField.setEditable(false);
         }
 
         try {
@@ -115,6 +101,30 @@ public class updateUser extends javax.swing.JDialog {
         setShape(roundedRectangle);
     }
 
+    private static void resizeAndCopyImage(File sourceFile, File destFile, int width, int height) throws IOException {
+        // Read the source image
+        BufferedImage originalImage = ImageIO.read(sourceFile);
+
+        // Create a new buffered image with the desired dimensions
+        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+        // Draw the original image into the new image with the new dimensions
+        Graphics2D g2d = resizedImage.createGraphics();
+        g2d.drawImage(originalImage, 0, 0, width, height, null);
+        g2d.dispose();
+
+        // Extract the file extension
+        String formatName = destFile.getName().substring(destFile.getName().lastIndexOf(".") + 1);
+
+        // Write the resized image to the destination file
+        ImageIO.write(resizedImage, formatName, destFile);
+    }
+    
+    private boolean isSpecialCharacter(char c) {
+        String specialChars = "!@#$%^&*()-_+=<>?/|\\{}[]~`";
+        return specialChars.indexOf(c) >= 0;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -161,8 +171,9 @@ public class updateUser extends javax.swing.JDialog {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
 
-        date.setForeground(new java.awt.Color(48, 144, 216));
+        date.setForeground(new java.awt.Color(15, 106, 191));
         date.setDateFormat("MMMM-dd-yyyy");
         date.setTextRefernce(bdayField);
 
@@ -182,14 +193,10 @@ public class updateUser extends javax.swing.JDialog {
 
         numberField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         numberField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        numberField.setSelectionColor(new java.awt.Color(204, 204, 204));
         numberField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 numberFieldMouseClicked(evt);
-            }
-        });
-        numberField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numberFieldActionPerformed(evt);
             }
         });
         numberField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -205,6 +212,7 @@ public class updateUser extends javax.swing.JDialog {
 
         snameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         snameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        snameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         delBtn.setBackground(new java.awt.Color(191, 50, 50));
         delBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -225,6 +233,7 @@ public class updateUser extends javax.swing.JDialog {
 
         lnameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         lnameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        lnameField.setSelectionColor(new java.awt.Color(204, 204, 204));
         lnameField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lnameFieldMouseClicked(evt);
@@ -248,28 +257,21 @@ public class updateUser extends javax.swing.JDialog {
         imgField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         imgField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(178, 178, 178)), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
         imgField.setCaretColor(new java.awt.Color(0, 0, 0));
-        imgField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                imgFieldActionPerformed(evt);
-            }
-        });
+        imgField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         emailField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         emailField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        emailField.setSelectionColor(new java.awt.Color(204, 204, 204));
         emailField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 emailFieldMouseClicked(evt);
-            }
-        });
-        emailField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailFieldActionPerformed(evt);
             }
         });
 
         usernameField.setEditable(false);
         usernameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         usernameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        usernameField.setSelectionColor(new java.awt.Color(204, 204, 204));
         usernameField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 usernameFieldMouseClicked(evt);
@@ -278,6 +280,7 @@ public class updateUser extends javax.swing.JDialog {
 
         mnameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         mnameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        mnameField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         jLabel19.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -306,11 +309,6 @@ public class updateUser extends javax.swing.JDialog {
         statusField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Active", "Inactive" }));
         statusField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         statusField.setLabelText("");
-        statusField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                statusFieldActionPerformed(evt);
-            }
-        });
 
         showDateBtn.setBackground(new java.awt.Color(15, 106, 191));
         showDateBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -335,6 +333,7 @@ public class updateUser extends javax.swing.JDialog {
 
         fnameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         fnameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        fnameField.setSelectionColor(new java.awt.Color(204, 204, 204));
         fnameField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 fnameFieldMouseClicked(evt);
@@ -396,11 +395,7 @@ public class updateUser extends javax.swing.JDialog {
 
         bdayField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         bdayField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(178, 178, 178)), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
-        bdayField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bdayFieldActionPerformed(evt);
-            }
-        });
+        bdayField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         passwordField.setEditable(false);
         passwordField.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
@@ -411,9 +406,14 @@ public class updateUser extends javax.swing.JDialog {
                 passwordFieldMouseClicked(evt);
             }
         });
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
+            }
+        });
         passwordField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                passwordFieldKeyPressed(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                passwordFieldKeyTyped(evt);
             }
         });
 
@@ -450,6 +450,11 @@ public class updateUser extends javax.swing.JDialog {
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel24.setText("*");
 
+        jLabel25.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel25.setText("*");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -459,16 +464,6 @@ public class updateUser extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bdayField, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(showDateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -500,7 +495,19 @@ public class updateUser extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(4, 4, 4)
-                                .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bdayField, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(showDateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -602,7 +609,8 @@ public class updateUser extends javax.swing.JDialog {
                             .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel18)
                             .addComponent(entryField)
-                            .addComponent(jLabel12)))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel25)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(imgField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel21))
@@ -646,7 +654,7 @@ public class updateUser extends javax.swing.JDialog {
         int choice = JOptionPane.showConfirmDialog(this, "Are you sure to delete this account?", "Delete User", JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
 
-            String password = JOptionPane.showInputDialog(this, "Enter your password:");
+            String password = JOptionPane.showInputDialog(this, "Enter your password:", "");
 
             if (password != null && password.equals(Main.getStoredPassword())) {
                 try {
@@ -691,7 +699,7 @@ public class updateUser extends javax.swing.JDialog {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
 
-        if (fnameField.getText().isEmpty() || lnameField.getText().isEmpty() || usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+        if (fnameField.getText().isEmpty() || lnameField.getText().isEmpty() || usernameField.getText().isEmpty() || passwordField.getText().isEmpty() || emailField.getText().isEmpty()) {
             ErrorMessage.setText("Please complete all required fields with *");
         } else {
             if (numberField.getText().trim().length() < 9 && !numberField.getText().trim().isEmpty()) {
@@ -803,10 +811,6 @@ public class updateUser extends javax.swing.JDialog {
 
     }//GEN-LAST:event_updateBtnActionPerformed
 
-    private void statusFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_statusFieldActionPerformed
-
     private void showDateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDateBtnActionPerformed
         date.showPopup();
     }//GEN-LAST:event_showDateBtnActionPerformed
@@ -821,21 +825,9 @@ public class updateUser extends javax.swing.JDialog {
 
     }//GEN-LAST:event_cmdCancelActionPerformed
 
-    private void bdayFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bdayFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bdayFieldActionPerformed
-
     private void passwordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldMouseClicked
         ErrorMessage.setText(" ");
     }//GEN-LAST:event_passwordFieldMouseClicked
-
-    private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
-
-    }//GEN-LAST:event_passwordFieldKeyPressed
-
-    private void imgFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imgFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_imgFieldActionPerformed
 
     private void uploadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadBtnActionPerformed
 
@@ -905,36 +897,21 @@ public class updateUser extends javax.swing.JDialog {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_numberFieldKeyTyped
 
-    private void numberFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_numberFieldActionPerformed
-
-    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailFieldActionPerformed
-
     private void emailFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailFieldMouseClicked
         ErrorMessage.setText(" ");
     }//GEN-LAST:event_emailFieldMouseClicked
 
-    private static void resizeAndCopyImage(File sourceFile, File destFile, int width, int height) throws IOException {
-        // Read the source image
-        BufferedImage originalImage = ImageIO.read(sourceFile);
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldActionPerformed
 
-        // Create a new buffered image with the desired dimensions
-        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-
-        // Draw the original image into the new image with the new dimensions
-        Graphics2D g2d = resizedImage.createGraphics();
-        g2d.drawImage(originalImage, 0, 0, width, height, null);
-        g2d.dispose();
-
-        // Extract the file extension
-        String formatName = destFile.getName().substring(destFile.getName().lastIndexOf(".") + 1);
-
-        // Write the resized image to the destination file
-        ImageIO.write(resizedImage, formatName, destFile);
-    }
+    private void passwordFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyTyped
+        char keyChar = evt.getKeyChar();
+        
+        if (!Character.isDigit(keyChar) && !Character.isLetter(keyChar) && !isSpecialCharacter(keyChar)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_passwordFieldKeyTyped
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -974,6 +951,20 @@ public class updateUser extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+        
+        
+    }
+    
+    
+    
+    
+    public updateUser(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+
+        // Create a rounded frame
+        Shape roundedRectangle = new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20);
+        setShape(roundedRectangle);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1003,6 +994,7 @@ public class updateUser extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

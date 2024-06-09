@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package popUps;
 
 import Main.*;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -47,16 +44,8 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
         txt.setOpaque(false);
         txt1.setBackground(new Color(0, 0, 0, 0));
         txt1.setOpaque(false);
-    }
-
-    @Override
-    protected void paintComponent(Graphics grphcs) {
-        Graphics2D g2 = (Graphics2D) grphcs.create();
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(getBackground());
-        g2.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 15, 15));
-        g2.dispose();
-        super.paintComponent(grphcs);
+        cmdCancel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        sendVCBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     // Method to generate OTP
@@ -142,6 +131,24 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
         return null;
     }
 
+    public static String getCode() {
+        return Code;
+    }
+
+    public static void setCode(String aCode) {
+        Code = aCode;
+    }
+    
+    @Override
+    protected void paintComponent(Graphics grphcs) {
+        Graphics2D g2 = (Graphics2D) grphcs.create();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(getBackground());
+        g2.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 15, 15));
+        g2.dispose();
+        super.paintComponent(grphcs);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -171,17 +178,13 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
         field.setText("Enter Email Address");
         field.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
         field.setOpaque(false);
+        field.setSelectionColor(new java.awt.Color(204, 204, 204));
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 fieldFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 fieldFocusLost(evt);
-            }
-        });
-        field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldActionPerformed(evt);
             }
         });
 
@@ -276,10 +279,6 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
 
     }//GEN-LAST:event_fieldFocusLost
 
-    private void fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldActionPerformed
-
     private void sendVCBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendVCBtnActionPerformed
         if (!field.getText().isEmpty() && !field.getText().trim().equalsIgnoreCase("Enter Email Address")) {
             try {
@@ -355,17 +354,5 @@ public class forgotPasswordMsg extends javax.swing.JPanel {
     private javax.swing.JLabel txt1;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the Code
-     */
-    public static String getCode() {
-        return Code;
-    }
-
-    /**
-     * @param aCode the Code to set
-     */
-    public static void setCode(String aCode) {
-        Code = aCode;
-    }
+    
 }

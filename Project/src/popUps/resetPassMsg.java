@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package popUps;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -13,14 +11,12 @@ import settings.GlassPanePopup;
 
 public class resetPassMsg extends javax.swing.JPanel {
 
-    /**
-     * Creates new form resetPassMsg
-     */
     public resetPassMsg() {
         initComponents();
         setOpaque(false);
         txt.setBackground(new Color(0, 0, 0, 0));
         txt.setOpaque(false);
+        confirmBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     @Override

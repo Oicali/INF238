@@ -23,15 +23,11 @@ import otherForms.*;
 import popUps.changePassword;
 import settings.GlassPanePopup;
 
-/**
- *
- * @author jairus
- */
+
 public class home extends javax.swing.JFrame {
 
     ImageIcon image = new ImageIcon(getClass().getResource("/resources/logoSmall.png"));
     private Form0 form0DashBoard;
-    private Form1 form1Categories;
     private Form2 form2Products;
     private Form3 form3Order;
     public static Form4 form4ViewOrder;
@@ -63,7 +59,6 @@ public class home extends javax.swing.JFrame {
         //Set up forms
         setBackground(new Color(0, 0, 0, 0));
         form0DashBoard = new Form0();
-        form1Categories = new Form1();
         form2Products = new Form2();
         form3Order = new Form3();
         form4ViewOrder = new Form4();
@@ -82,26 +77,22 @@ public class home extends javax.swing.JFrame {
                         setForm(form0DashBoard);
                     } else if (index == 1) {
                         lastSelected = 1;
-                        setForm(form1Categories);
+                        setForm(form2Products);
                     } else if (index == 2) {
                         lastSelected = 2;
-                        setForm(form2Products);
+                        setForm(form3Order);
                     } else if (index == 3) {
                         lastSelected = 3;
-                        setForm(form3Order);
+                        setForm(form4ViewOrder);
                     } else if (index == 4) {
                         lastSelected = 4;
-                        setForm(form4ViewOrder);
+                        setForm(form5Customers);
                     } else if (index == 5) {
                         lastSelected = 5;
-                        setForm(form5Customers);
+                        setForm(form6Users);
                     } else if (index == 6) {
                         lastSelected = 6;
-                        setForm(form6Users);
-                    } else if (index == 7) {
-                        lastSelected = 7;
                         setForm(form7Profile);
-
                     } else if (index == 11) {
                         logout();
                     }
@@ -112,21 +103,18 @@ public class home extends javax.swing.JFrame {
                         setForm(form0DashBoard);
                     } else if (index == 1) {
                         lastSelected = 1;
-                        setForm(form1Categories);
+                        setForm(form2Products);
                     } else if (index == 2) {
                         lastSelected = 2;
-                        setForm(form2Products);
+                        setForm(form3Order);
                     } else if (index == 3) {
                         lastSelected = 3;
-                        setForm(form3Order);
+                        setForm(form4ViewOrder);
                     } else if (index == 4) {
                         lastSelected = 4;
-                        setForm(form4ViewOrder);
+                        setForm(form5Customers);
                     } else if (index == 5) {
                         lastSelected = 5;
-                        setForm(form5Customers);
-                    } else if (index == 6) {
-                        lastSelected = 6;
                         setForm(form7Profile);
                     } else if (index == 11) {
                         logout();
@@ -158,17 +146,13 @@ public class home extends javax.swing.JFrame {
                         setForm(form0DashBoard);
                     } else if (index == 1) {
                         lastSelected = 1;
-                        setForm(form1Categories);
+                        setForm(form2Products);
                     } else if (index == 2) {
                         lastSelected = 2;
-                        setForm(form2Products);
+                        setForm(form4ViewOrder);
                     } else if (index == 3) {
                         lastSelected = 3;
-                        setForm(form4ViewOrder);
-                    } else if (index == 4) {
-                        lastSelected = 4;
                         setForm(form7Profile);
-
                     } else if (index == 11) {
                         logout();
                     }
@@ -219,99 +203,30 @@ public class home extends javax.swing.JFrame {
         jPanel1.revalidate();
     }
 
-    public home(String Role) {
-        initComponents();
-        GlassPanePopup.install(this);
-        setIconImage(image.getImage());
-        //JDialog.setDefaultLookAndFeelDecorated(true);
+    public void logout() {
+        int choice = JOptionPane.showConfirmDialog(this, "Do you want to log out?", "Log Out", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            Main.username = "";
+            Main.setStoredPassword("");
+            Main.userPosition = "";
+//            Main.fname = "";
+//            Main.mname = "";
+//            Main.lname = "";
+//            Main.sname = "";
+//            Main.fullname = "";
+            //Main.number = "";
+//            Main.email = "";
+            //Main.birth = "";
+            //Main.gender = "";
+            //Main.date = "";
+            Main.status = "";
+            //Main.imageBytes = null;
+            dispose();
+            new logIn().show();;
 
-        nameLbl.setText(Main.fname + " " + Main.lname);
-        roleLbl.setText(Main.userPosition);
-        lastSelected = 0;
-
-        successChangePassword = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password");
-        successChangeImg = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Profile Image Changed", "Log in to see changes");
-
-        //Set up forms
-        setBackground(new Color(0, 0, 0, 0));
-        form0DashBoard = new Form0();
-        form1Categories = new Form1();
-        form2Products = new Form2();
-        form3Order = new Form3();
-        form6Users = new Form6();
-        form7Profile = new Form7();
-        setForm(form0DashBoard); // added to be in form 0 by default
-        menu.initMoving(home.this);
-        menu.addEventMenuSelected(new EventMenuSelected() {
-            @Override
-            public void selected(int index) {
-                //System.out.println(index);
-                if (Main.userPosition.equalsIgnoreCase("Administrator")) {
-                    if (index == 0) {
-                        lastSelected = 0;
-                        setForm(form0DashBoard);
-                    } else if (index == 1) {
-                        lastSelected = 1;
-                        setForm(form1Categories);
-                    } else if (index == 2) {
-                        lastSelected = 2;
-                        setForm(form2Products);
-                    } else if (index == 3) {
-                        lastSelected = 3;
-                        setForm(form3Order);
-                    } else if (index == 4) {
-                        lastSelected = 4;
-                    } else if (index == 5) {
-                        lastSelected = 5;
-                    } else if (index == 6) {
-                        lastSelected = 6;
-                        setForm(form6Users);
-                    } else if (index == 7) {
-                        lastSelected = 7;
-                        setForm(form7Profile);
-
-                    } else if (index == 11) {
-                        logout();
-                    }
-
-                } else if (Main.userPosition.equalsIgnoreCase("Employee")) {
-                    if (index == 0) {
-                        lastSelected = 0;
-                        setForm(form0DashBoard);
-                    } else if (index == 1) {
-                        lastSelected = 1;
-                        setForm(form2Products);
-                    } else if (index == 2) {
-                        lastSelected = 2;
-                        setForm(form3Order);
-                    } else if (index == 3) {
-                        lastSelected = 3;
-
-                    } else if (index == 4) {
-                        lastSelected = 4;
-
-                    } else if (index == 5) {
-                        lastSelected = 5;
-                        setForm(form7Profile);
-                    } else if (index == 11) {
-                        logout();
-                    }
-
-                }
-
-            }
-        });
-
-        // Create a rounded frame
-        Shape roundedRectangle = new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20);
-        setShape(roundedRectangle);
+        }
     }
-
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -415,36 +330,7 @@ public class home extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void logout() {
-        int choice = JOptionPane.showConfirmDialog(this, "Do you want to log out?", "Log Out", JOptionPane.YES_NO_OPTION);
-        if (choice == JOptionPane.YES_OPTION) {
-            Main.username = "";
-            Main.setStoredPassword("");
-            Main.userPosition = "";
-            Main.fname = "";
-            Main.mname = "";
-            Main.lname = "";
-            Main.sname = "";
-            Main.fullname = "";
-            Main.number = "";
-            Main.email = "";
-            Main.birth = "";
-            Main.gender = "";
-            Main.date = "";
-            Main.status = "";
-            Main.imageBytes = null;
-            dispose();
-            new logIn().show();;
-
-        }
-    }
-
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -485,7 +371,97 @@ public class home extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    
+    
+    public home(String Role) {
+        initComponents();
+        GlassPanePopup.install(this);
+        setIconImage(image.getImage());
+        //JDialog.setDefaultLookAndFeelDecorated(true);
 
+//        nameLbl.setText(Main.fname + " " + Main.lname);
+        roleLbl.setText(Main.userPosition);
+        lastSelected = 0;
+
+        successChangePassword = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password");
+        successChangeImg = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Profile Image Changed", "Log in to see changes");
+
+        //Set up forms
+        setBackground(new Color(0, 0, 0, 0));
+        form0DashBoard = new Form0();
+        //form1Categories = new Form1();
+        form2Products = new Form2();
+        form3Order = new Form3();
+        form6Users = new Form6();
+        form7Profile = new Form7();
+        setForm(form0DashBoard); // added to be in form 0 by default
+        menu.initMoving(home.this);
+        menu.addEventMenuSelected(new EventMenuSelected() {
+            @Override
+            public void selected(int index) {
+                //System.out.println(index);
+                if (Main.userPosition.equalsIgnoreCase("Administrator")) {
+                    if (index == 0) {
+                        lastSelected = 0;
+                        setForm(form0DashBoard);
+                    } else if (index == 1) {
+                        lastSelected = 1;
+                        //setForm(form1Categories);
+                    } else if (index == 2) {
+                        lastSelected = 2;
+                        setForm(form2Products);
+                    } else if (index == 3) {
+                        lastSelected = 3;
+                        setForm(form3Order);
+                    } else if (index == 4) {
+                        lastSelected = 4;
+                    } else if (index == 5) {
+                        lastSelected = 5;
+                    } else if (index == 6) {
+                        lastSelected = 6;
+                        setForm(form6Users);
+                    } else if (index == 7) {
+                        lastSelected = 7;
+                        setForm(form7Profile);
+
+                    } else if (index == 11) {
+                        logout();
+                    }
+
+                } else if (Main.userPosition.equalsIgnoreCase("Employee")) {
+                    if (index == 0) {
+                        lastSelected = 0;
+                        setForm(form0DashBoard);
+                    } else if (index == 1) {
+                        lastSelected = 1;
+                        setForm(form2Products);
+                    } else if (index == 2) {
+                        lastSelected = 2;
+                        setForm(form3Order);
+                    } else if (index == 3) {
+                        lastSelected = 3;
+
+                    } else if (index == 4) {
+                        lastSelected = 4;
+
+                    } else if (index == 5) {
+                        lastSelected = 5;
+                        setForm(form7Profile);
+                    } else if (index == 11) {
+                        logout();
+                    }
+
+                }
+
+            }
+        });
+
+        // Create a rounded frame
+        Shape roundedRectangle = new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20);
+        setShape(roundedRectangle);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static components.ImageAvatar avatar1;

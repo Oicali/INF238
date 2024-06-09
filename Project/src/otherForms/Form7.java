@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package otherForms;
 
 import Main.*;
@@ -30,10 +25,6 @@ import popUps.changePassword;
 import settings.GlassPanePopup;
 import settings.Model_User;
 
-/**
- *
- * @author Marilou Ilacio
- */
 public class Form7 extends javax.swing.JPanel {
 
     JFileChooser file = new JFileChooser();
@@ -95,6 +86,25 @@ public class Form7 extends javax.swing.JPanel {
         }
     }
 
+    private static void resizeAndCopyImage(File sourceFile, File destFile, int width, int height) throws IOException {
+        // Read the source image
+        BufferedImage originalImage = ImageIO.read(sourceFile);
+
+        // Create a new buffered image with the desired dimensions
+        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+        // Draw the original image into the new image with the new dimensions
+        Graphics2D g2d = resizedImage.createGraphics();
+        g2d.drawImage(originalImage, 0, 0, width, height, null);
+        g2d.dispose();
+
+        // Extract the file extension
+        String formatName = destFile.getName().substring(destFile.getName().lastIndexOf(".") + 1);
+
+        // Write the resized image to the destination file
+        ImageIO.write(resizedImage, formatName, destFile);
+    }
+    
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -183,21 +193,11 @@ public class Form7 extends javax.swing.JPanel {
         birthField.setForeground(new java.awt.Color(102, 102, 102));
         birthField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         birthField.setSelectionColor(new java.awt.Color(204, 204, 204));
-        birthField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                birthFieldActionPerformed(evt);
-            }
-        });
 
         numberField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         numberField.setForeground(new java.awt.Color(153, 153, 153));
         numberField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         numberField.setSelectionColor(new java.awt.Color(204, 204, 204));
-        numberField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numberFieldActionPerformed(evt);
-            }
-        });
 
         emailField.setEditable(false);
         emailField.setBackground(new java.awt.Color(255, 255, 255));
@@ -434,14 +434,6 @@ public class Form7 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void numberFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_numberFieldActionPerformed
-
-    private void birthFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_birthFieldActionPerformed
-
     private void changePassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePassBtnActionPerformed
         changePassword obj11 = new changePassword();
         GlassPanePopup.showPopup(obj11);
@@ -521,24 +513,7 @@ public class Form7 extends javax.swing.JPanel {
 
     }//GEN-LAST:event_uploadBtnActionPerformed
 
-    private static void resizeAndCopyImage(File sourceFile, File destFile, int width, int height) throws IOException {
-        // Read the source image
-        BufferedImage originalImage = ImageIO.read(sourceFile);
-
-        // Create a new buffered image with the desired dimensions
-        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-
-        // Draw the original image into the new image with the new dimensions
-        Graphics2D g2d = resizedImage.createGraphics();
-        g2d.drawImage(originalImage, 0, 0, width, height, null);
-        g2d.dispose();
-
-        // Extract the file extension
-        String formatName = destFile.getName().substring(destFile.getName().lastIndexOf(".") + 1);
-
-        // Write the resized image to the destination file
-        ImageIO.write(resizedImage, formatName, destFile);
-    }
+    
     
     
     
@@ -555,32 +530,32 @@ public class Form7 extends javax.swing.JPanel {
 
         String censoredPass = String.join("", Collections.nCopies(Main.getStoredPassword().length(), "*"));
 
-        String str1 = Main.number.substring(0, 7);
-        String str2 = Main.number.substring(7);
-        String maskedCN = String.join("", Collections.nCopies(str1.length(), "*"));
-        String censoredCN = maskedCN + str2;
+        //String str1 = Main.number.substring(0, 7);
+        //String str2 = Main.number.substring(7);
+//        String maskedCN = String.join("", Collections.nCopies(str1.length(), "*"));
+//        String censoredCN = maskedCN + str2;
 
-        String str3 = Main.email.substring(0, 5);
-        String str4 = Main.email.substring(5);
-        String maskedEmail = String.join("", Collections.nCopies(str4.length(), "*"));
-        String censoredEmail = str3 + maskedEmail;
+//        String str3 = Main.email.substring(0, 5);
+//        String str4 = Main.email.substring(5);
+//        String maskedEmail = String.join("", Collections.nCopies(str4.length(), "*"));
+//        String censoredEmail = str3 + maskedEmail;
 
-        fullNameLbl.setText(Main.fullname);
+//        fullNameLbl.setText(Main.fullname);
 
         roleLbl.setText(Main.userPosition);
 
-        fNameField.setText(Main.fname);
-        mNameField.setText(Main.mname);
-        lNameField.setText(Main.lname);
-        sNameField.setText(Main.sname);
+//        fNameField.setText(Main.fname);
+//        mNameField.setText(Main.mname);
+//        lNameField.setText(Main.lname);
+//        sNameField.setText(Main.sname);
         roleField.setText(Main.userPosition);
-        genderField.setText(Main.gender);
-        birthField.setText(Main.birth);
-        numberField.setText(censoredCN);
+//        genderField.setText(Main.gender);
+        //birthField.setText(Main.birth);
+//        numberField.setText(censoredCN);
         usernameField.setText(Main.username);
         passwordField.setText(censoredPass);
-        emailField.setText(censoredEmail);
-        dateField.setText("Entry date: " + Main.date);
+//        emailField.setText(censoredEmail);
+        //dateField.setText("Entry date: " + Main.date);
 
     }
 

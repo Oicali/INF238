@@ -10,9 +10,6 @@ import settings.Model_Menu;
 
 public class MenuItem extends javax.swing.JPanel {
 
-    /**
-     * Creates new form MenuItem
-     */
     private boolean selected;
     private boolean over;
 
@@ -32,9 +29,7 @@ public class MenuItem extends javax.swing.JPanel {
 
     }
 
-    /**
-     * @param selected the selected to set
-     */
+
     public void setSelected(boolean selected) {
         this.selected = selected;
         repaint();

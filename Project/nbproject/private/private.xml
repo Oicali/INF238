@@ -3,14 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/GitHub/INF238/Project/src/otherForms/Form7.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/Main/logIn.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/components/ImageAvatar.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/otherForms/updateUser.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/otherForms/Card.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/otherForms/Form2.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/otherForms/progressScreen.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/popUps/verifyCodeMsg.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/otherForms/Form6.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/otherForms/Form0.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/popUps/noWiFiMsg.java</file>
             <file>file:/D:/GitHub/INF238/Project/src/Main/Main.java</file>
             <file>file:/D:/GitHub/INF238/Project/src/Main/home.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/otherForms/Form3.java</file>
             <file>file:/D:/GitHub/INF238/Project/src/otherForms/addNewUser.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/otherForms/Form7.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/otherForms/updateUser.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/popUps/changePassword.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/popUps/placeholder.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/popUps/forgotPasswordMsg.java</file>
         </group>
     </open-files>
 </project-private>

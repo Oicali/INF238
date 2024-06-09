@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package popUps;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -12,20 +10,18 @@ import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import settings.GlassPanePopup;
 
-/**
- *
- * @author jairus
- */
 public class noWiFiMsg extends javax.swing.JPanel {
 
-    /**
-     * Creates new form noWiFiMsg
-     */
     public noWiFiMsg() {
         initComponents();
         setOpaque(false);
         txt.setBackground(new Color(0, 0, 0, 0));
         txt.setOpaque(false);
+        closeBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }
+    
+    public void closeBtnEvnt(ActionListener event) {
+        closeBtn.addActionListener(event);
     }
 
     @Override
@@ -68,11 +64,6 @@ public class noWiFiMsg extends javax.swing.JPanel {
         closeBtn.setColorOver(new java.awt.Color(191, 50, 50));
         closeBtn.setFocusPainted(false);
         closeBtn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        closeBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeBtnActionPerformed(evt);
-            }
-        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/wifiProbIcon.png"))); // NOI18N
         jLabel1.setToolTipText("");
@@ -115,13 +106,7 @@ public class noWiFiMsg extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_closeBtnActionPerformed
-
-    public void closeBtnEvnt(ActionListener event) {
-        closeBtn.addActionListener(event);
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private components.RoundedButtons closeBtn;

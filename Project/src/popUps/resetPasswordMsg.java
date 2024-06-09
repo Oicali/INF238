@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package popUps;
 
 import Main.*;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -16,15 +13,8 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import settings.GlassPanePopup;
 
-/**
- *
- * @author jairus
- */
 public class resetPasswordMsg extends javax.swing.JPanel {
 
-    /**
-     * Creates new form resetPasswordMsg
-     */
     public resetPasswordMsg() {
         initComponents();
         setOpaque(false);
@@ -32,6 +22,13 @@ public class resetPasswordMsg extends javax.swing.JPanel {
         txt.setOpaque(false);
         txt1.setText(forgotPasswordMsg.storedEmail);
         newPassField.setEchoChar('•');
+        cmdCancel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        setNewPassBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }
+
+    private boolean isSpecialCharacter(char c) {
+        String specialChars = "!@#$%^&*()-_+=<>?/|\\{}[]~`";
+        return specialChars.indexOf(c) >= 0;
     }
 
     @Override
@@ -50,11 +47,12 @@ public class resetPasswordMsg extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         txt = new javax.swing.JLabel();
-        cmdCancel = new components.RoundedButtons();
         setNewPassBtn = new components.RoundedButtons();
         txt1 = new javax.swing.JLabel();
         newPassField = new components.PasswordField();
         showNewPass = new components.JCheckBoxCustom();
+        lbl = new javax.swing.JLabel();
+        cmdCancel = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -67,22 +65,6 @@ public class resetPasswordMsg extends javax.swing.JPanel {
         txt.setForeground(new java.awt.Color(102, 102, 102));
         txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt.setText("Enter your new password for the account:");
-
-        cmdCancel.setBackground(new java.awt.Color(191, 50, 50));
-        cmdCancel.setForeground(new java.awt.Color(255, 255, 255));
-        cmdCancel.setText("Cancel");
-        cmdCancel.setBorderColor(new java.awt.Color(191, 50, 50));
-        cmdCancel.setBorderPainted(false);
-        cmdCancel.setColor(new java.awt.Color(191, 50, 50));
-        cmdCancel.setColorClick(new java.awt.Color(191, 50, 50));
-        cmdCancel.setColorOver(new java.awt.Color(191, 50, 50));
-        cmdCancel.setFocusPainted(false);
-        cmdCancel.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        cmdCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdCancelActionPerformed(evt);
-            }
-        });
 
         setNewPassBtn.setBackground(new java.awt.Color(70, 191, 50));
         setNewPassBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -113,6 +95,11 @@ public class resetPasswordMsg extends javax.swing.JPanel {
                 newPassFieldActionPerformed(evt);
             }
         });
+        newPassField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                newPassFieldKeyTyped(evt);
+            }
+        });
 
         showNewPass.setForeground(new java.awt.Color(153, 153, 153));
         showNewPass.setText("Show Password");
@@ -124,41 +111,65 @@ public class resetPasswordMsg extends javax.swing.JPanel {
             }
         });
 
+        lbl.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lbl.setForeground(new java.awt.Color(255, 0, 0));
+        lbl.setText(" ");
+
+        cmdCancel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        cmdCancel.setForeground(new java.awt.Color(153, 153, 153));
+        cmdCancel.setText("X");
+        cmdCancel.setBorderPainted(false);
+        cmdCancel.setContentAreaFilled(false);
+        cmdCancel.setFocusPainted(false);
+        cmdCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(setNewPassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(103, 103, 103)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(showNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newPassField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(newPassField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 5, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(setNewPassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 5, Short.MAX_VALUE)))
                         .addGap(53, 53, 53))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt)
                 .addGap(3, 3, 3)
@@ -167,19 +178,20 @@ public class resetPasswordMsg extends javax.swing.JPanel {
                 .addComponent(newPassField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(showNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(setNewPassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(setNewPassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void setNewPassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setNewPassBtnActionPerformed
-        if (!newPassField.getText().isEmpty()) {
-
+        if (newPassField.getText().length() < 8) {
+            lbl.setText("Password must be at least 8 characters!");
+        } else {
             try {
-
+                lbl.setText(" ");
                 Statement s = Main.getDbCon().createStatement();
                 int rowsAffected = s.executeUpdate("UPDATE users SET password = '" + newPassField.getText() + "' WHERE email = '" + forgotPasswordMsg.storedEmail + "'");
 
@@ -206,10 +218,6 @@ public class resetPasswordMsg extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_setNewPassBtnActionPerformed
 
-    private void newPassFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPassFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_newPassFieldActionPerformed
-
     private void showNewPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showNewPassActionPerformed
         if (showNewPass.isSelected()) {
             newPassField.setEchoChar((char) 0);
@@ -218,14 +226,26 @@ public class resetPasswordMsg extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_showNewPassActionPerformed
 
+    private void newPassFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_newPassFieldKeyTyped
+        char keyChar = evt.getKeyChar();
+
+        if (!Character.isDigit(keyChar) && !Character.isLetter(keyChar) && !isSpecialCharacter(keyChar)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_newPassFieldKeyTyped
+
     private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
         GlassPanePopup.closePopupLast();
     }//GEN-LAST:event_cmdCancelActionPerformed
 
+    private void newPassFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPassFieldActionPerformed
+        lbl.setText(" ");
+    }//GEN-LAST:event_newPassFieldActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private components.RoundedButtons cmdCancel;
+    private javax.swing.JButton cmdCancel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lbl;
     private components.PasswordField newPassField;
     private components.RoundedButtons setNewPassBtn;
     private components.JCheckBoxCustom showNewPass;

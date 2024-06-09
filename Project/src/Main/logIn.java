@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Main;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Shape;
 import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
@@ -31,12 +29,18 @@ public class logIn extends javax.swing.JFrame {
         setIconImage(image.getImage());
         GlassPanePopup.install(this);
         passField.setEchoChar('•');
+        logInBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         //JDialog.setDefaultLookAndFeelDecorated(true);
 
         // Create a rounded frame
         Shape roundedRectangle = new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20);
         setShape(roundedRectangle);
 
+    }
+    
+    private boolean isSpecialCharacter(char c) {
+        String specialChars = "!@#$%^&*()-_+=<>?/|\\{}[]~`";
+        return specialChars.indexOf(c) >= 0;
     }
 
     @SuppressWarnings("unchecked")
@@ -156,11 +160,6 @@ public class logIn extends javax.swing.JFrame {
         usernameField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 usernameFieldMouseClicked(evt);
-            }
-        });
-        usernameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameFieldActionPerformed(evt);
             }
         });
 
@@ -432,15 +431,6 @@ public class logIn extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_passFieldKeyPressed
 
-    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usernameFieldActionPerformed
-
-    private boolean isSpecialCharacter(char c) {
-        String specialChars = "!@#$%^&*()-_+=<>?/|\\{}[]~`";
-        return specialChars.indexOf(c) >= 0;
-    }
-    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

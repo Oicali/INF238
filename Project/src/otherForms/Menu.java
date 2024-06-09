@@ -33,7 +33,6 @@ public class Menu extends javax.swing.JPanel {
 
         if (Main.userPosition.equalsIgnoreCase("Administrator")) {
             listMenu1.addItem(new Model_Menu("1", "Dashboard", Model_Menu.MenuType.MENU));
-            listMenu1.addItem(new Model_Menu("2", "Categories", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("3", "Products", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("4", "Order", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("5", "View Order", Model_Menu.MenuType.MENU));
@@ -43,16 +42,17 @@ public class Menu extends javax.swing.JPanel {
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
+            listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("9", "Log Out", Model_Menu.MenuType.MENU));
 
         } else if (Main.userPosition.equalsIgnoreCase("Supervisor")) {
             listMenu1.addItem(new Model_Menu("1", "Dashboard", Model_Menu.MenuType.MENU));
-            listMenu1.addItem(new Model_Menu("2", "Categories", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("3", "Products", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("4", "Order", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("5", "View Order", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("6", "Customers", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("8", "My Profile", Model_Menu.MenuType.MENU));
+            listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
@@ -72,13 +72,13 @@ public class Menu extends javax.swing.JPanel {
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("9", "Log Out", Model_Menu.MenuType.MENU));
-            
+
         } else if (Main.userPosition.equalsIgnoreCase("Warehouse Staff")) {
             listMenu1.addItem(new Model_Menu("1", "Dashboard", Model_Menu.MenuType.MENU));
-            listMenu1.addItem(new Model_Menu("2", "Categories", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("3", "Products", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("5", "View Order", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("8", "My Profile", Model_Menu.MenuType.MENU));
+            listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
