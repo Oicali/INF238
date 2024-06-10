@@ -4,6 +4,13 @@
  */
 package Main;
 
+import Pages.Form7;
+import Pages.Form6;
+import Pages.Form5;
+import Pages.Form4;
+import Pages.Form3;
+import Pages.Form2;
+import Pages.Form0;
 import components.ScrollBarWin11UI;
 import interfaces.EventMenuSelected;
 import java.awt.Color;
@@ -246,7 +253,7 @@ public class home extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         nameLbl = new javax.swing.JLabel();
         roleLbl = new javax.swing.JLabel();
-        avatar1 = new components.ImageAvatar();
+        avatar1 = new components.CircleImageAvatar();
         mainPanel = new javax.swing.JPanel();
         menu = new otherForms.Menu();
 
@@ -478,7 +485,7 @@ public class home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private static components.ImageAvatar avatar1;
+    private static components.CircleImageAvatar avatar1;
     public static javax.swing.JPanel jPanel1;
     public static javax.swing.JPanel mainPanel;
     private otherForms.Menu menu;

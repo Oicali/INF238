@@ -1,4 +1,4 @@
-package otherForms;
+package Pages;
 
 import Main.Main;
 import Main.home;
@@ -28,6 +28,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import otherForms.Card;
+import otherForms.addNewUser;
+import otherForms.updateUser;
 import popUps.placeholder;
 import settings.GlassPanePopup;
 import settings.Model_User;

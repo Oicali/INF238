@@ -159,16 +159,22 @@ public class verifyCodeMsg extends javax.swing.JPanel {
         cmdCancel = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(460, 290));
+        setMinimumSize(new java.awt.Dimension(460, 290));
+        setPreferredSize(new java.awt.Dimension(460, 290));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(15, 106, 191));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Verification Code");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 33, -1, -1));
 
         txt.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt.setForeground(new java.awt.Color(102, 102, 102));
         txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt.setText("We have sent the verification code through email.");
+        add(txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 80, -1, -1));
 
         code1.setBackground(new java.awt.Color(238, 238, 238));
         code1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -180,6 +186,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
                 code1KeyTyped(evt);
             }
         });
+        add(code1, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 142, 35, 33));
 
         code2.setBackground(new java.awt.Color(238, 238, 238));
         code2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -191,6 +198,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
                 code2KeyTyped(evt);
             }
         });
+        add(code2, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 142, 32, 33));
 
         code3.setBackground(new java.awt.Color(238, 238, 238));
         code3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -202,6 +210,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
                 code3KeyTyped(evt);
             }
         });
+        add(code3, new org.netbeans.lib.awtextra.AbsoluteConstraints(188, 142, 32, 33));
 
         code4.setBackground(new java.awt.Color(238, 238, 238));
         code4.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -213,6 +222,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
                 code4KeyTyped(evt);
             }
         });
+        add(code4, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 142, 32, 33));
 
         code5.setBackground(new java.awt.Color(238, 238, 238));
         code5.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -224,6 +234,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
                 code5KeyTyped(evt);
             }
         });
+        add(code5, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 142, 32, 33));
 
         code6.setBackground(new java.awt.Color(238, 238, 238));
         code6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -235,6 +246,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
                 code6KeyTyped(evt);
             }
         });
+        add(code6, new org.netbeans.lib.awtextra.AbsoluteConstraints(338, 142, 32, 33));
 
         verifyBtn.setBackground(new java.awt.Color(70, 191, 50));
         verifyBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -251,11 +263,13 @@ public class verifyCodeMsg extends javax.swing.JPanel {
                 verifyBtnActionPerformed(evt);
             }
         });
+        add(verifyBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 128, 37));
 
         txt1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         txt1.setForeground(new java.awt.Color(102, 102, 102));
         txt1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt1.setText("Enter the code before in expires in 300 seconds.");
+        add(txt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 105, -1, -1));
 
         resendCodeBtn.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         resendCodeBtn.setForeground(new java.awt.Color(15, 106, 191));
@@ -268,6 +282,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
                 resendCodeBtnActionPerformed(evt);
             }
         });
+        add(resendCodeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, -1, 16));
 
         cmdCancel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         cmdCancel.setForeground(new java.awt.Color(153, 153, 153));
@@ -280,74 +295,7 @@ public class verifyCodeMsg extends javax.swing.JPanel {
                 cmdCancelActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(verifyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(resendCodeBtn)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(code1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(code2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(code3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(code4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(code5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(code6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 61, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(txt)))
-                .addGap(57, 57, 57))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(txt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(code1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(code2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(code3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(code4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(code5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(code6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(verifyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(resendCodeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        add(cmdCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(411, 5, -1, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void verifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verifyBtnActionPerformed

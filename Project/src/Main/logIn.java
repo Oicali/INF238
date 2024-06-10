@@ -15,7 +15,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.plaf.metal.MetalButtonUI;
 import popUps.forgotPasswordMsg;
 import popUps.forgotUsernameMsg;
-import otherForms.Form7;
+import Pages.Form7;
 import settings.GlassPanePopup;
 
 public class logIn extends javax.swing.JFrame {
@@ -58,7 +58,7 @@ public class logIn extends javax.swing.JFrame {
         showPass = new components.JCheckBoxCustom();
         closeBtn = new javax.swing.JButton();
         usernameField = new components.TextField();
-        imageAvatar1 = new components.ImageAvatar();
+        imageAvatar1 = new components.CircleImageAvatar();
         passField = new components.PasswordField();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -446,7 +446,7 @@ public class logIn extends javax.swing.JFrame {
     private javax.swing.JButton closeBtn;
     private javax.swing.JButton forgotPass;
     private javax.swing.JButton forgotUser;
-    private components.ImageAvatar imageAvatar1;
+    private components.CircleImageAvatar imageAvatar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

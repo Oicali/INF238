@@ -12,10 +12,10 @@ public class CenteredCellRenderer extends DefaultTableCellRenderer {
         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
         setHorizontalAlignment(SwingConstants.CENTER); // Center the text
-        c.setFont(new Font("SansSerif", Font.PLAIN, 14)); // Set the font
+        c.setFont(new Font("SansSerif", Font.PLAIN, 16)); // Set the font
 
         if (isSelected) {
-            c.setBackground(new Color(57, 105, 138));
+            c.setBackground(new Color(40, 72, 102));
             c.setForeground(Color.WHITE);
         } else {
             c.setBackground(row % 2 == 0 ? Color.WHITE : new Color(240, 240, 240));

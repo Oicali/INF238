@@ -55,16 +55,21 @@ public class resetPasswordMsg extends javax.swing.JPanel {
         cmdCancel = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(460, 308));
+        setMinimumSize(new java.awt.Dimension(460, 308));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(15, 106, 191));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Reset your password!");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 35, -1, -1));
 
         txt.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt.setForeground(new java.awt.Color(102, 102, 102));
         txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt.setText("Enter your new password for the account:");
+        add(txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 79, 312, -1));
 
         setNewPassBtn.setBackground(new java.awt.Color(70, 191, 50));
         setNewPassBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -81,11 +86,13 @@ public class resetPasswordMsg extends javax.swing.JPanel {
                 setNewPassBtnActionPerformed(evt);
             }
         });
+        add(setNewPassBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 248, 130, 36));
 
         txt1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         txt1.setForeground(new java.awt.Color(102, 102, 102));
         txt1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt1.setText("@gmail.com");
+        add(txt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 101, 349, -1));
 
         newPassField.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         newPassField.setLabelText("");
@@ -100,6 +107,7 @@ public class resetPasswordMsg extends javax.swing.JPanel {
                 newPassFieldKeyTyped(evt);
             }
         });
+        add(newPassField, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 132, 354, 45));
 
         showNewPass.setForeground(new java.awt.Color(153, 153, 153));
         showNewPass.setText("Show Password");
@@ -110,10 +118,12 @@ public class resetPasswordMsg extends javax.swing.JPanel {
                 showNewPassActionPerformed(evt);
             }
         });
+        add(showNewPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 185, -1, -1));
 
         lbl.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         lbl.setForeground(new java.awt.Color(255, 0, 0));
         lbl.setText(" ");
+        add(lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 217, 354, -1));
 
         cmdCancel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         cmdCancel.setForeground(new java.awt.Color(153, 153, 153));
@@ -126,64 +136,7 @@ public class resetPasswordMsg extends javax.swing.JPanel {
                 cmdCancelActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(setNewPassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(showNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(newPassField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 5, Short.MAX_VALUE)))
-                        .addGap(53, 53, 53))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt)
-                .addGap(3, 3, 3)
-                .addComponent(txt1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(newPassField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(showNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(setNewPassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-        );
+        add(cmdCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(411, 3, -1, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void setNewPassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setNewPassBtnActionPerformed

@@ -1,5 +1,6 @@
-package otherForms;
+package Pages;
 
+import Pages.Form6;
 import Main.*;
 import java.awt.Cursor;
 import java.awt.Graphics;
@@ -118,7 +119,7 @@ public class Form7 extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        avatar = new components.ImageAvatar();
+        avatar = new components.CircleImageAvatar();
         fullNameLbl = new javax.swing.JLabel();
         roleLbl = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -560,7 +561,7 @@ public class Form7 extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static components.ImageAvatar avatar;
+    public static components.CircleImageAvatar avatar;
     private javax.swing.JTextField birthField;
     public components.RoundedButtons changePassBtn;
     private javax.swing.JLabel dateField;

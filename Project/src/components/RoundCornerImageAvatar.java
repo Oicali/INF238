@@ -19,7 +19,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
-public class ImageAvatar extends JComponent {
+public class RoundCornerImageAvatar extends JComponent {
 
     public Icon getIcon() {
         return icon;
@@ -54,7 +54,11 @@ public class ImageAvatar extends JComponent {
             BufferedImage img = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2_img = img.createGraphics();
             g2_img.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2_img.fillOval(0, 0, diameter, diameter);
+
+            // Draw rounded rectangle
+            int cornerRadius = 20; // You can adjust the radius as per your requirement
+            g2_img.fillRoundRect(0, 0, diameter, diameter, cornerRadius, cornerRadius);
+
             Composite composite = g2_img.getComposite();
             g2_img.setComposite(AlphaComposite.SrcIn);
             g2_img.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
@@ -66,12 +70,12 @@ public class ImageAvatar extends JComponent {
             if (borderSize > 0) {
                 diameter += border;
                 g2.setColor(getForeground());
-                g2.fillOval(x, y, diameter, diameter);
+                g2.fillRoundRect(x, y, diameter, diameter, cornerRadius, cornerRadius);
             }
             if (isOpaque()) {
                 g2.setColor(getBackground());
                 diameter -= border;
-                g2.fillOval(x + borderSize, y + borderSize, diameter, diameter);
+                g2.fillRoundRect(x + borderSize, y + borderSize, diameter, diameter, cornerRadius, cornerRadius);
             }
             g2.drawImage(img, x + borderSize, y + borderSize, null);
         }
@@ -95,7 +99,7 @@ public class ImageAvatar extends JComponent {
             height = 1;
         }
         int cw = size;
-        int ch =size;
+        int ch = size;
         int x = (cw - width) / 2;
         int y = (ch - height) / 2;
         return new Rectangle(new Point(x, y), new Dimension(width, height));

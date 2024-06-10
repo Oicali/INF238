@@ -50,7 +50,7 @@ public class Card extends javax.swing.JPanel {
     private void initComponents() {
 
         userID = new javax.swing.JLabel();
-        pic = new components.ImageAvatar();
+        pic = new components.CircleImageAvatar();
         userFNameLbl = new javax.swing.JLabel();
         userLNameLbl = new javax.swing.JLabel();
         RoleLbl = new javax.swing.JLabel();
@@ -150,7 +150,7 @@ public class Card extends javax.swing.JPanel {
     } 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel RoleLbl;
-    private components.ImageAvatar pic;
+    private components.CircleImageAvatar pic;
     private otherForms.CircularPanel statusPnl;
     private javax.swing.JLabel userFNameLbl;
     private javax.swing.JLabel userID;

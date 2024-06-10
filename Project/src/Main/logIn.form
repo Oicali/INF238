@@ -299,7 +299,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="usernameFieldMouseClicked"/>
           </Events>
         </Component>
-        <Container class="components.ImageAvatar" name="imageAvatar1">
+        <Container class="components.CircleImageAvatar" name="imageAvatar1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/resources/logInUser.png"/>

@@ -1,4 +1,4 @@
-package otherForms;
+package Main;
 
 import java.awt.Color;
 import javax.swing.JDialog;
@@ -63,7 +63,7 @@ public class progressScreen extends javax.swing.JDialog {
         jLabel3.setBounds(188, 200, 170, 22);
 
         lblStatus.setBackground(new java.awt.Color(255, 255, 255));
-        lblStatus.setFont(new java.awt.Font("SansSerif", 2, 12)); // NOI18N
+        lblStatus.setFont(new java.awt.Font("SansSerif", 2, 13)); // NOI18N
         lblStatus.setForeground(new java.awt.Color(255, 255, 255));
         lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblStatus.setText("Status ...");

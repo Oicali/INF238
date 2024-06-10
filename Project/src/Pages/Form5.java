@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package otherForms;
+package Pages;
 
 /**
  *
  * @author jairus
  */
-public class Form4 extends javax.swing.JPanel {
+public class Form5 extends javax.swing.JPanel {
 
     /**
      * Creates new form Form3
      */
-    public Form4() {
+    public Form5() {
         initComponents();
     }
 
@@ -32,7 +32,7 @@ public class Form4 extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("View Orders");
+        jLabel1.setText("Customers");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
