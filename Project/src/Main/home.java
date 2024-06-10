@@ -28,10 +28,11 @@ import settings.GlassPanePopup;
 
 
 public class home extends javax.swing.JFrame {
+    
 
     ImageIcon image = new ImageIcon(getClass().getResource("/resources/logoSmall.png"));
     private Form0 form0DashBoard;
-    private Form2 form2Products;
+    public static Form2 form2Products;
     private Form3 form3Order;
     public static Form4 form4ViewOrder;
     public static Form5 form5Customers;
@@ -40,7 +41,8 @@ public class home extends javax.swing.JFrame {
 
     public static int lastSelected;
     public static Notifications successChangePassword, successChangeImg, successPrintUsers, successAddUser, successUpdateUser,
-            successDeleteUser;
+            successDeleteUser, successNewCategory, successUpdateCategory, successDeleteCategory;
+    
 
     public home() {
         initComponents();
@@ -58,6 +60,9 @@ public class home extends javax.swing.JFrame {
         successAddUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New User", "You have successfully added a new user");
         successUpdateUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Updated User Information", "You have successfully updated user information");
         successDeleteUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "User Account Deleted", "You have successfully deleted a user account");
+        successNewCategory = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New Category", "You have successfully added a item category");
+        successUpdateCategory = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Updated Item Category", "You have successfully updated item category");
+        successDeleteCategory = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Item Category Deleted", "You have successfully deleted an item category");
 
         //Set up forms
         setBackground(new Color(0, 0, 0, 0));
@@ -229,6 +234,9 @@ public class home extends javax.swing.JFrame {
 
         }
     }
+    
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

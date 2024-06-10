@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.Collections;
 import javax.swing.JOptionPane;
 import otherForms.Form7;
+import otherForms.Notifications;
 import settings.GlassPanePopup;
 
 public class changePassword extends javax.swing.JPanel {
@@ -21,6 +22,7 @@ public class changePassword extends javax.swing.JPanel {
 //    private boolean isOPShowing = false;
 //    private boolean isNPShowing = false;
 //    private boolean isCPShowing = false;
+    
     public changePassword() {
         initComponents();
         setOpaque(false);

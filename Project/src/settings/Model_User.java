@@ -70,34 +70,24 @@ public class Model_User {
         this.Role = Role;
         this.userName = userName;
         this.status = status;
-        this.image = image;
-        
+        this.image = image;    
     }
 
-    /**
-     * @return the userLName
-     */
+
     public String getUserLName() {
         return userLName;
     }
 
-    /**
-     * @param userLName the userLName to set
-     */
+
     public void setUserLName(String userLName) {
         this.userLName = userLName;
     }
 
-    /**
-     * @return the status
-     */
+
     public String getStatus() {
         return status;
     }
 
-    /**
-     * @param status the status to set
-     */
     public void setStatus(String status) {
         this.status = status;
     }

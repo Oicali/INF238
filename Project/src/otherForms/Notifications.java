@@ -32,13 +32,13 @@ public class Notifications extends javax.swing.JPanel {
         this.location = location;
         initComponents();
         init(message, submsg);
-        initAnimator(); 
+        initAnimator();
         setBackground(new Color(0, 0, 0, 0));
         setOpaque(false);
     }
 
     private void init(String message, String submsg) {
-        
+
         dialog = new JDialog(fram);
         dialog.setUndecorated(true);
         dialog.setFocusableWindowState(false);
@@ -189,17 +189,18 @@ public class Notifications extends javax.swing.JPanel {
         g2.fillRect(x, y, width, height);
         if (type == Type.SUCCESS) {
             g2.setColor(new Color(18, 163, 24));
-            line1.setBackground(new Color(170,237,166));
-            line2.setBackground(new Color(210,239,211));
-            line3.setBackground(new Color(210,239,211));
-            pnl1.setBackground(new Color(106,144,95));
+            line1.setBackground(new Color(170, 237, 166));
+            line2.setBackground(new Color(210, 239, 211));
+            line3.setBackground(new Color(210, 239, 211));
+            pnl1.setBackground(new Color(106, 144, 95));
+
         } else if (type == Type.INFO) {
             g2.setColor(new Color(28, 139, 206));
-            line1.setBackground(new Color(15,106,191));
-            line2.setBackground(new Color(15,106,191));
-            line3.setBackground(new Color(15,106,191));
-            pnl1.setBackground(new Color(15,106,191));
-            
+            line1.setBackground(new Color(15, 106, 191));
+            line2.setBackground(new Color(15, 106, 191));
+            line3.setBackground(new Color(15, 106, 191));
+            pnl1.setBackground(new Color(15, 106, 191));
+
         } else {
             g2.setColor(new Color(241, 196, 15));
             line1.setBackground(Color.WHITE);
