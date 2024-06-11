@@ -1,5 +1,5 @@
 
-package settings;
+package model;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;

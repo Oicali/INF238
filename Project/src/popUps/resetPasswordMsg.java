@@ -122,6 +122,7 @@ public class resetPasswordMsg extends javax.swing.JPanel {
 
         lbl.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         lbl.setForeground(new java.awt.Color(255, 0, 0));
+        lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl.setText(" ");
         add(lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 217, 354, -1));
 

@@ -15,7 +15,7 @@ import java.awt.RenderingHints;
 public class Item_Card extends javax.swing.JPanel {
 
     private boolean selected;
-    private Model_Products data;
+    private Model_Pro data;
     
     public Item_Card() {
         initComponents();
@@ -23,7 +23,7 @@ public class Item_Card extends javax.swing.JPanel {
         setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
     
-    public void setData(Model_Products data){
+    public void setData(Model_Pro data){
         this.data = data;
         pic.setIcon(data.getImage());
         stockLbl.setText(String.valueOf(data.getStocks()));
@@ -32,7 +32,7 @@ public class Item_Card extends javax.swing.JPanel {
     }
     
     
-    public Model_Products getData() {
+    public Model_Pro getData() {
         return data;
     }
 

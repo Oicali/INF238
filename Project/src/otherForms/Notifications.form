@@ -51,7 +51,7 @@
         <Container class="javax.swing.JPanel" name="line2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="d3" green="ef" red="d2" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -76,7 +76,7 @@
         <Container class="otherForms.PanelBorder" name="line1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="a6" green="ed" red="aa" type="rgb"/>
+              <Color blue="33" green="0" red="ff" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -122,7 +122,7 @@
         <Container class="otherForms.PanelBorder" name="line3">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="d3" green="ef" red="d2" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>

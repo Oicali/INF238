@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import popUps.changePassword;
 import settings.GlassPanePopup;
-import settings.Model_User;
+import model.Model_User;
 
 public class Form7 extends javax.swing.JPanel {
 

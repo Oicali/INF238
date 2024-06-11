@@ -28,12 +28,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
-import otherForms.Card;
+import otherForms.User_Card;
 import otherForms.addNewUser;
 import otherForms.updateUser;
 import popUps.placeholder;
 import settings.GlassPanePopup;
-import settings.Model_User;
+import model.Model_User;
 
 public class Form6 extends javax.swing.JPanel {
 
@@ -96,7 +96,7 @@ public class Form6 extends javax.swing.JPanel {
     }
 
     public void addUser(Model_User data) {
-        Card card = new Card();
+        User_Card card = new User_Card();
         card.setData(data);
         card.addMouseListener(new MouseAdapter() {
             @Override

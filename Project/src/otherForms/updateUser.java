@@ -63,6 +63,8 @@ public class updateUser extends javax.swing.JDialog {
             passwordField.setEditable(false);
             usernameField.setEditable(false);
             roleField.setEditable(false);
+            statusField.setEnabled(false);
+            roleField.setEnabled(false);
         }
 
         try {
@@ -181,7 +183,6 @@ public class updateUser extends javax.swing.JDialog {
         date.setTextRefernce(bdayField);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1090, 717));
         setMinimumSize(new java.awt.Dimension(1090, 717));
         setUndecorated(true);
 

@@ -1,14 +1,28 @@
 
-package testing;
+package model;
 
 import javax.swing.Icon;
-
 
 public class Model_Products {
     private double price;
     private int stocks;
     private String itemName;
     private Icon image;
+    private String ID;
+    private String category;
+    
+    public Model_Products(){
+    
+    }
+    
+    public Model_Products(String itemName, Icon image, int stocks, double price, String ID, String category){
+        this.itemName = itemName;
+        this.stocks = stocks;
+        this.price = price; 
+        this.image = image; 
+        this.ID = ID;
+        this.category = category;
+    }
 
     /**
      * @return the price
@@ -65,16 +79,33 @@ public class Model_Products {
     public void setImage(Icon image) {
         this.image = image;
     }
-    
-    public Model_Products(){
-    
+
+    /**
+     * @return the ID
+     */
+    public String getID() {
+        return ID;
     }
-    
-    public Model_Products(String itemName, Icon image, int stocks, double price){
-        this.itemName = itemName;
-        this.stocks = stocks;
-        this.price = price; 
-        this.image = image;    
+
+    /**
+     * @param ID the ID to set
+     */
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    /**
+     * @return the category
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    /**
+     * @param category the category to set
+     */
+    public void setCategory(String category) {
+        this.category = category;
     }
     
 }

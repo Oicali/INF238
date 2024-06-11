@@ -6,9 +6,9 @@ import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import settings.Model_User;
+import model.Model_User;
 
-public class Card extends javax.swing.JPanel {
+public class User_Card extends javax.swing.JPanel {
 
     private boolean selected;
     private Model_User data;
@@ -37,7 +37,7 @@ public class Card extends javax.swing.JPanel {
         
     }
 
-    public Card() {
+    public User_Card() {
         initComponents();
         setOpaque(false);
         setCursor(new Cursor(Cursor.HAND_CURSOR));

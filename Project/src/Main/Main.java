@@ -9,6 +9,8 @@ public class Main {
     public static String userPosition = "";
     public static String status = "";
     private static String storedPassword = "";
+
+    private static Connection con = null;
 //    public static String fname = "";
 //    public static String fullname = "";
 //    public static String mname = "";
@@ -21,7 +23,6 @@ public class Main {
 //    public static String email = "";
     //public static String date = "";
     //public static byte[] imageBytes;
-    
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -37,28 +38,30 @@ public class Main {
 
     // Code for Database Connection
     public static Connection getDbCon() {
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "#MySQL2220");
-            return con;
-        } catch (Exception e) {
-            System.out.println(e);
-            return null;
+        if (con == null) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "#MySQL2220");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
         }
+        return con;
 
     }
 
     public static void closeCon() {
-        try {
-            if (getDbCon() != null) {
-                getDbCon().close();
+        if (con != null) {
+            try {
+                con.close();
+                con = null;
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
     }
-
+    
 
     // Encapsulate Password
     public static String getStoredPassword() {

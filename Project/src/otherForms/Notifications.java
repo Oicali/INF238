@@ -190,21 +190,17 @@ public class Notifications extends javax.swing.JPanel {
         if (type == Type.SUCCESS) {
             g2.setColor(new Color(18, 163, 24));
             line1.setBackground(new Color(170, 237, 166));
-            line2.setBackground(new Color(210, 239, 211));
-            line3.setBackground(new Color(210, 239, 211));
             pnl1.setBackground(new Color(106, 144, 95));
 
         } else if (type == Type.INFO) {
             g2.setColor(new Color(28, 139, 206));
-            line1.setBackground(new Color(15, 106, 191));
-            line2.setBackground(new Color(15, 106, 191));
-            line3.setBackground(new Color(15, 106, 191));
+            line1.setBackground(new Color(48, 144, 216));
             pnl1.setBackground(new Color(15, 106, 191));
 
         } else {
             g2.setColor(new Color(241, 196, 15));
-            line1.setBackground(Color.WHITE);
-            line2.setBackground(Color.WHITE);
+            line1.setBackground(new Color(255,0,51));
+            pnl1.setBackground(new Color(191,50,50));
         }
         g2.fillRect(6, 5, 5, getHeight() - shadowSize * 2 + 1);
         g2.dispose();
@@ -251,7 +247,7 @@ public class Notifications extends javax.swing.JPanel {
         pnl1.setPreferredSize(new java.awt.Dimension(450, 100));
         pnl1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        line2.setBackground(new java.awt.Color(210, 239, 211));
+        line2.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout line2Layout = new javax.swing.GroupLayout(line2);
         line2.setLayout(line2Layout);
@@ -266,7 +262,7 @@ public class Notifications extends javax.swing.JPanel {
 
         pnl1.add(line2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 42, 448, 15));
 
-        line1.setBackground(new java.awt.Color(170, 237, 166));
+        line1.setBackground(new java.awt.Color(255, 0, 51));
 
         lbMessage.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         lbMessage.setForeground(new java.awt.Color(0, 0, 0));
@@ -291,7 +287,7 @@ public class Notifications extends javax.swing.JPanel {
 
         pnl1.add(line1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 448, -1));
 
-        line3.setBackground(new java.awt.Color(210, 239, 211));
+        line3.setBackground(new java.awt.Color(255, 255, 255));
 
         lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/sucess.png"))); // NOI18N
 

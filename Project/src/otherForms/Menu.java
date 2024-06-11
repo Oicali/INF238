@@ -10,7 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
-import settings.Model_Menu;
+import model.Model_Menu;
 import Main.*;
 
 public class Menu extends javax.swing.JPanel {

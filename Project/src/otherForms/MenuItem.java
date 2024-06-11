@@ -6,7 +6,7 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import settings.Model_Menu;
+import model.Model_Menu;
 
 public class MenuItem extends javax.swing.JPanel {
 

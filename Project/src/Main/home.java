@@ -48,8 +48,8 @@ public class home extends javax.swing.JFrame {
 
     public static int lastSelected;
     public static Notifications successChangePassword, successChangeImg, successPrintUsers, successAddUser, successUpdateUser,
-            successDeleteUser, successNewCategory, successUpdateCategory, successDeleteCategory;
-    
+            successDeleteUser, successNewCategory, successUpdateCategory, successDeleteCategory, successUpdateItem, successAddItem;
+    public static Notifications itemWarning;
 
     public home() {
         initComponents();
@@ -61,16 +61,19 @@ public class home extends javax.swing.JFrame {
         //roleLbl.setText(Main.selectedRole);
         lastSelected = 0;
 
-        successChangePassword = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password");
-        successChangeImg = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Profile Image Changed", "New profile picture uploaded");
+        successChangePassword = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password");
+        successChangeImg = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Profile Image Changed", "New profile picture uploaded");
         successPrintUsers = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "File Exported", "Created a csv file for users");
         successAddUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New User", "You have successfully added a new user");
-        successUpdateUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Updated User Information", "You have successfully updated user information");
-        successDeleteUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "User Account Deleted", "You have successfully deleted a user account");
+        successUpdateUser = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Updated User Information", "You have successfully updated user information");
+        successDeleteUser = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "User Account Deleted", "You have successfully deleted a user account");
         successNewCategory = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New Category", "You have successfully added an item category");
-        successUpdateCategory = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Updated Item Category", "You have successfully updated item category");
-        successDeleteCategory = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Item Category Deleted", "You have successfully deleted an item category");
-
+        successUpdateCategory = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Updated Item Category", "You have successfully updated item category");
+        successDeleteCategory = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Item Category Deleted", "You have successfully deleted an item category");
+        successUpdateItem = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Updated Product Data", "You have successfully updated an item");
+        itemWarning = new Notifications(this,Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "Item Stocks", "An item is running low or out of stock"); 
+        successAddItem = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New Item", "You have successfully added a new item");
+        
         //Set up forms
         setBackground(new Color(0, 0, 0, 0));
         form0DashBoard = new Form0();

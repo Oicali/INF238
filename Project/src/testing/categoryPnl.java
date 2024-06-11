@@ -30,15 +30,15 @@ public class categoryPnl extends javax.swing.JPanel {
         removeAll();
 
         for (int i = 0; i <= 7; i++) {
-            addItem(new Model_Products("Pencils", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
+            addItem(new Model_Pro("Pencils", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
         }
         
         for (int i = 0; i <= 3; i++) {
-            addItem(new Model_Products("Pens", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
+            addItem(new Model_Pro("Pens", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
         }
     }
 
-    public void addItem(Model_Products data) {
+    public void addItem(Model_Pro data) {
         Item_Card card = new Item_Card();
         card.setData(data);
         System.out.println("Item clickable!");

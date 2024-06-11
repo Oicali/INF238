@@ -33,7 +33,7 @@ import javax.swing.table.TableColumn;
 import otherForms.*;
 import settings.CenteredCellRenderer;
 import settings.GlassPanePopup;
-import settings.Model_User;
+import model.Model_User;
 import settings.ModernCellRenderer;
 import settings.ModernHeaderRenderer;
 
@@ -399,6 +399,9 @@ public class editCategories extends javax.swing.JPanel {
 //                    s.close();
                 }
 
+                home.form2Products = new Form2();
+                home.setForm(home.form2Products);
+
                 GlassPanePopup.closePopupLast();
                 home.successNewCategory.showNotification();
 
@@ -473,7 +476,7 @@ public class editCategories extends javax.swing.JPanel {
     }//GEN-LAST:event_IDFieldMouseClicked
 
     private void IDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDFieldActionPerformed
-        
+
     }//GEN-LAST:event_IDFieldActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
@@ -498,6 +501,8 @@ public class editCategories extends javax.swing.JPanel {
 //                categoryTable.setValueAt(data, row, 1);
                 ErrorMessage.setText(" ");
 
+                home.form2Products = new Form2();
+                home.setForm(home.form2Products);
                 GlassPanePopup.closePopupLast();
                 home.successUpdateCategory.showNotification();
 
@@ -543,7 +548,7 @@ public class editCategories extends javax.swing.JPanel {
                         } else {
                             System.out.println("No rows were deleted.");
                         }
-                        
+
                         home.form2Products = new Form2();
                         home.setForm(home.form2Products);
 
