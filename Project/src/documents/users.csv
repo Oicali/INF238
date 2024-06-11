@@ -1,6 +1,6 @@
 fname,mname,lname,Sname,userName,userRole,email,gender,mobileNumber,birthDate,entryDate,status
 Jairus Miguel,Boco,Ilacio,,ilaciojb2341@invsys.mark-it,Administrator,ilaciojairusmiguel@gmail.com,Male,09471210799,October-05-2003,May-26-2024,Active
-Juan,,Dela Cruz,,delacruzj2013@invsys.mark-it,Warehouse Staff,delacruzj2013@gmail.com,Male,09123412346,February-15-1996,May-26-2024,Active
+Juan,,Dela Cruz,,delacruzj2013@invsys.mark-it,Warehouse Staff,delacruzj2013@gmail.com,Male,09132141234,February-15-1996,May-26-2024,Active
 Narda,,Custodio,,custodion6791@invsys.mark-it,Sales Associate,Darna@gmail.com,Female,09015028401,March-10-2003,June-06-2024,Active
 Anthony Edward,,Stark,,starkae3000@invsys.mark-it,Supervisor,ironMan3000@gmail.com,Male,09103957392,May-29-1970,June-07-2024,Inactive
 Angelo Gabriel,Tagaamo,Nuñez,,nuñezat6278@invsys.mark-it,Administrator,angelo.nunez@sdca.edu.ph,Male,09235123412,January-10-2004,June-08-2024,Active
@@ -8,4 +8,8 @@ Kriston Kraish,Balane,Roan,,roankb6853@invsys.mark-it,Sales Associate,ahhahaha@g
 Heinrich Timothy,,Jamito,,jamitoh0131@invsys.mark-it,Warehouse Staff,trolololololololololol917@gmail.com,Male,09123412342,January-04-2003,June-08-2024,Active
 Jaira Angela,Boco,Ilacio,,ilaciojb1842@invsys.mark-it,Supervisor,dummy@gmail.com,Female,09123412341,April-08-2011,June-08-2024,Active
 Kaori,,Miyazono,,miyazonok3569@invsys.mark-it,Sales Associate,dummy2@gmail.com,Female,09,July-04-2000,June-09-2024,Inactive
-Monkey,D,Luffy,,luffymd1725@invsys.mark-it,Warehouse Staff,pirateKing@gmail.com,Male,09,May-05-1997,June-08-2024,Active
+Monkey,D,Luffy,,luffymd1725@invsys.mark-it,Administrator,pirateKing@gmail.com,Male,09,May-05-1997,June-08-2024,Active
+Naruto,,Uzumaki,,uzumakin2851@invsys.mark-it,Warehouse Staff,dummy3@gmail,Male,09,October-10-1999,June-11-2024,Active
+Raiden,Bosenmori,Mei,,meirb4237@invsys.mark-it,Supervisor,dummy4@gmail.com,Female,09,March-27-1998,June-11-2024,Active
+La,,Signora,,signoral2283@invsys.mark-it,Warehouse Staff,dummy5@gmail.com,Female,09,January-18-2000,June-11-2024,Inactive
+Steve Paul,,Jobs,,jobss4955@invsys.mark-it,Supervisor,dummy6@gmail.com,Male,09,February-24-1955,June-11-2024,Inactive

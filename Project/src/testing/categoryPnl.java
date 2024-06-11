@@ -23,7 +23,6 @@ public class categoryPnl extends javax.swing.JPanel {
 
     public categoryPnl(String Category) {
         initComponents();
-        initData(Category);
         jLabel1.setText(Category);
     }
 
@@ -32,6 +31,10 @@ public class categoryPnl extends javax.swing.JPanel {
 
         for (int i = 0; i <= 7; i++) {
             addItem(new Model_Products("Pencils", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
+        }
+        
+        for (int i = 0; i <= 3; i++) {
+            addItem(new Model_Products("Pens", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
         }
     }
 
@@ -45,7 +48,7 @@ public class categoryPnl extends javax.swing.JPanel {
             public void mouseClicked(MouseEvent me) {
                 if (SwingUtilities.isLeftMouseButton(me)) {
 
-                    //Do something
+                    // Do something
                     System.out.println("Item click!");
 
                 }

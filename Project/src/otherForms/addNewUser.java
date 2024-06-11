@@ -516,12 +516,12 @@ public class addNewUser extends javax.swing.JDialog {
 
                             File selectedFile;
                             if (imgname.isEmpty()) {
-                                selectedFile = new File("C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\default.png");
+                                selectedFile = new File("C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Inventory_System\\Users\\default.png");
                             } else {
                                 selectedFile = file.getSelectedFile();
                             }
 
-                            String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads";
+                            String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Inventory_System\\Users";
                             File destinationFile = new File(destinationDir, selectedFile.getName());
 
                             try {
@@ -597,7 +597,7 @@ public class addNewUser extends javax.swing.JDialog {
     }//GEN-LAST:event_showDateBtnActionPerformed
 
     private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
-        int choice = JOptionPane.showConfirmDialog(this, "Changes you made will not be save.", "Close Task", JOptionPane.YES_NO_OPTION);
+        int choice = JOptionPane.showConfirmDialog(this, "Changes you made will not be save.\nClick Yes to close.", "Close Task", JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
             GlassPanePopup.closePopupLast();
             dispose();
@@ -624,7 +624,7 @@ public class addNewUser extends javax.swing.JDialog {
                 imgField.setText(file.getSelectedFile().getName());
 
                 // Destination directory
-                String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads";
+                String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Inventory_System\\Users";
                 File destinationFile = new File(destinationDir, selectedFile.getName());
 
                 try {

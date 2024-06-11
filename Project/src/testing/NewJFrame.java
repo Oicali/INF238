@@ -5,6 +5,9 @@
  */
 package testing;
 
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -13,24 +16,32 @@ import javax.swing.JFrame;
  */
 public class NewJFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NewJFrame
-     */
+     private Map<String, categoryPnl> categoryPanels;
     public NewJFrame() {
         initComponents();
 
-        for (int i = 0; i <= 2; i++) {
-            addCategory("Category " + i);
-        }
+        categoryPanels = new HashMap<>();
+        addCategory("Pencils");
+        addCategory("Pens");
     }
 
     public void addCategory(String category) {
         categoryPnl panel = new categoryPnl(category);
         System.out.println(category);
+        categoryPanels.put(category, panel);
         panelItem1.add(panel);
 
         panelItem1.repaint();
         panelItem1.revalidate();
+    }
+    
+    public void addItemToCategory(String category, Model_Products item) {
+        categoryPnl panel = categoryPanels.get(category);
+        if (panel == null) {
+            addCategory(category);
+            panel = categoryPanels.get(category);
+        }
+        panel.addItem(item);
     }
 
     @SuppressWarnings("unchecked")
@@ -95,7 +106,18 @@ public class NewJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
+                
+                 NewJFrame frame = new NewJFrame();
+                frame.setVisible(true);
+                
+                frame.addItemToCategory("Pencils", new Model_Products("Pencil A", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
+                frame.addItemToCategory("Pencils", new Model_Products("Pencil B", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
+                frame.addItemToCategory("Pencils", new Model_Products("Pencil A", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
+                frame.addItemToCategory("Pencils", new Model_Products("Pencil B", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
+                frame.addItemToCategory("Pencils", new Model_Products("Pencil A", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
+                frame.addItemToCategory("Pencils", new Model_Products("Pencil B", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
+                frame.addItemToCategory("Pencils", new Model_Products("Pencil A", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
+                frame.addItemToCategory("Pencils", new Model_Products("Pencil B", new ImageIcon("D:\\GitHub\\INF238\\Project\\src\\resources\\logoSmall.png"), 10000, 5000.0));
             }
         });
     }

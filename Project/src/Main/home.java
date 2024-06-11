@@ -63,11 +63,11 @@ public class home extends javax.swing.JFrame {
 
         successChangePassword = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password");
         successChangeImg = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Profile Image Changed", "New profile picture uploaded");
-        successPrintUsers = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "File Exported", "Created a file for users");
+        successPrintUsers = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "File Exported", "Created a csv file for users");
         successAddUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New User", "You have successfully added a new user");
         successUpdateUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Updated User Information", "You have successfully updated user information");
         successDeleteUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "User Account Deleted", "You have successfully deleted a user account");
-        successNewCategory = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New Category", "You have successfully added a item category");
+        successNewCategory = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New Category", "You have successfully added an item category");
         successUpdateCategory = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Updated Item Category", "You have successfully updated item category");
         successDeleteCategory = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Item Category Deleted", "You have successfully deleted an item category");
 

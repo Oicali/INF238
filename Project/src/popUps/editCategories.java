@@ -98,12 +98,12 @@ public class editCategories extends javax.swing.JPanel {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     int selectedRow = categoryTable.getSelectedRow();
-                    if (selectedRow != -1 && !addBtn.isEnabled()) {
-                        String name = categoryTable.getValueAt(selectedRow, 1).toString();
+                    if (selectedRow != -1 && !addBtn.isVisible()) {
+                        String label = categoryTable.getValueAt(selectedRow, 1).toString();
                         String ID = categoryTable.getValueAt(selectedRow, 0).toString();
 
                         IDField.setText(ID);
-                        nameField.setText(name);
+                        labelField.setText(label);
                     }
                 }
             }
@@ -120,7 +120,7 @@ public class editCategories extends javax.swing.JPanel {
             ResultSet rs = s.executeQuery("select * from category");
 
             while (rs.next()) {
-                model.addRow(new Object[]{rs.getString("category_ID"), rs.getString("name")});
+                model.addRow(new Object[]{rs.getString("category_ID"), rs.getString("label")});
             }
             // Close the ResultSet
             rs.close();
@@ -167,7 +167,7 @@ public class editCategories extends javax.swing.JPanel {
         cmdCancel = new javax.swing.JButton();
         addBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
-        nameField = new javax.swing.JTextField();
+        labelField = new javax.swing.JTextField();
         jScrollPane1 = new components.ScrollPaneWin11();
         categoryTable = new javax.swing.JTable();
         IDField = new javax.swing.JTextField();
@@ -231,21 +231,21 @@ public class editCategories extends javax.swing.JPanel {
         });
         add(editBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(599, 351, 84, 35));
 
-        nameField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
-        nameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(178, 178, 178)), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
-        nameField.setMaximumSize(new java.awt.Dimension(16, 27));
-        nameField.setSelectionColor(new java.awt.Color(204, 204, 204));
-        nameField.addMouseListener(new java.awt.event.MouseAdapter() {
+        labelField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
+        labelField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(178, 178, 178)), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        labelField.setMaximumSize(new java.awt.Dimension(16, 27));
+        labelField.setSelectionColor(new java.awt.Color(204, 204, 204));
+        labelField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                nameFieldMouseClicked(evt);
+                labelFieldMouseClicked(evt);
             }
         });
-        nameField.addActionListener(new java.awt.event.ActionListener() {
+        labelField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldActionPerformed(evt);
+                labelFieldActionPerformed(evt);
             }
         });
-        add(nameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 298, 285, 35));
+        add(labelField, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 298, 285, 35));
 
         jScrollPane1.setBackground(new java.awt.Color(40, 72, 102));
         jScrollPane1.setBorder(null);
@@ -301,7 +301,7 @@ public class editCategories extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel7.setText("Category Name:");
+        jLabel7.setText("Category Label:");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 256, 206, 36));
 
         ErrorMessage.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
@@ -347,7 +347,7 @@ public class editCategories extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
-        int choice = JOptionPane.showConfirmDialog(this, "Changes you made will not be save.", "Close Task", JOptionPane.YES_NO_OPTION);
+        int choice = JOptionPane.showConfirmDialog(this, "Changes you made will not be save.\nClick Yes to close.", "Close Task", JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
             GlassPanePopup.closePopupLast();
         }
@@ -355,43 +355,43 @@ public class editCategories extends javax.swing.JPanel {
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         ErrorMessage.setText(" ");
-        String categoryName = nameField.getText().trim();
+        String categorylabel = labelField.getText().trim();
 
-        if (categoryName.isEmpty()) {
+        if (categorylabel.isEmpty()) {
             ErrorMessage.setText("Please complete all required fields with *");
 
-        } else if (categoryName.length() > 24) {
-            ErrorMessage.setText("Category name too long!");
+        } else if (categorylabel.length() > 24) {
+            ErrorMessage.setText("Category label too long!");
         } else {
             try {
                 Connection con = Main.getDbCon();
 
-                String checkUserQuery = "SELECT COUNT(*) FROM category WHERE name = ?";
+                String checkUserQuery = "SELECT COUNT(*) FROM category WHERE label = ?";
                 PreparedStatement ps = con.prepareStatement(checkUserQuery);
-                ps.setString(1, categoryName);
+                ps.setString(1, categorylabel);
                 ResultSet rs = ps.executeQuery();
                 rs.next();
                 int userCount = rs.getInt(1);
 
                 if (userCount > 0) {
-                    ErrorMessage.setText("Category name already exist!");
+                    ErrorMessage.setText("Category label already exist!");
 
                 } else {
 
-                    String insertCategory = "INSERT INTO category (name) values (?)";
+                    String insertCategory = "INSERT INTO category (label) values (?)";
                     ps = con.prepareStatement(insertCategory);
-                    ps.setString(1, categoryName);
+                    ps.setString(1, categorylabel);
                     ps.executeUpdate();
 
 //                    Statement s = Main.getDbCon().createStatement();
-//                    ResultSet rs2 = s.executeQuery("SELECT category_ID FROM category WHERE name = '" + categoryName + "'");
+//                    ResultSet rs2 = s.executeQuery("SELECT category_ID FROM category WHERE label = '" + categorylabel + "'");
 //
 //                    String ID = "";
 //                    while (rs2.next()) {
 //                        ID = rs2.getString("category_ID");
 //                    }
 //                    String data1 = ID;
-//                    String data2 = categoryName;
+//                    String data2 = categorylabel;
 //                    Object[] row = {data1, data2};
 //                    DefaultTableModel model = (DefaultTableModel) categoryTable.getModel();
 //                    model.addRow(row);
@@ -423,11 +423,11 @@ public class editCategories extends javax.swing.JPanel {
             if (row == -1) {
                 ErrorMessage.setText("Please select a row to edit!");
             } else {
-                String Name = categoryTable.getValueAt(row, 1).toString();
+                String label = categoryTable.getValueAt(row, 1).toString();
                 String ID = categoryTable.getValueAt(row, 0).toString();
 
                 IDField.setText(ID);
-                nameField.setText(Name);
+                labelField.setText(label);
 
 //                addBtn.setEnabled(false);
 //                updateBtn.setEnabled(true);
@@ -444,7 +444,7 @@ public class editCategories extends javax.swing.JPanel {
         } else {
             editBtn.setText("Edit");
             isEditing = true;
-            nameField.setText("");
+            labelField.setText("");
             IDField.setText("");
 //
 //            addBtn.setEnabled(true);
@@ -459,14 +459,14 @@ public class editCategories extends javax.swing.JPanel {
 
     }//GEN-LAST:event_editBtnActionPerformed
 
-    private void nameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameFieldMouseClicked
+    private void labelFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelFieldMouseClicked
         ErrorMessage.setText(" ");
-    }//GEN-LAST:event_nameFieldMouseClicked
+    }//GEN-LAST:event_labelFieldMouseClicked
 
-    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
+    private void labelFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labelFieldActionPerformed
         ErrorMessage.setText(" ");
 
-    }//GEN-LAST:event_nameFieldActionPerformed
+    }//GEN-LAST:event_labelFieldActionPerformed
 
     private void IDFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IDFieldMouseClicked
         ErrorMessage.setText(" ");
@@ -479,18 +479,18 @@ public class editCategories extends javax.swing.JPanel {
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         ErrorMessage.setText(" ");
         int row = categoryTable.getSelectedRow();
-        String data = nameField.getText().trim();
+        String data = labelField.getText().trim();
         if (row == -1) {
             ErrorMessage.setText("You did not select a row to delete!");
 
         } else if (data.length() > 24) {
-            ErrorMessage.setText("Category name too long!");
+            ErrorMessage.setText("Category label too long!");
         } else {
             try {
 
                 Connection con = Main.getDbCon();
 
-                PreparedStatement ps = con.prepareStatement("UPDATE category SET name = ? where name = ?");
+                PreparedStatement ps = con.prepareStatement("UPDATE category SET label = ? where label = ?");
                 ps.setString(1, data);
                 ps.setString(2, (String) categoryTable.getValueAt(row, 1));
                 ps.executeUpdate();
@@ -529,7 +529,7 @@ public class editCategories extends javax.swing.JPanel {
 
                     try {
                         Connection con = Main.getDbCon();
-                        PreparedStatement ps = con.prepareStatement("DELETE FROM category WHERE name = '" + categoryTable.getValueAt(row, 1) + "'");
+                        PreparedStatement ps = con.prepareStatement("DELETE FROM category WHERE label = '" + categoryTable.getValueAt(row, 1) + "'");
 
                         // Execute the DELETE statement
                         int rowsDeleted = ps.executeUpdate();
@@ -578,7 +578,7 @@ public class editCategories extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nameField;
+    private javax.swing.JTextField labelField;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

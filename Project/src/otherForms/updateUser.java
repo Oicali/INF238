@@ -612,7 +612,7 @@ public class updateUser extends javax.swing.JDialog {
                         String Filepath = "";
                         File selectedFile = file.getSelectedFile();
                         if (selectedFile != null) {
-                            String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads";
+                            String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Inventory_System\\Users";
                             File destinationFile = new File(destinationDir, selectedFile.getName());
 
                             try {
@@ -625,7 +625,7 @@ public class updateUser extends javax.swing.JDialog {
                             }
 
                         } else {
-                            String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads";
+                            String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Inventory_System\\Users";
                             File defaultFile = new File(destinationDir, imgField.getText().trim());
                             // Assign the default file to the destination file
                             Filepath = defaultFile.getAbsolutePath();
@@ -688,7 +688,7 @@ public class updateUser extends javax.swing.JDialog {
     }//GEN-LAST:event_showDateBtnActionPerformed
 
     private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
-        int choice = JOptionPane.showConfirmDialog(this, "Changes you made will not be save.", "Close Task", JOptionPane.YES_NO_OPTION);
+        int choice = JOptionPane.showConfirmDialog(this, "Changes you made will not be save.\nClick Yes to close.", "Close Task", JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
             GlassPanePopup.closePopupLast();
             dispose();
@@ -719,7 +719,7 @@ public class updateUser extends javax.swing.JDialog {
                 imgField.setText(file.getSelectedFile().getName());
 
                 // Destination directory
-                String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads";
+                String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Inventory_System\\Users";
                 File destinationFile = new File(destinationDir, selectedFile.getName());
 
                 try {

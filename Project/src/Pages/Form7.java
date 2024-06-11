@@ -460,7 +460,7 @@ public class Form7 extends javax.swing.JPanel {
             } else {
 
                 // Destination directory
-                String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads";
+                String destinationDir = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Inventory_System\\Users";
                 File destinationFile = new File(destinationDir, selectedFile.getName());
 
                 // Copy the file to the destination
