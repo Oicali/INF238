@@ -48,7 +48,8 @@ public class home extends javax.swing.JFrame {
 
     public static int lastSelected;
     public static Notifications successChangePassword, successChangeImg, successPrintUsers, successAddUser, successUpdateUser,
-            successDeleteUser, successNewCategory, successUpdateCategory, successDeleteCategory, successUpdateItem, successAddItem;
+            successDeleteUser, successNewCategory, successUpdateCategory, successDeleteCategory, successUpdateItem, successAddItem,
+            successAddCustomer, successUpdateCustomer, successDeleteCustomer;
     public static Notifications itemWarning;
 
     public home() {
@@ -73,6 +74,9 @@ public class home extends javax.swing.JFrame {
         successUpdateItem = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Updated Product Data", "You have successfully updated an item");
         itemWarning = new Notifications(this,Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "Item Stocks Warning", "An item is running low or out of stock"); 
         successAddItem = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New Item", "You have successfully added a new item");
+        successAddCustomer = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New Customer", "You have successfully added a customer");
+        successUpdateCustomer = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Updated Customer Data", "You have successfully updated a customer information");
+        successDeleteCustomer = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Customer Data Deleted", "You have successfully deleted a customer information");
         
         //Set up forms
         setBackground(new Color(0, 0, 0, 0));

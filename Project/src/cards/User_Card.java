@@ -1,5 +1,5 @@
 
-package otherForms;
+package cards;
 
 import java.awt.Color;
 import java.awt.Cursor;

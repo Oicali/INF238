@@ -383,27 +383,13 @@ public class editCategories extends javax.swing.JPanel {
                     ps.setString(1, categorylabel);
                     ps.executeUpdate();
 
-//                    Statement s = Main.getDbCon().createStatement();
-//                    ResultSet rs2 = s.executeQuery("SELECT category_ID FROM category WHERE label = '" + categorylabel + "'");
-//
-//                    String ID = "";
-//                    while (rs2.next()) {
-//                        ID = rs2.getString("category_ID");
-//                    }
-//                    String data1 = ID;
-//                    String data2 = categorylabel;
-//                    Object[] row = {data1, data2};
-//                    DefaultTableModel model = (DefaultTableModel) categoryTable.getModel();
-//                    model.addRow(row);
-//
-//                    s.close();
+                    home.form2Products = new Form2();
+                    home.setForm(home.form2Products);
+
+                    GlassPanePopup.closePopupLast();
+                    home.successNewCategory.showNotification();
+
                 }
-
-                home.form2Products = new Form2();
-                home.setForm(home.form2Products);
-
-                GlassPanePopup.closePopupLast();
-                home.successNewCategory.showNotification();
 
                 ps.close();
                 con.close();
@@ -432,9 +418,6 @@ public class editCategories extends javax.swing.JPanel {
                 IDField.setText(ID);
                 labelField.setText(label);
 
-//                addBtn.setEnabled(false);
-//                updateBtn.setEnabled(true);
-//                deleteBtn.setEnabled(true);
                 addBtn.setVisible(false);
                 updateBtn.setVisible(true);
                 deleteBtn.setVisible(true);
@@ -484,7 +467,7 @@ public class editCategories extends javax.swing.JPanel {
         int row = categoryTable.getSelectedRow();
         String data = labelField.getText().trim();
         if (row == -1) {
-            ErrorMessage.setText("You did not select a row to delete!");
+            ErrorMessage.setText("You did not select a row to update!");
 
         } else if (data.length() > 24) {
             ErrorMessage.setText("Category label too long!");
@@ -541,16 +524,14 @@ public class editCategories extends javax.swing.JPanel {
 
                         // Check if any rows were deleted
                         if (rowsDeleted > 0) {
-                            System.out.println("Row deleted successfully.");
+                            home.form2Products = new Form2();
+                            home.setForm(home.form2Products);
                             GlassPanePopup.closePopupLast();
                             home.successDeleteCategory.showNotification();
 
                         } else {
                             System.out.println("No rows were deleted.");
                         }
-
-                        home.form2Products = new Form2();
-                        home.setForm(home.form2Products);
 
                         // Close the ResultSet
                         ps.close();

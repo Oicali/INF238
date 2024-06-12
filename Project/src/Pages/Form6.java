@@ -30,7 +30,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
-import otherForms.User_Card;
+import cards.User_Card;
 import otherForms.addNewUser;
 import otherForms.updateUser;
 import popUps.placeholder;

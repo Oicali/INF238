@@ -659,7 +659,7 @@ public class addNewUser extends javax.swing.JDialog {
 
         // Check if the key typed is a number or a space
         char c = evt.getKeyChar();
-        if ((c >= '0' && c <= '9') || c == ' ') {
+        if ((c >= '0' && c <= '9')) {
             if (l >= 9) {
                 evt.consume();
                 ErrorMessage.setText("Accepts 9-digit number only!");

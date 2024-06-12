@@ -5,6 +5,7 @@
  */
 package otherForms;
 
+import cards.Item_Card;
 import model.Model_Products;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -74,7 +75,7 @@ public class categoryPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        item_Card4 = new otherForms.Item_Card();
+        item_Card4 = new cards.Item_Card();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new components.ScrollPaneWin11();
         jPanel1 = new javax.swing.JPanel();
@@ -99,7 +100,7 @@ public class categoryPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private otherForms.Item_Card item_Card4;
+    private cards.Item_Card item_Card4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

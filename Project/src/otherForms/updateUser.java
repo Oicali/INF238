@@ -208,6 +208,11 @@ public class updateUser extends javax.swing.JDialog {
                 numberFieldMouseClicked(evt);
             }
         });
+        numberField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numberFieldActionPerformed(evt);
+            }
+        });
         numberField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 numberFieldKeyTyped(evt);
@@ -758,7 +763,7 @@ public class updateUser extends javax.swing.JDialog {
 
         // Check if the key typed is a number or a space
         char c = evt.getKeyChar();
-        if ((c >= '0' && c <= '9') || c == ' ') {
+        if ((c >= '0' && c <= '9')) {
             if (l >= 9) {
                 evt.consume();
                 ErrorMessage.setText("Accepts 9-digit number only!");
@@ -785,6 +790,10 @@ public class updateUser extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_passwordFieldKeyTyped
+
+    private void numberFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_numberFieldActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

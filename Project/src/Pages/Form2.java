@@ -157,9 +157,6 @@ public class Form2 extends javax.swing.JPanel {
                 String category = rs.getString(8); // Assuming the 8th column is the category
                 String ID = rs.getString("product_pk");
 
-                System.out.println(category);
-                System.out.println(itemName);
-
                 Model_Products product = new Model_Products(itemName, imageIcon, stocks, price, ID, category);
                 addItemToCategory(category, product);
             }
@@ -184,7 +181,7 @@ public class Form2 extends javax.swing.JPanel {
 
             String data = searchField.getText().trim();
             Statement s = Main.getDbCon().createStatement();
-            ResultSet rs = s.executeQuery("select * from products inner join category on products.category_fk = category_ID where item_Name like '%" + data + "%' OR category.label LIKE '%" + data + "%'");
+            ResultSet rs = s.executeQuery("select * from products inner join category on products.category_fk = category_ID where item_Name like '%" + data + "%'");
 
             Set<String> processedLabels = new HashSet<>();
 
@@ -207,9 +204,6 @@ public class Form2 extends javax.swing.JPanel {
                 double price = rs.getDouble("price");
                 String category = rs.getString(8); // Assuming the 8th column is the category
                 String ID = rs.getString("product_pk");
-
-                System.out.println(category);
-                System.out.println(itemName);
 
                 Model_Products product = new Model_Products(itemName, imageIcon, stocks, price, ID, category);
                 addItemToCategory(category, product);
@@ -257,7 +251,6 @@ public class Form2 extends javax.swing.JPanel {
 
     public void addPanelCategory(String category) {
         categoryPanel panel = new categoryPanel(category);
-        System.out.println(category);
         categoryPanels.put(category, panel);
         panelItem1.add(panel);
 
@@ -360,8 +353,6 @@ public class Form2 extends javax.swing.JPanel {
                 String column4 = nextLine[3];
                 String column5 = nextLine[4];
                 String column6 = nextLine[5];
-
-                System.out.println(column1 + ", " + column2 + ", " + column3 + ", " + column4 + ", " + column5 + ", ");
 
                 // Prepare SQL update statement
                 ps = con.prepareStatement("UPDATE products SET item_Name = ?, quantity = ?, price = ?, category_fk = ? WHERE product_pk = ?");

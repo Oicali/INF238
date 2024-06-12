@@ -467,7 +467,6 @@ public class Form7 extends javax.swing.JPanel {
                 try {
                     resizeAndCopyImage(selectedFile, destinationFile, 150, 150);
 
-                    System.out.println(destinationFile.getName());
                     String file = destinationFile.getName();
 
                     try {
@@ -509,8 +508,6 @@ public class Form7 extends javax.swing.JPanel {
             }
 
         }
-
-        //System.out.println(file.getSelectedFile().getAbsolutePath());
 
     }//GEN-LAST:event_uploadBtnActionPerformed
 
