@@ -1,6 +1,8 @@
 package Pages;
 
 import Main.*;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import components.ScrollBarCustom;
 import interfaces.EventCallBack;
 import interfaces.EventTextField;
@@ -9,9 +11,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,6 +34,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFormattedTextField.AbstractFormatterFactory;
 import javax.swing.JOptionPane;
@@ -46,6 +54,7 @@ public class Form2 extends javax.swing.JPanel {
 
     private Map<String, categoryPanel> categoryPanels;
     public static String oldItemName = "";
+    private static final String DESTINATION_DIRECTORY = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Inventory_System\\Documents";
 
     public Form2() {
         initComponents();
@@ -309,6 +318,110 @@ public class Form2 extends javax.swing.JPanel {
 
         fileWriter.flush();
         fileWriter.close();
+    }
+
+    private static void processCSV(java.io.File csvFile) throws FileNotFoundException, IOException, CsvValidationException {
+        // Define the expected column count
+        int EXPECTED_COLUMN_COUNT = 5;
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        CSVReader csvReader = null;
+
+        try {
+            // Establish database connection
+            con = Main.getDbCon();
+
+            // Prepare SQL update statement
+            ps = con.prepareStatement("UPDATE products SET item_Name = ?, quantity = ?, price = ?, category_fk = ? WHERE category_fk = ?");
+
+            // Create a BufferedReader to read the CSV file
+            BufferedReader reader = new BufferedReader(new FileReader(csvFile));
+
+            // Create a CSVReader using the BufferedReader
+            csvReader = new CSVReader(reader);
+
+            // Read the CSV file
+            String[] headers = csvReader.readNext();
+
+            // Validate headers
+            if (headers == null || headers.length != EXPECTED_COLUMN_COUNT) {
+                throw new IllegalArgumentException("CSV file has incorrect headers or column count.");
+            }
+
+            String[] nextLine;
+            while ((nextLine = csvReader.readNext()) != null) {
+                // Validate row length
+                if (nextLine.length != EXPECTED_COLUMN_COUNT) {
+                    throw new IllegalArgumentException("CSV file has rows with incorrect column count.");
+                }
+
+                // Assume the CSV columns are in the order: column1, column2, id
+                String column1 = nextLine[0];
+                String column2 = nextLine[1];
+                String column3 = nextLine[2];
+                String column4 = nextLine[3];
+                String column5 = nextLine[4];
+
+                // Set the parameters for the update statement
+                ps.setString(1, column1);
+                ps.setString(2, column2);
+                ps.setString(3, column3);
+                ps.setString(4, column4);
+                ps.setString(5, column4);
+
+                // Add to batch
+                ps.addBatch();
+            }
+
+            // Execute batch update
+            ps.executeBatch();
+
+            System.out.println("Database imported successfully from CSV file!");
+
+            // Save file to destination directory
+            saveFileToDirectory(csvFile);
+
+            home.form2Products = new Form2();
+            home.setForm(home.form2Products);
+            home.successUpdateItem.showNotification();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print the exception details for debugging
+            JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                // Close resources in the reverse order of opening
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (csvReader != null) {
+                    csvReader.close();
+                }
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void saveFileToDirectory(File csvFile) throws IOException {
+        // Create destination directory if it doesn't exist
+        Path destinationDirectory = Paths.get(DESTINATION_DIRECTORY);
+        if (!Files.exists(destinationDirectory)) {
+            Files.createDirectories(destinationDirectory);
+        }
+
+        // Prepare destination file path
+        String fileName = csvFile.getName();
+        Path destinationFilePath = destinationDirectory.resolve(fileName);
+
+        // Copy CSV file to destination directory
+        Files.copy(csvFile.toPath(), destinationFilePath, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+        System.out.println("File saved to: " + destinationFilePath);
     }
 
     @Override
@@ -634,10 +747,12 @@ public class Form2 extends javax.swing.JPanel {
     private void exportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportBtnActionPerformed
         int choice = JOptionPane.showConfirmDialog(this, "Get a copy of products information?", "Export Products", JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
+            Connection con = null;
             try {
-                Statement s = Main.getDbCon().createStatement();
+                con = Main.getDbCon();
+                Statement s = con.createStatement();
 
-                ResultSet rs = s.executeQuery("select item_Name, quantity, price, category_ID, label FROM products INNER JOIN category ON products.category_fk = category.category_ID;");
+                ResultSet rs = s.executeQuery("select item_Name, quantity, price, category_fk, label FROM products INNER JOIN category ON products.category_fk = category.category_ID;");
                 // Determine the path to the Downloads folder
                 String userHome = System.getProperty("user.home");
                 String downloadsPath = Paths.get(userHome, "Downloads", "Copy of Mark-It Products.csv").toString();
@@ -650,24 +765,50 @@ public class Form2 extends javax.swing.JPanel {
                 rs.close();
                 s.close();
 
-                home.successPrintUsers.showNotification();
+                home.form2Products = new Form2();
+                home.setForm(home.form2Products);
+                home.successPrintDocument.showNotification();
 
             } catch (SQLException e) {
                 e.printStackTrace(); // Print the exception details for debugging
                 JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
             } catch (IOException ex) {
                 Logger.getLogger(Form2.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-            finally {
-                Main.closeCon();
+            } finally {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-
         }
+
 
     }//GEN-LAST:event_exportBtnActionPerformed
 
     private void importBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importBtnActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select CSV File");
+        int userSelection = fileChooser.showOpenDialog(null);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            // Get selected file
+            java.io.File csvFile = fileChooser.getSelectedFile();
+
+            try {
+                // Process selected file
+                processCSV(csvFile);
+
+            } catch (IOException ex) {
+                Logger.getLogger(Form2.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (CsvValidationException ex) {
+                Logger.getLogger(Form2.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+
     }//GEN-LAST:event_importBtnActionPerformed
 
     private void priceFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_priceFieldMouseClicked

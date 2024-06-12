@@ -341,7 +341,7 @@ public class Form6 extends javax.swing.JPanel {
                 rs.close();
                 s.close();
 
-                home.successPrintUsers.showNotification();
+                home.successPrintDocument.showNotification();
 
             } catch (SQLException e) {
                 e.printStackTrace(); // Print the exception details for debugging
