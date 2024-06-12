@@ -4,6 +4,7 @@ import Main.*;
 import components.ScrollBarCustom;
 import interfaces.EventCallBack;
 import interfaces.EventTextField;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -57,6 +58,7 @@ public class Form2 extends javax.swing.JPanel {
         saveBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         addBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         exportBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        impBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         if (Main.userPosition.equals("Administrator") || Main.userPosition.equals("Supervisor")) {
             editCatBtn.setVisible(true);
@@ -147,9 +149,6 @@ public class Form2 extends javax.swing.JPanel {
                 String category = rs.getString(8); // Assuming the 8th column is the category
                 String ID = rs.getString("product_pk");
 
-                System.out.println(category);
-                System.out.println(itemName);
-
                 Model_Products product = new Model_Products(itemName, imageIcon, stocks, price, ID, category);
                 addItemToCategory(category, product);
             }
@@ -198,9 +197,6 @@ public class Form2 extends javax.swing.JPanel {
                 String category = rs.getString(8); // Assuming the 8th column is the category
                 String ID = rs.getString("product_pk");
 
-                System.out.println(category);
-                System.out.println(itemName);
-
                 Model_Products product = new Model_Products(itemName, imageIcon, stocks, price, ID, category);
                 addItemToCategory(category, product);
             }
@@ -247,7 +243,7 @@ public class Form2 extends javax.swing.JPanel {
 
     public void addPanelCategory(String category) {
         categoryPanel panel = new categoryPanel(category);
-        System.out.println(category);
+
         categoryPanels.put(category, panel);
         panelItem1.add(panel);
 
@@ -311,6 +307,111 @@ public class Form2 extends javax.swing.JPanel {
         fileWriter.close();
     }
 
+<<<<<<< Updated upstream
+=======
+    private static void processCSV(java.io.File csvFile) throws FileNotFoundException, IOException, CsvValidationException {
+        // Define the expected column count
+        int EXPECTED_COLUMN_COUNT = 6;
+
+        CSVReader csvReader = null;
+        PreparedStatement ps = null;
+        
+        Connection con = Main.getDbCon();
+        try {
+            // Establish database connection
+
+            
+            // Create a BufferedReader to read the CSV file
+            BufferedReader reader = new BufferedReader(new FileReader(csvFile));
+
+            // Create a CSVReader using the BufferedReader
+            csvReader = new CSVReader(reader);
+
+            // Read the CSV file
+            String[] headers = csvReader.readNext();
+
+            // Validate headers
+            if (headers == null || headers.length != EXPECTED_COLUMN_COUNT) {
+                throw new IllegalArgumentException("CSV file has incorrect headers or column count.");
+            }
+
+            String[] nextLine;
+            while ((nextLine = csvReader.readNext()) != null) {
+                // Validate row length
+                if (nextLine.length != EXPECTED_COLUMN_COUNT) {
+                    throw new IllegalArgumentException("CSV file has rows with incorrect column count.");
+                }
+
+                // Assume the CSV columns are in the order: column1, column2, id
+                String column1 = nextLine[0];
+                String column2 = nextLine[1];
+                String column3 = nextLine[2];
+                String column4 = nextLine[3];
+                String column5 = nextLine[4];
+                String column6 = nextLine[5];
+
+                System.out.println(column1 + ", " + column2 + ", " + column3 + ", " + column4 + ", " + column5 + ", ");
+
+                // Prepare SQL update statement
+                ps = con.prepareStatement("UPDATE products SET item_Name = ?, quantity = ?, price = ?, category_fk = ? WHERE product_pk = ?");
+
+                // Set the parameters for the update statement
+                ps.setString(1, column2);
+                ps.setString(2, column3);
+                ps.setString(3, column4);
+                ps.setString(4, column5);
+                ps.setString(5, column1);
+
+                // Add to batch
+                ps.executeUpdate();
+            }
+
+
+            // Save file to destination directory
+            saveFileToDirectory(csvFile);
+
+            home.form2Products = new Form2();
+            home.setForm(home.form2Products);
+            home.successUpdateItem.showNotification();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print the exception details for debugging
+            JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                // Close resources in the reverse order of opening
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (csvReader != null) {
+                    csvReader.close();
+                }
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void saveFileToDirectory(File csvFile) throws IOException {
+        // Create destination directory if it doesn't exist
+        Path destinationDirectory = Paths.get(DESTINATION_DIRECTORY);
+        if (!Files.exists(destinationDirectory)) {
+            Files.createDirectories(destinationDirectory);
+        }
+
+        // Prepare destination file path
+        String fileName = csvFile.getName();
+        Path destinationFilePath = destinationDirectory.resolve(fileName);
+
+        // Copy CSV file to destination directory
+        Files.copy(csvFile.toPath(), destinationFilePath, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+    }
+
+>>>>>>> Stashed changes
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -343,7 +444,6 @@ public class Form2 extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         f2ErrorMessage = new javax.swing.JLabel();
         itemNameField = new javax.swing.JTextField();
-        importBtn = new components.RoundedButtons();
         searchField = new components.TextFieldAnimation();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -587,7 +687,6 @@ public class Form2 extends javax.swing.JPanel {
 
         add(itemDataPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(782, 186, 325, -1));
 
-        importBtn.setForeground(new java.awt.Color(255, 255, 255));
         importBtn.setText("Import");
         importBtn.setBorderColor(new java.awt.Color(15, 106, 191));
         importBtn.setBorderPainted(false);
@@ -600,10 +699,8 @@ public class Form2 extends javax.swing.JPanel {
         importBtn.setMinimumSize(new java.awt.Dimension(85, 38));
         importBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                importBtnActionPerformed(evt);
             }
         });
-        add(importBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1007, 127, 100, 38));
 
         searchField.setBackground(new java.awt.Color(240, 240, 240));
         searchField.setAnimationColor(new java.awt.Color(15, 106, 191));
@@ -666,9 +763,34 @@ public class Form2 extends javax.swing.JPanel {
 
     }//GEN-LAST:event_exportBtnActionPerformed
 
+<<<<<<< Updated upstream
     private void importBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_importBtnActionPerformed
+=======
+    private void impBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_impBtnActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select CSV File");
+        int userSelection = fileChooser.showOpenDialog(null);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            // Get selected file
+            java.io.File csvFile = fileChooser.getSelectedFile();
+
+            try {
+                // Process selected file
+                processCSV(csvFile);
+
+            } catch (IOException ex) {
+                Logger.getLogger(Form2.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (CsvValidationException ex) {
+                Logger.getLogger(Form2.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+
+    }//GEN-LAST:event_impBtnActionPerformed
+>>>>>>> Stashed changes
 
     private void priceFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_priceFieldMouseClicked
         f2ErrorMessage.setText(" ");
@@ -811,7 +933,7 @@ public class Form2 extends javax.swing.JPanel {
     private components.RoundedButtons editCatBtn;
     private components.RoundedButtons exportBtn;
     public static javax.swing.JLabel f2ErrorMessage;
-    private components.RoundedButtons importBtn;
+    private components.RoundedButtons impBtn;
     public static otherForms.PanelBorder itemDataPanel;
     public static javax.swing.JTextField itemNameField;
     private javax.swing.JLabel jLabel1;
