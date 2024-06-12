@@ -71,7 +71,7 @@ public class home extends javax.swing.JFrame {
         successUpdateCategory = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Updated Item Category", "You have successfully updated item category");
         successDeleteCategory = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Item Category Deleted", "You have successfully deleted an item category");
         successUpdateItem = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Updated Product Data", "You have successfully updated an item");
-        itemWarning = new Notifications(this,Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "Item Stocks", "An item is running low or out of stock"); 
+        itemWarning = new Notifications(this,Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "Item Stocks Warning", "An item is running low or out of stock"); 
         successAddItem = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New Item", "You have successfully added a new item");
         
         //Set up forms

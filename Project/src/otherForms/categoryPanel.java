@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.SwingUtilities;
 import Pages.*;
 import static Pages.Form2.f2ErrorMessage;
+import java.awt.Color;
 import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 
@@ -24,17 +25,21 @@ public class categoryPanel extends javax.swing.JPanel {
 
     public categoryPanel() {
         initComponents();
+        
+        
     }
 
     public categoryPanel(String Category) {
         initComponents();
         jLabel1.setText(Category);
+        
     }
 
     public void addItem(Model_Products data) {
         Item_Card card = new Item_Card();
         card.setData(data);
         System.out.println("Item clickable!");
+        
 
         card.addMouseListener(new MouseAdapter() {
             @Override
@@ -42,6 +47,7 @@ public class categoryPanel extends javax.swing.JPanel {
 
                 if (SwingUtilities.isLeftMouseButton(me)) {
 
+                    Form2.oldItemName = "";
                     f2ErrorMessage.setText(" ");
                     System.out.println("Item click!");
                     Form2.picLbl.setIcon(data.getImage());
@@ -49,6 +55,7 @@ public class categoryPanel extends javax.swing.JPanel {
                     Form2.itemDataPanel.repaint();
                     Form2.itemDataPanel.revalidate();
 
+                    Form2.oldItemName = data.getItemName();
                     Form2.itemNameField.setText(data.getItemName());
                     Form2.priceField.setText(decimal.format(data.getPrice()));
                     Form2.categoryField.setSelectedItem(data.getCategory());
@@ -79,7 +86,7 @@ public class categoryPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel1.setText("Category Name");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 15, 366, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 15, 400, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);

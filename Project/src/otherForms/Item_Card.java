@@ -36,6 +36,7 @@ public class Item_Card extends javax.swing.JPanel {
 
         if (data.getStocks() == 0) {
             status.setBackground(new Color(191, 50, 50));
+           
         } else if (data.getStocks() <= 25) {
             status.setBackground(new Color(255, 153, 51));
         } else {

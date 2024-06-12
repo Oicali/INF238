@@ -95,6 +95,11 @@ public class changePassword extends javax.swing.JPanel {
                 OPFieldMouseClicked(evt);
             }
         });
+        OPField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OPFieldActionPerformed(evt);
+            }
+        });
         OPField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 OPFieldKeyTyped(evt);
@@ -305,6 +310,10 @@ public class changePassword extends javax.swing.JPanel {
             evt.consume();
         }
     }//GEN-LAST:event_CPFieldKeyTyped
+
+    private void OPFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OPFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_OPFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

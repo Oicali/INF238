@@ -36,8 +36,6 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.NumberFormatter;
-import static testing.addNewProduct.categoryChoices;
-import static testing.addNewProduct.spinner;
 import settings.GlassPanePopup;
 
 public class addNewProducts extends javax.swing.JDialog {

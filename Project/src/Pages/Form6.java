@@ -15,6 +15,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -43,7 +45,6 @@ public class Form6 extends javax.swing.JPanel {
         initData();
         addBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         exportBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
 
         searchField.addEvent(new EventTextField() {
             @Override
@@ -69,7 +70,7 @@ public class Form6 extends javax.swing.JPanel {
                 searchField.setText("");
             }
         });
-        
+
         // Add a DocumentListener to the searchField
         searchField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -116,7 +117,7 @@ public class Form6 extends javax.swing.JPanel {
 
     public void initData() {
         panelItem2.removeAll();
-        
+
         try {
             Statement s = Main.getDbCon().createStatement();
 
@@ -166,12 +167,14 @@ public class Form6 extends javax.swing.JPanel {
     }
 
     private void searchData(String data) {
-        panelItem2.removeAll();
-
         try {
+            panelItem2.removeAll();
+            panelItem2.repaint();
+            panelItem2.revalidate();
+
             Statement s = Main.getDbCon().createStatement();
 
-            ResultSet rs = s.executeQuery("SELECT * FROM users WHERE fullname LIKE '%" + data + "%'");
+            ResultSet rs = s.executeQuery("SELECT * FROM users WHERE fullname LIKE '%" + data + "%' OR userRole LIKE '%" + data + "%'");
 
             if (rs.isBeforeFirst()) { // Check if the ResultSet is not empty
                 while (rs.next()) {
@@ -185,7 +188,10 @@ public class Form6 extends javax.swing.JPanel {
                             rs.getString("status")
                     ));
                 }
-            } 
+
+                panelItem2.repaint();
+                panelItem2.revalidate();
+            }
             // Close the ResultSet
             rs.close();
             s.close();
@@ -197,7 +203,7 @@ public class Form6 extends javax.swing.JPanel {
             Main.closeCon();
         }
     }
-    
+
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -264,6 +270,11 @@ public class Form6 extends javax.swing.JPanel {
         searchField.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         searchField.setHintText("Search a user");
         searchField.setSelectionColor(new java.awt.Color(204, 204, 204));
+        searchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFieldActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -318,12 +329,14 @@ public class Form6 extends javax.swing.JPanel {
                 Statement s = Main.getDbCon().createStatement();
 
                 ResultSet rs = s.executeQuery("select fname, mname, lname, Sname, userName, userRole, email, gender, mobileNumber, birthDate, entryDate, status from users");
-                String filePath = "D:\\GitHub\\INF238\\Project\\src\\documents\\users.csv";
-                try {
-                    writeResultSetToCSV(rs, filePath);
-                } catch (IOException ex) {
-                    Logger.getLogger(Form6.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                // Determine the path to the Downloads folder
+                String userHome = System.getProperty("user.home");
+                String downloadsPath = Paths.get(userHome, "Downloads", "Copy of Mark-It Users.csv").toString();
+
+                // Ensure the Downloads folder exists (it should by default on most systems)
+                Files.createDirectories(Paths.get(userHome, "Downloads"));
+
+                writeResultSetToCSV(rs, downloadsPath);
 
                 rs.close();
                 s.close();
@@ -333,6 +346,8 @@ public class Form6 extends javax.swing.JPanel {
             } catch (SQLException e) {
                 e.printStackTrace(); // Print the exception details for debugging
                 JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException ex) {
+                Logger.getLogger(Form6.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 Main.closeCon();
             }
@@ -341,6 +356,10 @@ public class Form6 extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_exportBtnActionPerformed
+
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

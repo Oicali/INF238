@@ -1,4 +1,3 @@
-
 package Main;
 
 import java.awt.Color;
@@ -38,10 +37,88 @@ public class logIn extends javax.swing.JFrame {
 
     }
     
+    private void logInMethod() {
+
+        if (usernameField.getText().isEmpty() & passField.getText().isEmpty()) {
+            logInErrorMessage.setText("Please fill up all required fields!");
+
+        } else if (usernameField.getText().isEmpty()) {
+            logInErrorMessage.setText("Please fill up username field!");
+
+        } else if (passField.getText().isEmpty()) {
+            logInErrorMessage.setText("Please fill up password field!");
+
+        } else {
+
+            String username = usernameField.getText();
+            String password = passField.getText();
+            //String selectedRole = (String) selectRole.getSelectedItem();
+
+            //Connection con = InventorySystem.getDbCon();
+            boolean accountNotFound = true;
+            try {
+
+                Statement s = Main.getDbCon().createStatement();
+                //ResultSet rs = s.executeQuery("SELECT * FROM users WHERE userName = '" + username + "' AND userRole = '" + selectedRole + "' AND status = 'Active'");
+                ResultSet rs = s.executeQuery("SELECT * FROM users WHERE userName = '" + username + "'");
+
+                while (rs.next()) {
+                    accountNotFound = false;
+                    Main.setStoredPassword(rs.getString("password")); // Get the stored password from the database
+                    Main.username = rs.getString("userName");
+                    Main.userPosition = rs.getString("userRole");
+                    Main.status = rs.getString("status");
+                }
+
+                if (accountNotFound) {
+                    logInErrorMessage.setText("Account not found!");
+
+                } else if (Main.status.equals("Inactive")) {
+                    logInErrorMessage.setText("Account currently deactivated!");
+                } else {
+                    if (password.equals(Main.getStoredPassword())) {
+
+                        new home().show();
+                        dispose();
+
+                        //new home(Main.selectedRole).show();
+                        //ImageIcon Icon = new ImageIcon(Main.imageBytes);
+                        //home.avatar1.setIcon(Icon);
+                        //Form7.avatar.setIcon(Icon);
+                        //Main.homepage.avatar1.setIcon(Icon);
+                    } else {
+                        logInErrorMessage.setText("Invalid Password!");
+
+                    }
+                }
+
+                // Close the ResultSet
+                rs.close();
+                s.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace(); // Print the exception details for debugging
+                JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                Main.closeCon();
+                /*try {
+                // Close the Connection
+                if (InventorySystem.getDbCon()!= null) {
+                    InventorySystem.getDbCon().close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }*/
+            }
+        }
+    }
+
     private boolean isSpecialCharacter(char c) {
         String specialChars = "!@#$%^&*()-_+=<>?/|\\{}[]~`";
         return specialChars.indexOf(c) >= 0;
     }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -162,6 +239,16 @@ public class logIn extends javax.swing.JFrame {
                 usernameFieldMouseClicked(evt);
             }
         });
+        usernameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameFieldActionPerformed(evt);
+            }
+        });
+        usernameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usernameFieldKeyPressed(evt);
+            }
+        });
 
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logInUser.png"))); // NOI18N
 
@@ -175,6 +262,9 @@ public class logIn extends javax.swing.JFrame {
         passField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 passFieldKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                passFieldKeyTyped(evt);
             }
         });
 
@@ -303,96 +393,23 @@ public class logIn extends javax.swing.JFrame {
     }//GEN-LAST:event_closeBtnActionPerformed
 
     private void logInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInBtnActionPerformed
-
-        if (usernameField.getText().isEmpty() & passField.getText().isEmpty()) {
-            logInErrorMessage.setText("Please fill up all required fields!");
-            
-        } else if (usernameField.getText().isEmpty()) {
-            logInErrorMessage.setText("Please fill up username field!");
-            
-        } else if (passField.getText().isEmpty()) {
-            logInErrorMessage.setText("Please fill up password field!");
-            
-        } else {
-
-            String username = usernameField.getText();
-            String password = passField.getText();
-            //String selectedRole = (String) selectRole.getSelectedItem();
-
-            //Connection con = InventorySystem.getDbCon();
-            boolean accountNotFound = true;
-            try {
-
-                Statement s = Main.getDbCon().createStatement();
-                //ResultSet rs = s.executeQuery("SELECT * FROM users WHERE userName = '" + username + "' AND userRole = '" + selectedRole + "' AND status = 'Active'");
-                ResultSet rs = s.executeQuery("SELECT * FROM users WHERE userName = '" + username + "'");
-                
-                while (rs.next()) {
-                    accountNotFound = false;
-                    Main.setStoredPassword(rs.getString("password")); // Get the stored password from the database
-                    Main.username = rs.getString("userName");
-                    Main.userPosition = rs.getString("userRole");
-                    Main.status = rs.getString("status");
-                }
-
-                if (accountNotFound) {
-                    logInErrorMessage.setText("Account not found!");
-                    
-                } else if (Main.status.equals("Inactive")){
-                    logInErrorMessage.setText("Account currently deactivated!");
-                } else {
-                    if (password.equals(Main.getStoredPassword())) {
-                        
-                        new home().show();
-                        dispose();
-                        
-                        //new home(Main.selectedRole).show();
-                        //ImageIcon Icon = new ImageIcon(Main.imageBytes);
-                        //home.avatar1.setIcon(Icon);
-                        //Form7.avatar.setIcon(Icon);
-                        //Main.homepage.avatar1.setIcon(Icon);
-                        
-                    } else {
-                        logInErrorMessage.setText("Invalid Password!");
-                        
-                    }
-                }
-
-                // Close the ResultSet
-                rs.close();
-                s.close();
-
-            } catch (SQLException e) {
-                e.printStackTrace(); // Print the exception details for debugging
-                JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                Main.closeCon();
-                /*try {
-                // Close the Connection
-                if (InventorySystem.getDbCon()!= null) {
-                    InventorySystem.getDbCon().close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }*/
-            }
-        }
-
-
+        logInMethod();
     }//GEN-LAST:event_logInBtnActionPerformed
+
+    
 
     private void forgotPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotPassActionPerformed
         forgotPasswordMsg obj5 = new forgotPasswordMsg();
         GlassPanePopup.showPopup(obj5);
         logInErrorMessage.setText("");
-        
+
     }//GEN-LAST:event_forgotPassActionPerformed
 
     private void forgotUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotUserActionPerformed
         forgotUsernameMsg obj0 = new forgotUsernameMsg();
         GlassPanePopup.showPopup(obj0);
         logInErrorMessage.setText("");
-        
+
     }//GEN-LAST:event_forgotUserActionPerformed
 
     private void showPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPassActionPerformed
@@ -402,17 +419,17 @@ public class logIn extends javax.swing.JFrame {
             passField.setEchoChar('•');
         }
         logInErrorMessage.setText("");
-        
+
     }//GEN-LAST:event_showPassActionPerformed
 
     private void usernameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameFieldMouseClicked
         logInErrorMessage.setText("");
-        
+
     }//GEN-LAST:event_usernameFieldMouseClicked
 
     private void passFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passFieldMouseClicked
         logInErrorMessage.setText("");
-        
+
     }//GEN-LAST:event_passFieldMouseClicked
 
     private void selectRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectRoleMouseClicked
@@ -422,14 +439,31 @@ public class logIn extends javax.swing.JFrame {
 
     private void passFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passFieldKeyPressed
         char keyChar = evt.getKeyChar();
-        // Allow only valid password characters: digits, letters, and special characters
-        if (Character.isDigit(keyChar) || Character.isLetter(keyChar) || isSpecialCharacter(keyChar) || keyChar == KeyEvent.VK_BACK_SPACE) {
-            passField.setEditable(true);
-        } else {
-            passField.setEditable(false);
-            passField.setBackground(Color.WHITE);
+        
+        if (keyChar == KeyEvent.VK_ENTER){
+            logInMethod(); 
         }
     }//GEN-LAST:event_passFieldKeyPressed
+
+    private void passFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passFieldKeyTyped
+        char keyChar = evt.getKeyChar();
+        
+        if (!Character.isDigit(keyChar) & !Character.isLetter(keyChar) & !isSpecialCharacter(keyChar) & keyChar != KeyEvent.VK_BACK_SPACE) {
+            evt.consume();
+        } 
+    }//GEN-LAST:event_passFieldKeyTyped
+
+    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameFieldActionPerformed
+
+    private void usernameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameFieldKeyPressed
+        char keyChar = evt.getKeyChar();
+        
+        if (keyChar == KeyEvent.VK_ENTER){
+            logInMethod(); 
+        }
+    }//GEN-LAST:event_usernameFieldKeyPressed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

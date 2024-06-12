@@ -1,13 +1,18 @@
 package Pages;
 
-import testing.addNewProduct;
 import Main.*;
 import components.ScrollBarCustom;
+import interfaces.EventCallBack;
+import interfaces.EventTextField;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +20,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
@@ -24,6 +33,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.NumberFormatter;
 import popUps.*;
 import settings.GlassPanePopup;
@@ -34,6 +45,7 @@ import otherForms.categoryPanel;
 public class Form2 extends javax.swing.JPanel {
 
     private Map<String, categoryPanel> categoryPanels;
+    public static String oldItemName = "";
 
     public Form2() {
         initComponents();
@@ -44,6 +56,8 @@ public class Form2 extends javax.swing.JPanel {
         editCatBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         saveBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         addBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        exportBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         if (Main.userPosition.equals("Administrator") || Main.userPosition.equals("Supervisor")) {
             editCatBtn.setVisible(true);
             itemNameField.setEditable(true);
@@ -61,13 +75,68 @@ public class Form2 extends javax.swing.JPanel {
         });
 
         initData();
+
+        searchField.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                try {
+                    for (int i = 1; i <= 100; i++) {
+                        Thread.sleep(10);
+                    }
+                    call.done();
+                    searchData();
+
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    System.err.println("Thread was interrupted: " + e);
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+                searchField.setText("");
+            }
+        });
+
+        // Add a DocumentListener to the searchField
+        searchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                checkIfEmpty();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                checkIfEmpty();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                checkIfEmpty();
+            }
+
+            private void checkIfEmpty() {
+                if (searchField.getText().trim().isEmpty()) {
+                    initData();
+                }
+            }
+        });
     }
 
     public void initData() {
         try {
-
+            panelItem1.removeAll();
             Statement s = Main.getDbCon().createStatement();
-            ResultSet rs = s.executeQuery("select * from products inner join category on products.category_fk = category_ID;");
+            ResultSet rs = s.executeQuery("SELECT * FROM category");
+
+            while (rs.next()) {
+                addPanelCategory(rs.getString("label"));
+            }
+
+            s = Main.getDbCon().createStatement();
+            rs = s.executeQuery("select * from products inner join category on products.category_fk = category_ID;");
 
             while (rs.next()) {
                 String itemName = rs.getString("item_Name");
@@ -85,6 +154,8 @@ public class Form2 extends javax.swing.JPanel {
                 addItemToCategory(category, product);
             }
 
+            panelItem1.repaint();
+            panelItem1.revalidate();
             // Close the ResultSet
             rs.close();
             s.close();
@@ -97,6 +168,58 @@ public class Form2 extends javax.swing.JPanel {
         }
     }
 
+    public void searchData() {
+        try {
+            panelItem1.removeAll();
+
+            String data = searchField.getText().trim();
+            Statement s = Main.getDbCon().createStatement();
+            ResultSet rs = s.executeQuery("select * from products inner join category on products.category_fk = category_ID where item_Name like '%" + data + "%' OR category.label LIKE '%" + data + "%'");
+
+            Set<String> processedLabels = new HashSet<>();
+
+            while (rs.next()) {
+                String label = rs.getString("label");
+                if (!processedLabels.contains(label)) {
+                    addPanelCategory(label);
+                    processedLabels.add(label);
+                }
+            }
+
+            s = Main.getDbCon().createStatement();
+            rs = s.executeQuery("select * from products inner join category on products.category_fk = category_ID where item_Name like '%" + data + "%'");
+
+            while (rs.next()) {
+                String itemName = rs.getString("item_Name");
+                byte[] imageBytes = rs.getBytes("item_Image");
+                Icon imageIcon = new ImageIcon(imageBytes);
+                int stocks = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                String category = rs.getString(8); // Assuming the 8th column is the category
+                String ID = rs.getString("product_pk");
+
+                System.out.println(category);
+                System.out.println(itemName);
+
+                Model_Products product = new Model_Products(itemName, imageIcon, stocks, price, ID, category);
+                addItemToCategory(category, product);
+            }
+
+            panelItem1.repaint();
+            panelItem1.revalidate();
+            // Close the ResultSet
+            rs.close();
+            s.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print the exception details for debugging
+            JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            Main.closeCon();
+        }
+
+    }
+
     private void getCategory() {
         categoryField.removeAllItems();
 
@@ -106,7 +229,7 @@ public class Form2 extends javax.swing.JPanel {
 
             while (rs.next()) {
                 categoryField.addItem(rs.getString("label"));
-                addCategory(rs.getString("label"));
+                addPanelCategory(rs.getString("label"));
             }
 
             // Close the ResultSet
@@ -122,7 +245,7 @@ public class Form2 extends javax.swing.JPanel {
 
     }
 
-    public void addCategory(String category) {
+    public void addPanelCategory(String category) {
         categoryPanel panel = new categoryPanel(category);
         System.out.println(category);
         categoryPanels.put(category, panel);
@@ -135,7 +258,7 @@ public class Form2 extends javax.swing.JPanel {
     public void addItemToCategory(String category, Model_Products item) {
         categoryPanel panel = categoryPanels.get(category);
         if (panel == null) {
-            addCategory(category);
+            addPanelCategory(category);
             panel = categoryPanels.get(category);
         }
         panel.addItem(item);
@@ -158,6 +281,34 @@ public class Form2 extends javax.swing.JPanel {
                 return formatter;
             }
         };
+    }
+
+    private static void writeResultSetToCSV(ResultSet resultSet, String filePath) throws SQLException, IOException {
+        FileWriter fileWriter = new FileWriter(filePath);
+
+        // Write CSV header
+        int columnCount = resultSet.getMetaData().getColumnCount();
+        for (int i = 1; i <= columnCount; i++) {
+            fileWriter.append(resultSet.getMetaData().getColumnName(i));
+            if (i < columnCount) {
+                fileWriter.append(",");
+            }
+        }
+        fileWriter.append("\n");
+
+        // Write CSV rows
+        while (resultSet.next()) {
+            for (int i = 1; i <= columnCount; i++) {
+                fileWriter.append(resultSet.getString(i));
+                if (i < columnCount) {
+                    fileWriter.append(",");
+                }
+            }
+            fileWriter.append("\n");
+        }
+
+        fileWriter.flush();
+        fileWriter.close();
     }
 
     @Override
@@ -192,7 +343,7 @@ public class Form2 extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         f2ErrorMessage = new javax.swing.JLabel();
         itemNameField = new javax.swing.JTextField();
-        exportBtn1 = new components.RoundedButtons();
+        importBtn = new components.RoundedButtons();
         searchField = new components.TextFieldAnimation();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -336,7 +487,7 @@ public class Form2 extends javax.swing.JPanel {
         });
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel8.setText("Quantity:");
+        jLabel8.setText("Stocks:");
 
         IDField.setFont(new java.awt.Font("SansSerif", 2, 12)); // NOI18N
         IDField.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -377,28 +528,25 @@ public class Form2 extends javax.swing.JPanel {
             itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(itemDataPanelLayout.createSequentialGroup()
                 .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(itemDataPanelLayout.createSequentialGroup()
-                            .addGap(25, 25, 25)
-                            .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(IDField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(itemNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(itemDataPanelLayout.createSequentialGroup()
+                    .addGroup(itemDataPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(IDField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(itemNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(itemDataPanelLayout.createSequentialGroup()
+                                    .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel8)
                                         .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel10)
-                                            .addComponent(categoryField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemDataPanelLayout.createSequentialGroup()
-                            .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel6))
-                            .addGap(57, 57, 57)
-                            .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(spinner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(priceField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(categoryField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(spinner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(priceField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(itemDataPanelLayout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(f2ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -439,29 +587,34 @@ public class Form2 extends javax.swing.JPanel {
 
         add(itemDataPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(782, 186, 325, -1));
 
-        exportBtn1.setForeground(new java.awt.Color(255, 255, 255));
-        exportBtn1.setText("Import");
-        exportBtn1.setBorderColor(new java.awt.Color(15, 106, 191));
-        exportBtn1.setBorderPainted(false);
-        exportBtn1.setColor(new java.awt.Color(15, 106, 191));
-        exportBtn1.setColorClick(new java.awt.Color(15, 106, 191));
-        exportBtn1.setColorOver(new java.awt.Color(15, 106, 191));
-        exportBtn1.setFocusPainted(false);
-        exportBtn1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        exportBtn1.setMaximumSize(new java.awt.Dimension(85, 38));
-        exportBtn1.setMinimumSize(new java.awt.Dimension(85, 38));
-        exportBtn1.addActionListener(new java.awt.event.ActionListener() {
+        importBtn.setForeground(new java.awt.Color(255, 255, 255));
+        importBtn.setText("Import");
+        importBtn.setBorderColor(new java.awt.Color(15, 106, 191));
+        importBtn.setBorderPainted(false);
+        importBtn.setColor(new java.awt.Color(15, 106, 191));
+        importBtn.setColorClick(new java.awt.Color(15, 106, 191));
+        importBtn.setColorOver(new java.awt.Color(15, 106, 191));
+        importBtn.setFocusPainted(false);
+        importBtn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        importBtn.setMaximumSize(new java.awt.Dimension(85, 38));
+        importBtn.setMinimumSize(new java.awt.Dimension(85, 38));
+        importBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exportBtn1ActionPerformed(evt);
+                importBtnActionPerformed(evt);
             }
         });
-        add(exportBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1007, 127, 100, 38));
+        add(importBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1007, 127, 100, 38));
 
         searchField.setBackground(new java.awt.Color(240, 240, 240));
         searchField.setAnimationColor(new java.awt.Color(15, 106, 191));
         searchField.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         searchField.setHintText("Search an item");
         searchField.setSelectionColor(new java.awt.Color(204, 204, 204));
+        searchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFieldActionPerformed(evt);
+            }
+        });
         add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 124, 363, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -479,13 +632,43 @@ public class Form2 extends javax.swing.JPanel {
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void exportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportBtnActionPerformed
+        int choice = JOptionPane.showConfirmDialog(this, "Get a copy of products information?", "Export Products", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            try {
+                Statement s = Main.getDbCon().createStatement();
 
+                ResultSet rs = s.executeQuery("select item_Name, quantity, price, category_ID, label FROM products INNER JOIN category ON products.category_fk = category.category_ID;");
+                // Determine the path to the Downloads folder
+                String userHome = System.getProperty("user.home");
+                String downloadsPath = Paths.get(userHome, "Downloads", "Copy of Mark-It Products.csv").toString();
+
+                // Ensure the Downloads folder exists (it should by default on most systems)
+                Files.createDirectories(Paths.get(userHome, "Downloads"));
+
+                writeResultSetToCSV(rs, downloadsPath);
+
+                rs.close();
+                s.close();
+
+                home.successPrintUsers.showNotification();
+
+            } catch (SQLException e) {
+                e.printStackTrace(); // Print the exception details for debugging
+                JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException ex) {
+                Logger.getLogger(Form2.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            finally {
+                Main.closeCon();
+            }
+
+        }
 
     }//GEN-LAST:event_exportBtnActionPerformed
 
-    private void exportBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportBtn1ActionPerformed
+    private void importBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_exportBtn1ActionPerformed
+    }//GEN-LAST:event_importBtnActionPerformed
 
     private void priceFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_priceFieldMouseClicked
         f2ErrorMessage.setText(" ");
@@ -540,7 +723,7 @@ public class Form2 extends javax.swing.JPanel {
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         f2ErrorMessage.setText(" ");
-        
+
         String item = itemNameField.getText().trim();
         String price = priceField.getText().trim();
 
@@ -560,12 +743,12 @@ public class Form2 extends javax.swing.JPanel {
 
                 Connection con = Main.getDbCon();
 
-                
-                PreparedStatement ps = con.prepareStatement("UPDATE products SET quantity = ?, price = ?, category_fk = ? where item_Name = ?");
-                ps.setString(1, String.valueOf(spinner.getValue()));
-                ps.setString(2, priceField.getText());
-                ps.setString(3, catID);
-                ps.setString(4, itemNameField.getText());
+                PreparedStatement ps = con.prepareStatement("UPDATE products SET item_Name = ?, quantity = ?, price = ?, category_fk = ? where item_Name = ?");
+                ps.setString(1, item);
+                ps.setString(2, String.valueOf(spinner.getValue()));
+                ps.setString(3, priceField.getText());
+                ps.setString(4, catID);
+                ps.setString(5, oldItemName);
                 ps.executeUpdate();
 
                 int value = (int) spinner.getValue();
@@ -580,9 +763,9 @@ public class Form2 extends javax.swing.JPanel {
                 con.close();
                 rs.close();
                 s.close();
- 
+
                 Timer timer = new Timer(4000, e -> {
-                    if(value<=25){
+                    if (value <= 25) {
                         home.itemWarning.showNotification();
                     }
                 });
@@ -616,6 +799,10 @@ public class Form2 extends javax.swing.JPanel {
         f2ErrorMessage.setText(" ");
     }//GEN-LAST:event_itemNameFieldMouseClicked
 
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel IDField;
@@ -623,8 +810,8 @@ public class Form2 extends javax.swing.JPanel {
     public static components.Combobox categoryField;
     private components.RoundedButtons editCatBtn;
     private components.RoundedButtons exportBtn;
-    private components.RoundedButtons exportBtn1;
     public static javax.swing.JLabel f2ErrorMessage;
+    private components.RoundedButtons importBtn;
     public static otherForms.PanelBorder itemDataPanel;
     public static javax.swing.JTextField itemNameField;
     private javax.swing.JLabel jLabel1;

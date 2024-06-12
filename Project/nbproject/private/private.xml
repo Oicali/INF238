@@ -3,18 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/GitHub/INF238/Project/src/popUps/resetPasswordMsg.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/testing/addNewProduct.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/otherForms/categoryPanel.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/popUps/forgotUsernameMsg.java</file>
             <file>file:/D:/GitHub/INF238/Project/src/Main/logIn.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/otherForms/Notifications.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/popUps/changePassword.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/popUps/editCategories.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/Main/home.java</file>
             <file>file:/D:/GitHub/INF238/Project/src/testing/NewJFrame.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/Pages/Form2.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/otherForms/addNewUser.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/otherForms/Item_Card.java</file>
         </group>
     </open-files>
 </project-private>
