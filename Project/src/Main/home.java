@@ -227,16 +227,7 @@ public class home extends javax.swing.JFrame {
             Main.username = "";
             Main.setStoredPassword("");
             Main.userPosition = "";
-//            Main.fname = "";
-//            Main.mname = "";
-//            Main.lname = "";
-//            Main.sname = "";
-//            Main.fullname = "";
-            //Main.number = "";
-//            Main.email = "";
-            //Main.birth = "";
-            //Main.gender = "";
-            //Main.date = "";
+
             Main.status = "";
             //Main.imageBytes = null;
             dispose();

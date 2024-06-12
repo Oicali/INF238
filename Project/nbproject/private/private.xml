@@ -5,7 +5,11 @@
         <group>
             <file>file:/D:/GitHub/INF238/Project/src/popUps/forgotUsernameMsg.java</file>
             <file>file:/D:/GitHub/INF238/Project/src/Main/logIn.java</file>
-            <file>file:/D:/GitHub/INF238/Project/src/testing/NewJFrame.java</file>
+            <file>file:/D:/GitHub/INF238/Project/build.xml</file>
+            <file>file:/D:/GitHub/INF238/Project/src/Main/Main.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/Main/home.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/Pages/Form2.java</file>
+            <file>file:/D:/GitHub/INF238/Project/src/Pages/Form6.java</file>
         </group>
     </open-files>
 </project-private>

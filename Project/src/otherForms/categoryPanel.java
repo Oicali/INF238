@@ -38,7 +38,6 @@ public class categoryPanel extends javax.swing.JPanel {
     public void addItem(Model_Products data) {
         Item_Card card = new Item_Card();
         card.setData(data);
-        System.out.println("Item clickable!");
         
 
         card.addMouseListener(new MouseAdapter() {
@@ -49,7 +48,6 @@ public class categoryPanel extends javax.swing.JPanel {
 
                     Form2.oldItemName = "";
                     f2ErrorMessage.setText(" ");
-                    System.out.println("Item click!");
                     Form2.picLbl.setIcon(data.getImage());
 
                     Form2.itemDataPanel.repaint();
