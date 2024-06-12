@@ -163,6 +163,7 @@ public class Form2 extends javax.swing.JPanel {
             e.printStackTrace(); // Print the exception details for debugging
             JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
+
             Main.closeCon();
         }
     }
@@ -444,6 +445,7 @@ public class Form2 extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         f2ErrorMessage = new javax.swing.JLabel();
         itemNameField = new javax.swing.JTextField();
+        impBtn = new components.RoundedButtons();
         searchField = new components.TextFieldAnimation();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -687,20 +689,23 @@ public class Form2 extends javax.swing.JPanel {
 
         add(itemDataPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(782, 186, 325, -1));
 
-        importBtn.setText("Import");
-        importBtn.setBorderColor(new java.awt.Color(15, 106, 191));
-        importBtn.setBorderPainted(false);
-        importBtn.setColor(new java.awt.Color(15, 106, 191));
-        importBtn.setColorClick(new java.awt.Color(15, 106, 191));
-        importBtn.setColorOver(new java.awt.Color(15, 106, 191));
-        importBtn.setFocusPainted(false);
-        importBtn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        importBtn.setMaximumSize(new java.awt.Dimension(85, 38));
-        importBtn.setMinimumSize(new java.awt.Dimension(85, 38));
-        importBtn.addActionListener(new java.awt.event.ActionListener() {
+        impBtn.setForeground(new java.awt.Color(255, 255, 255));
+        impBtn.setText("Import");
+        impBtn.setBorderColor(new java.awt.Color(15, 106, 191));
+        impBtn.setBorderPainted(false);
+        impBtn.setColor(new java.awt.Color(15, 106, 191));
+        impBtn.setColorClick(new java.awt.Color(15, 106, 191));
+        impBtn.setColorOver(new java.awt.Color(15, 106, 191));
+        impBtn.setFocusPainted(false);
+        impBtn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        impBtn.setMaximumSize(new java.awt.Dimension(85, 38));
+        impBtn.setMinimumSize(new java.awt.Dimension(85, 38));
+        impBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                impBtnActionPerformed(evt);
             }
         });
+        add(impBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1007, 127, 100, 38));
 
         searchField.setBackground(new java.awt.Color(240, 240, 240));
         searchField.setAnimationColor(new java.awt.Color(15, 106, 191));
@@ -732,9 +737,17 @@ public class Form2 extends javax.swing.JPanel {
         int choice = JOptionPane.showConfirmDialog(this, "Get a copy of products information?", "Export Products", JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
             try {
+<<<<<<< Updated upstream
                 Statement s = Main.getDbCon().createStatement();
 
                 ResultSet rs = s.executeQuery("select item_Name, quantity, price, category_ID, label FROM products INNER JOIN category ON products.category_fk = category.category_ID;");
+=======
+
+                con = Main.getDbCon();
+                Statement s = con.createStatement();
+
+                ResultSet rs = s.executeQuery("select product_pk, item_Name, quantity, price, category_fk, label FROM products INNER JOIN category ON products.category_fk = category.category_ID;");
+>>>>>>> Stashed changes
                 // Determine the path to the Downloads folder
                 String userHome = System.getProperty("user.home");
                 String downloadsPath = Paths.get(userHome, "Downloads", "Copy of Mark-It Products.csv").toString();
