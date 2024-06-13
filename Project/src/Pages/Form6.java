@@ -225,11 +225,14 @@ public class Form6 extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         scroll.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setVerticalScrollBar(new ScrollBarCustom());
         scroll.setViewportView(panelItem2);
+
+        add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 172, 1069, 580));
 
         addBtn.setForeground(new java.awt.Color(255, 255, 255));
         addBtn.setText("Add");
@@ -247,6 +250,7 @@ public class Form6 extends javax.swing.JPanel {
                 addBtnActionPerformed(evt);
             }
         });
+        add(addBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(887, 110, 100, 38));
 
         exportBtn.setForeground(new java.awt.Color(255, 255, 255));
         exportBtn.setText("Export");
@@ -264,6 +268,7 @@ public class Form6 extends javax.swing.JPanel {
                 exportBtnActionPerformed(evt);
             }
         });
+        add(exportBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 110, 100, 38));
 
         searchField.setBackground(new java.awt.Color(240, 240, 240));
         searchField.setAnimationColor(new java.awt.Color(15, 106, 191));
@@ -275,45 +280,12 @@ public class Form6 extends javax.swing.JPanel {
                 searchFieldActionPerformed(evt);
             }
         });
+        add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 110, 387, -1));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Users Information Page");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(exportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 1069, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 36, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(352, 352, 352))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(exportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 440, 68));
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed

@@ -1,9 +1,6 @@
-package otherForms;
+package calendar;
 
-import otherForms.Years;
 import settings.SelectedDate;
-import otherForms.Months;
-import otherForms.Dates;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -234,13 +231,13 @@ public final class DatePicker extends javax.swing.JPanel {
             }
         };
         header = new javax.swing.JPanel();
-        cmdForward = new components.dateButton();
+        cmdForward = new calendar.dateButton();
         MY = new javax.swing.JLayeredPane();
-        cmdMonth = new components.dateButton();
+        cmdMonth = new calendar.dateButton();
         lb = new javax.swing.JLabel();
-        cmdYear = new components.dateButton();
-        cmdPrevious = new components.dateButton();
-        slide = new otherForms.Slider();
+        cmdYear = new calendar.dateButton();
+        cmdPrevious = new calendar.dateButton();
+        slide = new calendar.Slider();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -491,14 +488,14 @@ public final class DatePicker extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane MY;
-    private components.dateButton cmdForward;
-    private components.dateButton cmdMonth;
-    private components.dateButton cmdPrevious;
-    private components.dateButton cmdYear;
+    private calendar.dateButton cmdForward;
+    private calendar.dateButton cmdMonth;
+    private calendar.dateButton cmdPrevious;
+    private calendar.dateButton cmdYear;
     private javax.swing.JPanel header;
     private javax.swing.JLabel lb;
     private javax.swing.JPopupMenu popup;
-    private otherForms.Slider slide;
+    private calendar.Slider slide;
     // End of variables declaration//GEN-END:variables
 
     public SelectedDate getSelectedDate() {

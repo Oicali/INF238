@@ -187,7 +187,7 @@ public class addNewUser extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        date = new otherForms.DatePicker();
+        date = new calendar.DatePicker();
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         numberField = new javax.swing.JTextField();
@@ -225,7 +225,6 @@ public class addNewUser extends javax.swing.JDialog {
         date.setTextRefernce(bdayField);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(609, 788));
         setMinimumSize(new java.awt.Dimension(609, 788));
         setUndecorated(true);
 
@@ -354,7 +353,7 @@ public class addNewUser extends javax.swing.JDialog {
         jLabel17.setText("Birthday:");
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 422, 84, -1));
 
-        roleField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrator", "Supervisor", "Sales Associate", "Warehouse Staff" }));
+        roleField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrator", "Supervisor", "Sales Associate", "Warehouse Staff", "Delivery Staff" }));
         roleField.setSelectedIndex(2);
         roleField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         roleField.setLabelText("");
@@ -731,7 +730,7 @@ public class addNewUser extends javax.swing.JDialog {
     private javax.swing.JLabel ErrorMessage;
     private javax.swing.JTextField bdayField;
     private javax.swing.JButton cmdCancel;
-    private otherForms.DatePicker date;
+    private calendar.DatePicker date;
     private javax.swing.JTextField emailField;
     private javax.swing.JTextField fnameField;
     private components.Combobox genderField;

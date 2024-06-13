@@ -1,6 +1,6 @@
-package otherForms;
+package calendar;
 
-import components.dateButton;
+import calendar.dateButton;
 import javax.swing.JButton;
 import interfaces.Event;
 
@@ -39,26 +39,26 @@ public final class Years extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cmd1 = new components.dateButton();
-        cmd2 = new components.dateButton();
-        cmd3 = new components.dateButton();
-        cmd4 = new components.dateButton();
-        cmd5 = new components.dateButton();
-        cmd6 = new components.dateButton();
-        cmd7 = new components.dateButton();
-        cmd8 = new components.dateButton();
-        cmd9 = new components.dateButton();
-        cmd10 = new components.dateButton();
-        cmd11 = new components.dateButton();
-        cmd12 = new components.dateButton();
-        cmd13 = new components.dateButton();
-        cmd14 = new components.dateButton();
-        cmd15 = new components.dateButton();
-        cmd16 = new components.dateButton();
-        cmd17 = new components.dateButton();
-        cmd18 = new components.dateButton();
-        cmd19 = new components.dateButton();
-        cmd20 = new components.dateButton();
+        cmd1 = new calendar.dateButton();
+        cmd2 = new calendar.dateButton();
+        cmd3 = new calendar.dateButton();
+        cmd4 = new calendar.dateButton();
+        cmd5 = new calendar.dateButton();
+        cmd6 = new calendar.dateButton();
+        cmd7 = new calendar.dateButton();
+        cmd8 = new calendar.dateButton();
+        cmd9 = new calendar.dateButton();
+        cmd10 = new calendar.dateButton();
+        cmd11 = new calendar.dateButton();
+        cmd12 = new calendar.dateButton();
+        cmd13 = new calendar.dateButton();
+        cmd14 = new calendar.dateButton();
+        cmd15 = new calendar.dateButton();
+        cmd16 = new calendar.dateButton();
+        cmd17 = new calendar.dateButton();
+        cmd18 = new calendar.dateButton();
+        cmd19 = new calendar.dateButton();
+        cmd20 = new calendar.dateButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.GridLayout(5, 4));
@@ -203,26 +203,26 @@ public final class Years extends javax.swing.JPanel {
         return startYear;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private components.dateButton cmd1;
-    private components.dateButton cmd10;
-    private components.dateButton cmd11;
-    private components.dateButton cmd12;
-    private components.dateButton cmd13;
-    private components.dateButton cmd14;
-    private components.dateButton cmd15;
-    private components.dateButton cmd16;
-    private components.dateButton cmd17;
-    private components.dateButton cmd18;
-    private components.dateButton cmd19;
-    private components.dateButton cmd2;
-    private components.dateButton cmd20;
-    private components.dateButton cmd3;
-    private components.dateButton cmd4;
-    private components.dateButton cmd5;
-    private components.dateButton cmd6;
-    private components.dateButton cmd7;
-    private components.dateButton cmd8;
-    private components.dateButton cmd9;
+    private calendar.dateButton cmd1;
+    private calendar.dateButton cmd10;
+    private calendar.dateButton cmd11;
+    private calendar.dateButton cmd12;
+    private calendar.dateButton cmd13;
+    private calendar.dateButton cmd14;
+    private calendar.dateButton cmd15;
+    private calendar.dateButton cmd16;
+    private calendar.dateButton cmd17;
+    private calendar.dateButton cmd18;
+    private calendar.dateButton cmd19;
+    private calendar.dateButton cmd2;
+    private calendar.dateButton cmd20;
+    private calendar.dateButton cmd3;
+    private calendar.dateButton cmd4;
+    private calendar.dateButton cmd5;
+    private calendar.dateButton cmd6;
+    private calendar.dateButton cmd7;
+    private calendar.dateButton cmd8;
+    private calendar.dateButton cmd9;
     // End of variables declaration//GEN-END:variables
 
 }

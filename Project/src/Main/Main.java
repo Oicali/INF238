@@ -9,6 +9,7 @@ public class Main {
     public static String userPosition = "";
     public static String status = "";
     private static String storedPassword = "";
+    public static int lowerLimit = 25;
 
     private static Connection con = null;
 //    public static String fname = "";

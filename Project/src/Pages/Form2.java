@@ -10,6 +10,8 @@ import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -55,10 +57,12 @@ public class Form2 extends javax.swing.JPanel {
     private Map<String, categoryPanel> categoryPanels;
     public static String oldItemName = "";
     private static final String DESTINATION_DIRECTORY = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Inventory_System\\Documents";
+    
 
     public Form2() {
         initComponents();
         setOpaque(false);
+        
         categoryPanels = new HashMap<>();
 
         getCategory();
@@ -67,6 +71,7 @@ public class Form2 extends javax.swing.JPanel {
         addBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         exportBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         impBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        impBtn.setVisible(false);
 
         if (Main.userPosition.equals("Administrator") || Main.userPosition.equals("Supervisor")) {
             editCatBtn.setVisible(true);
@@ -136,6 +141,7 @@ public class Form2 extends javax.swing.JPanel {
     }
 
     public void initData() {
+        boolean itemsChecker = false;
         try {
             panelItem1.removeAll();
             Statement s = Main.getDbCon().createStatement();
@@ -163,9 +169,23 @@ public class Form2 extends javax.swing.JPanel {
 
             panelItem1.repaint();
             panelItem1.revalidate();
+
+            rs = s.executeQuery("select count(quantity) from products inner join category on products.category_fk = category_ID where quantity <= " + Main.lowerLimit);
+            rs.next();
+            int userCount = rs.getInt(1);
+
+            if (userCount > 0) {
+                itemsChecker = true;
+            }
+
             // Close the ResultSet
             rs.close();
             s.close();
+
+            Timer itemNotif = new Timer(3200, new MyActionListener(itemsChecker));
+
+            itemNotif.setRepeats(false);
+            itemNotif.start();
 
         } catch (SQLException e) {
             e.printStackTrace(); // Print the exception details for debugging
@@ -373,6 +393,7 @@ public class Form2 extends javax.swing.JPanel {
 
             home.form2Products = new Form2();
             home.setForm(home.form2Products);
+            home.form3Order = new Form3();
             home.successUpdateItem.showNotification();
 
         } catch (SQLException e) {
@@ -453,7 +474,7 @@ public class Form2 extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manage Products");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 38, 336, 68));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 20, 336, 68));
 
         editCatBtn.setForeground(new java.awt.Color(255, 255, 255));
         editCatBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/2.png"))); // NOI18N
@@ -473,14 +494,14 @@ public class Form2 extends javax.swing.JPanel {
                 editCatBtnActionPerformed(evt);
             }
         });
-        add(editCatBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(417, 127, 176, 38));
+        add(editCatBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 176, 38));
 
         jScrollPane3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane3.setViewportView(panelItem1);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 186, 728, 566));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 172, 730, 580));
 
         addBtn.setForeground(new java.awt.Color(255, 255, 255));
         addBtn.setText("New Item");
@@ -498,7 +519,7 @@ public class Form2 extends javax.swing.JPanel {
                 addBtnActionPerformed(evt);
             }
         });
-        add(addBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 127, 159, 38));
+        add(addBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 110, 159, 38));
 
         exportBtn.setForeground(new java.awt.Color(255, 255, 255));
         exportBtn.setText("Export");
@@ -516,7 +537,7 @@ public class Form2 extends javax.swing.JPanel {
                 exportBtnActionPerformed(evt);
             }
         });
-        add(exportBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 130, 100, 38));
+        add(exportBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 110, 100, 38));
 
         itemDataPanel.setMaximumSize(null);
 
@@ -627,35 +648,34 @@ public class Form2 extends javax.swing.JPanel {
         itemDataPanel.setLayout(itemDataPanelLayout);
         itemDataPanelLayout.setHorizontalGroup(
             itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(itemDataPanelLayout.createSequentialGroup()
-                .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(itemDataPanelLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(IDField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(itemNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(itemDataPanelLayout.createSequentialGroup()
-                                    .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel8)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel6))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10)
-                                            .addComponent(categoryField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(spinner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(priceField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(itemDataPanelLayout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(f2ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemDataPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(picLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(100, 100, 100))
+            .addGroup(itemDataPanelLayout.createSequentialGroup()
+                .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(itemDataPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(IDField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(itemNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(itemDataPanelLayout.createSequentialGroup()
+                                .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel10)
+                                        .addComponent(categoryField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(spinner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(priceField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(saveBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(itemDataPanelLayout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(f2ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         itemDataPanelLayout.setVerticalGroup(
             itemDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -679,14 +699,14 @@ public class Form2 extends javax.swing.JPanel {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(IDField)
-                .addGap(42, 42, 42)
+                .addGap(30, 30, 30)
                 .addComponent(f2ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addGap(31, 31, 31)
+                .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
 
-        add(itemDataPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(782, 186, 325, -1));
+        add(itemDataPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 170, 325, 580));
 
         searchField.setBackground(new java.awt.Color(240, 240, 240));
         searchField.setAnimationColor(new java.awt.Color(15, 106, 191));
@@ -698,7 +718,7 @@ public class Form2 extends javax.swing.JPanel {
                 searchFieldActionPerformed(evt);
             }
         });
-        add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 124, 363, -1));
+        add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 110, 363, -1));
 
         impBtn.setForeground(new java.awt.Color(255, 255, 255));
         impBtn.setText("Import");
@@ -716,7 +736,7 @@ public class Form2 extends javax.swing.JPanel {
                 impBtnActionPerformed(evt);
             }
         });
-        add(impBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 130, 100, 38));
+        add(impBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 110, 100, 38));
     }// </editor-fold>//GEN-END:initComponents
 
     private void editCatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCatBtnActionPerformed
@@ -751,9 +771,10 @@ public class Form2 extends javax.swing.JPanel {
                 rs.close();
                 s.close();
 
-                home.form2Products = new Form2();
-                home.setForm(home.form2Products);
+//                home.form2Products = new Form2();
+//                home.setForm(home.form2Products);
                 home.successPrintUsers.showNotification();
+                impBtn.setVisible(true);
 
             } catch (SQLException e) {
                 e.printStackTrace(); // Print the exception details for debugging
@@ -870,11 +891,11 @@ public class Form2 extends javax.swing.JPanel {
                 ps.setString(5, oldItemName);
                 ps.executeUpdate();
 
-                int value = (int) spinner.getValue();
                 f2ErrorMessage.setText(" ");
 
                 home.form2Products = new Form2();
                 home.setForm(home.form2Products);
+                home.form3Order = new Form3();
                 home.successUpdateItem.showNotification();
 
                 // Close the ResultSet
@@ -882,16 +903,6 @@ public class Form2 extends javax.swing.JPanel {
                 con.close();
                 rs.close();
                 s.close();
-
-                Timer timer = new Timer(4000, e -> {
-                    if (value <= 25) {
-                        home.itemWarning.showNotification();
-                    }
-                });
-
-                // Start the timer
-                timer.setRepeats(false); // Set to false to execute only once
-                timer.start();
 
             } catch (SQLException e) {
                 e.printStackTrace(); // Print the exception details for debugging
@@ -950,4 +961,20 @@ public class Form2 extends javax.swing.JPanel {
     private components.TextFieldAnimation searchField;
     public static javax.swing.JSpinner spinner;
     // End of variables declaration//GEN-END:variables
+}
+
+class MyActionListener implements ActionListener {
+
+    private boolean itemsChecker;
+
+    public MyActionListener(boolean itemsChecker) {
+        this.itemsChecker = itemsChecker;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (itemsChecker) {
+            home.itemWarning.showNotification();
+        }
+    }
 }

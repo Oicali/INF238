@@ -11,6 +11,7 @@ import Pages.Form4;
 import Pages.Form3;
 import Pages.Form2;
 import Pages.Form0;
+import Pages.Form3;
 import components.ScrollBarWin11UI;
 import interfaces.EventMenuSelected;
 import java.awt.Color;
@@ -40,7 +41,7 @@ public class home extends javax.swing.JFrame {
     ImageIcon image = new ImageIcon(getClass().getResource("/resources/logoSmall.png"));
     private Form0 form0DashBoard;
     public static Form2 form2Products;
-    private Form3 form3Order;
+    public static Form3 form3Order;
     public static Form4 form4ViewOrder;
     public static Form5 form5Customers;
     public static Form6 form6Users;
@@ -162,7 +163,7 @@ public class home extends javax.swing.JFrame {
                     } else if (index == 11) {
                         logout();
                     }
-                } else if (Main.userPosition.equalsIgnoreCase("Warehouse Staff")) {
+                } else if (Main.userPosition.equalsIgnoreCase("Warehouse Staff") || Main.userPosition.equalsIgnoreCase("Delivery Staff")) {
                     if (index == 0) {
                         lastSelected = 0;
                         setForm(form0DashBoard);

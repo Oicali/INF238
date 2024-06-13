@@ -1,4 +1,4 @@
-package components;
+package calendar;
 
 import java.awt.Color;
 import java.awt.Graphics;

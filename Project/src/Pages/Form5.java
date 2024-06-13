@@ -6,6 +6,8 @@ package Pages;
 
 import Main.Main;
 import Main.home;
+import interfaces.EventCallBack;
+import interfaces.EventTextField;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -18,14 +20,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+import model.Model_User;
 import settings.CenteredCellRenderer;
 import settings.GlassPanePopup;
 import settings.ModernCellRenderer;
@@ -51,12 +57,64 @@ public class Form5 extends javax.swing.JPanel {
         dualBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         editBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+        searchField.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                try {
+                    String data = searchField.getText();
+                    for (int i = 1; i <= 100; i++) {
+                        Thread.sleep(10);
+                    }
+                    call.done();
+                    searchData(data);
+
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    System.err.println("Thread was interrupted: " + e);
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+                searchField.setText("");
+            }
+        });
+
+        // Add a DocumentListener to the searchField
+        searchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                checkIfEmpty();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                checkIfEmpty();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                checkIfEmpty();
+            }
+
+            private void checkIfEmpty() {
+                if (searchField.getText().trim().isEmpty()) {
+                    initData();
+                }
+            }
+        });
+
         repaint();
         revalidate();
     }
 
     public void initData() {
+
         DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
+
+        model.setRowCount(0);
 
         try {
             Statement s = Main.getDbCon().createStatement();
@@ -79,12 +137,38 @@ public class Form5 extends javax.swing.JPanel {
 
     }
 
+    private void searchData(String data) {
+
+        DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
+        model.setRowCount(0);
+        try {
+
+            Statement s = Main.getDbCon().createStatement();
+
+            ResultSet rs = s.executeQuery("SELECT * FROM customers WHERE name LIKE '%" + data + "%' OR customers_pk LIKE '%" + data + "%'");
+
+            while (rs.next()) {
+                model.addRow(new Object[]{rs.getString("customers_pk"), rs.getString("name"), rs.getString("mobile_Number"), rs.getString("email")});
+            }
+
+            // Close the ResultSet
+            rs.close();
+            s.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print the exception details for debugging
+            JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            Main.closeCon();
+        }
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane1 = new components.ScrollPaneWin11();
         customerTable = new javax.swing.JTable();
         panelBorder1 = new otherForms.PanelBorder();
         jLabel11 = new javax.swing.JLabel();
@@ -100,12 +184,13 @@ public class Form5 extends javax.swing.JPanel {
         dualBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         ErrorMessage = new javax.swing.JLabel();
+        searchField = new components.TextFieldAnimation();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Customers Information Page");
+        jScrollPane1.setBackground(new java.awt.Color(40, 72, 102));
 
         customerTable.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         customerTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -131,6 +216,8 @@ public class Form5 extends javax.swing.JPanel {
             customerTable.getColumnModel().getColumn(2).setResizable(false);
             customerTable.getColumnModel().getColumn(3).setResizable(false);
         }
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 172, 680, 580));
 
         jLabel11.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
@@ -198,6 +285,8 @@ public class Form5 extends javax.swing.JPanel {
             }
         });
 
+        circleImageAvatar1.setBackground(new java.awt.Color(15, 106, 191));
+        circleImageAvatar1.setForeground(new java.awt.Color(15, 106, 191));
         circleImageAvatar1.setBorderSize(1);
         circleImageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logInUser.png"))); // NOI18N
 
@@ -254,60 +343,59 @@ public class Form5 extends javax.swing.JPanel {
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(circleImageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(113, 113, 113))
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
+                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)
+                        .addGap(1, 1, 1)
                         .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fnameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(panelBorder1Layout.createSequentialGroup()
-                                    .addGap(2, 2, 2)
-                                    .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(panelBorder1Layout.createSequentialGroup()
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel19)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                                    .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(dualBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ErrorMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelBorder1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel19)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(dualBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(39, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(circleImageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(111, 111, 111))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(42, 42, 42)
                 .addComponent(circleImageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel22))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -316,36 +404,29 @@ public class Form5 extends javax.swing.JPanel {
                     .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dualBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                        .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addContainerGap(37, Short.MAX_VALUE))
-        );
+        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(735, 170, 370, 580));
+
+        searchField.setBackground(new java.awt.Color(240, 240, 240));
+        searchField.setAnimationColor(new java.awt.Color(15, 106, 191));
+        searchField.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        searchField.setHintText("Search a customer");
+        searchField.setSelectionColor(new java.awt.Color(204, 204, 204));
+        searchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFieldActionPerformed(evt);
+            }
+        });
+        add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 363, -1));
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Manage Customer Information");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 440, 68));
     }// </editor-fold>//GEN-END:initComponents
 
     private void fnameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fnameFieldMouseClicked
@@ -397,8 +478,8 @@ public class Form5 extends javax.swing.JPanel {
             } else {
                 String name = customerTable.getValueAt(row, 1).toString();
                 String number = "";
-                if (numberField.getText().trim().isEmpty()) {
-                    number = customerTable.getValueAt(row, 2).toString();
+                if (customerTable.getValueAt(row, 2).equals("")) {
+                    number = "";
                 } else {
                     number = customerTable.getValueAt(row, 2).toString().substring(2);
                 }
@@ -442,33 +523,46 @@ public class Form5 extends javax.swing.JPanel {
             if (row == -1) {
                 ErrorMessage.setText("You did not select a row to update!");
             } else {
-                try {
+                if (nameField.isEmpty()) {
+                    ErrorMessage.setText("Please complete all required fields with *");
+                } else if (numberField.getText().trim().length() < 9 && !numberField.getText().trim().isEmpty()) {
+                    ErrorMessage.setText("Invalid mobile number!");
+                } else {
+                    try {
 
-                    Connection con = Main.getDbCon();
+                        Connection con = Main.getDbCon();
 
-                    PreparedStatement ps = con.prepareStatement("UPDATE customers SET name = ?, mobile_Number = ?, email = ? where customers_pk = ?");
-                    ps.setString(1, data);
-                    ps.setString(2, "09" + numberField.getText().trim());
-                    ps.setString(3, emailField.getText().trim());
-                    ps.setString(4, (String) customerTable.getValueAt(row, 0));
-                    ps.executeUpdate();
+                        PreparedStatement ps = con.prepareStatement("UPDATE customers SET name = ?, mobile_Number = ?, email = ? where customers_pk = ?");
+                        ps.setString(1, data);
 
-                    ErrorMessage.setText(" ");
+                        if (numberField.getText().trim().isEmpty()) {
+                            ps.setString(2, numberField.getText().trim());
+                        } else {
+                            ps.setString(2, "09" + numberField.getText().trim());
+                        }
 
-                    home.form5Customers = new Form5();
-                    home.setForm(home.form5Customers);
-                    home.successUpdateCustomer.showNotification();
+                        ps.setString(3, emailField.getText().trim());
+                        ps.setString(4, (String) customerTable.getValueAt(row, 0));
+                        ps.executeUpdate();
 
-                    // Close the ResultSet
-                    ps.close();
-                    con.close();
+                        ErrorMessage.setText(" ");
 
-                } catch (SQLException e) {
-                    e.printStackTrace(); // Print the exception details for debugging
-                    JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
-                } finally {
-                    Main.closeCon();
+                        home.form5Customers = new Form5();
+                        home.setForm(home.form5Customers);
+                        home.successUpdateCustomer.showNotification();
+
+                        // Close the ResultSet
+                        ps.close();
+                        con.close();
+
+                    } catch (SQLException e) {
+                        e.printStackTrace(); // Print the exception details for debugging
+                        JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+                    } finally {
+                        Main.closeCon();
+                    }
                 }
+
             }
 
         } else {
@@ -544,7 +638,7 @@ public class Form5 extends javax.swing.JPanel {
                         if (rowsDeleted > 0) {
                             home.form5Customers = new Form5();
                             home.setForm(home.form5Customers);
-                            home.successUpdateCustomer.showNotification();
+                            home.successDeleteCustomer.showNotification();
 
                         } else {
                             System.out.println("No rows were deleted.");
@@ -566,6 +660,10 @@ public class Form5 extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFieldActionPerformed
 
     @Override
     protected void paintComponent(Graphics grphcs) {
@@ -637,11 +735,11 @@ public class Form5 extends javax.swing.JPanel {
         int width = 0; // Min width
         TableColumn column = table.getColumnModel().getColumn(columnIndex);
         Component comp;
-        Font font = new Font("SansSerif", Font.PLAIN, 14);
+        Font font = new Font("SansSerif", Font.PLAIN, 17);
         for (int row = 0; row < table.getRowCount(); row++) {
             comp = table.prepareRenderer(table.getCellRenderer(row, columnIndex), row, columnIndex);
             comp.setFont(font); // Ensure font is set for accurate width calculation
-            width = Math.max(comp.getPreferredSize().width + 10, width); // Adding padding
+            width = Math.max(comp.getPreferredSize().width + 20, width); // Adding padding
         }
         return width;
     }
@@ -664,5 +762,6 @@ public class Form5 extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField numberField;
     private otherForms.PanelBorder panelBorder1;
+    private components.TextFieldAnimation searchField;
     // End of variables declaration//GEN-END:variables
 }

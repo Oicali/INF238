@@ -134,7 +134,7 @@ public class updateUser extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        date = new otherForms.DatePicker();
+        date = new calendar.DatePicker();
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -356,7 +356,7 @@ public class updateUser extends javax.swing.JDialog {
         jLabel17.setText("Birthday:");
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 462, 84, -1));
 
-        roleField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrator", "Supervisor", "Sales Associate", "Warehouse Staff" }));
+        roleField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrator", "Supervisor", "Sales Associate", "Warehouse Staff", "Delivery Staff" }));
         roleField.setSelectedIndex(2);
         roleField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         roleField.setLabelText("");
@@ -609,8 +609,6 @@ public class updateUser extends javax.swing.JDialog {
                     String imgname = imgField.getText().trim();
                     String role = (String) roleField.getSelectedItem();
                     String status = (String) statusField.getSelectedItem();
-                    System.out.println(status);
-                    //String status = (String) statusField.getSelectedItem();
 
                     try {
                         Connection con = Main.getDbCon();
@@ -623,7 +621,7 @@ public class updateUser extends javax.swing.JDialog {
 
                             try {
                                 resizeAndCopyImage(selectedFile, destinationFile, 150, 150);
-                                System.out.println(destinationFile.getName());
+
                                 Filepath = destinationFile.getAbsolutePath();
                             } catch (IOException ex) {
                                 ex.printStackTrace();
@@ -635,7 +633,6 @@ public class updateUser extends javax.swing.JDialog {
                             File defaultFile = new File(destinationDir, imgField.getText().trim());
                             // Assign the default file to the destination file
                             Filepath = defaultFile.getAbsolutePath();
-                            System.out.println("No file selected or selection canceled.");
                         }
 
                         PreparedStatement ps = con.prepareStatement("UPDATE users SET img = LOAD_FILE(?), fname = ?, mname = ?, lname = ?, Sname = ?, fullname = ?, userName = ?, userRole = ?, password = ?, email = ?, gender = ?, mobileNumber = ?, birthDate = ?, status = ?, fileName = ? WHERE username = ?");
@@ -731,7 +728,6 @@ public class updateUser extends javax.swing.JDialog {
                 try {
                     resizeAndCopyImage(selectedFile, destinationFile, 150, 150);
 
-                    System.out.println(destinationFile.getName());
 
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -853,7 +849,7 @@ public class updateUser extends javax.swing.JDialog {
     private javax.swing.JLabel ErrorMessage;
     private javax.swing.JTextField bdayField;
     private javax.swing.JButton cmdCancel;
-    private otherForms.DatePicker date;
+    private calendar.DatePicker date;
     private components.RoundedButtons delBtn;
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel entryField;

@@ -265,7 +265,6 @@ public class Notifications extends javax.swing.JPanel {
         line1.setBackground(new java.awt.Color(255, 0, 51));
 
         lbMessage.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        lbMessage.setForeground(new java.awt.Color(0, 0, 0));
         lbMessage.setText("Message");
 
         javax.swing.GroupLayout line1Layout = new javax.swing.GroupLayout(line1);

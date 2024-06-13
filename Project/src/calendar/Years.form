@@ -24,7 +24,7 @@
     <Property name="rows" type="int" value="5"/>
   </Layout>
   <SubComponents>
-    <Component class="components.dateButton" name="cmd1">
+    <Component class="calendar.dateButton" name="cmd1">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -34,7 +34,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd2">
+    <Component class="calendar.dateButton" name="cmd2">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -44,7 +44,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd3">
+    <Component class="calendar.dateButton" name="cmd3">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -54,7 +54,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd4">
+    <Component class="calendar.dateButton" name="cmd4">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -64,7 +64,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd5">
+    <Component class="calendar.dateButton" name="cmd5">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -74,7 +74,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd6">
+    <Component class="calendar.dateButton" name="cmd6">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -84,7 +84,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd7">
+    <Component class="calendar.dateButton" name="cmd7">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -94,7 +94,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd8">
+    <Component class="calendar.dateButton" name="cmd8">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -104,7 +104,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd9">
+    <Component class="calendar.dateButton" name="cmd9">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -114,7 +114,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd10">
+    <Component class="calendar.dateButton" name="cmd10">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -124,7 +124,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd11">
+    <Component class="calendar.dateButton" name="cmd11">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -134,7 +134,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd12">
+    <Component class="calendar.dateButton" name="cmd12">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -144,7 +144,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd13">
+    <Component class="calendar.dateButton" name="cmd13">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -154,7 +154,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd14">
+    <Component class="calendar.dateButton" name="cmd14">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -164,7 +164,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd15">
+    <Component class="calendar.dateButton" name="cmd15">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -174,7 +174,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd16">
+    <Component class="calendar.dateButton" name="cmd16">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -184,7 +184,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd17">
+    <Component class="calendar.dateButton" name="cmd17">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -194,7 +194,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd18">
+    <Component class="calendar.dateButton" name="cmd18">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -204,7 +204,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd19">
+    <Component class="calendar.dateButton" name="cmd19">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>
@@ -214,7 +214,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="components.dateButton" name="cmd20">
+    <Component class="calendar.dateButton" name="cmd20">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="4b" type="rgb"/>

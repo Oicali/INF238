@@ -20,23 +20,23 @@ import javax.swing.ImageIcon;
  *
  * @author ASUS
  */
-public class categoryPanel extends javax.swing.JPanel {
+public class orderPanel extends javax.swing.JPanel {
 
     private DecimalFormat decimal = new DecimalFormat("0.00");
 
-    public categoryPanel() {
+    public orderPanel() {
         initComponents();
         
         
     }
 
-    public categoryPanel(String Category) {
+    public orderPanel(String Category) {
         initComponents();
         jLabel1.setText(Category);
         
     }
 
-    public void addItem(Model_Products data) {
+    public void addOrderItem(Model_Products data) {
         Item_Card card = new Item_Card();
         card.setData(data);
         
@@ -46,20 +46,7 @@ public class categoryPanel extends javax.swing.JPanel {
 
                 if (SwingUtilities.isLeftMouseButton(me)) {
 
-                    Form2.oldItemName = "";
-                    f2ErrorMessage.setText(" ");
-                    Form2.picLbl.setIcon(data.getImage());
-
-                    Form2.itemDataPanel.repaint();
-                    Form2.itemDataPanel.revalidate();
-
-                    Form2.oldItemName = data.getItemName();
-                    Form2.itemNameField.setText(data.getItemName());
-                    Form2.priceField.setText(decimal.format(data.getPrice()));
-                    Form2.categoryField.setSelectedItem(data.getCategory());
-
-                    Form2.spinner.setValue(data.getStocks());
-                    Form2.IDField.setText("Item ID: " + data.getID());
+                        System.out.println("Click me !!!");
 
                 }
             }
@@ -82,9 +69,9 @@ public class categoryPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(708, 310));
-        setMinimumSize(new java.awt.Dimension(708, 310));
+        setMinimumSize(new java.awt.Dimension(605, 310));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(708, 310));
+        setPreferredSize(new java.awt.Dimension(620, 310));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
@@ -99,7 +86,7 @@ public class categoryPanel extends javax.swing.JPanel {
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
         jScrollPane1.setViewportView(jPanel1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 708, 250));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 610, 250));
     }// </editor-fold>//GEN-END:initComponents
 
 
