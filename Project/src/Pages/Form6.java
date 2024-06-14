@@ -280,7 +280,7 @@ public class Form6 extends javax.swing.JPanel {
                 searchFieldActionPerformed(evt);
             }
         });
-        add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 110, 387, -1));
+        add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 110, 390, -1));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

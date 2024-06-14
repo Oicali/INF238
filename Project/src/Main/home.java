@@ -72,7 +72,7 @@ public class home extends javax.swing.JFrame {
         successNewCategory = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New Category", "You have successfully added an item category");
         successUpdateCategory = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Updated Item Category", "You have successfully updated item category");
         successDeleteCategory = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Item Category Deleted", "You have successfully deleted an item category");
-        successUpdateItem = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Updated Product Data", "You have successfully updated an item");
+        successUpdateItem = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Updated Products Data", "You have successfully changed items");
         itemWarning = new Notifications(this,Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "Item Stocks Warning", "An item is running low or out of stock"); 
         successAddItem = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New Item", "You have successfully added a new item");
         successAddCustomer = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New Customer", "You have successfully added a customer");

@@ -57,12 +57,11 @@ public class Form2 extends javax.swing.JPanel {
     private Map<String, categoryPanel> categoryPanels;
     public static String oldItemName = "";
     private static final String DESTINATION_DIRECTORY = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Inventory_System\\Documents";
-    
 
     public Form2() {
         initComponents();
         setOpaque(false);
-        
+
         categoryPanels = new HashMap<>();
 
         getCategory();

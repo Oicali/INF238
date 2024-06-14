@@ -8,6 +8,7 @@ package popUps;
 import Pages.Form2;
 import Main.Main;
 import Main.home;
+import Pages.Form3;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -385,6 +386,7 @@ public class editCategories extends javax.swing.JPanel {
 
                     home.form2Products = new Form2();
                     home.setForm(home.form2Products);
+                    home.form3Order = new Form3();
 
                     GlassPanePopup.closePopupLast();
                     home.successNewCategory.showNotification();
@@ -486,6 +488,7 @@ public class editCategories extends javax.swing.JPanel {
 
                 home.form2Products = new Form2();
                 home.setForm(home.form2Products);
+                home.form3Order = new Form3();
                 GlassPanePopup.closePopupLast();
                 home.successUpdateCategory.showNotification();
 
@@ -526,6 +529,7 @@ public class editCategories extends javax.swing.JPanel {
                         if (rowsDeleted > 0) {
                             home.form2Products = new Form2();
                             home.setForm(home.form2Products);
+                            home.form3Order = new Form3();
                             GlassPanePopup.closePopupLast();
                             home.successDeleteCategory.showNotification();
 

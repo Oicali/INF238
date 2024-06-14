@@ -12,6 +12,7 @@ import Main.Main;
 import Main.home;
 import Pages.Form2;
 import static Pages.Form2.spinner;
+import Pages.Form3;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -581,7 +582,9 @@ public class addNewProducts extends javax.swing.JDialog {
                     dispose();
                     home.form2Products = new Form2();
                     home.setForm(home.form2Products);
+                    home.form3Order = new Form3();
                     home.successAddItem.showNotification();
+                    
 
                 } catch (SQLException e) {
                     e.printStackTrace();

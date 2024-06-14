@@ -426,7 +426,7 @@ public class Form5 extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manage Customer Information");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 440, 68));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 440, 68));
     }// </editor-fold>//GEN-END:initComponents
 
     private void fnameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fnameFieldMouseClicked

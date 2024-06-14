@@ -18,7 +18,9 @@ import java.awt.RenderingHints;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -44,8 +46,10 @@ import javax.swing.text.NumberFormatter;
 import model.Model_Products;
 import otherForms.orderPanel;
 import popUps.placeholder;
+import popUps.viewCart;
 import settings.CenteredCellRenderer;
 import settings.GlassPanePopup;
+import settings.LeftCellRenderer;
 import settings.ModernCellRenderer;
 import settings.ModernHeaderRenderer;
 
@@ -56,27 +60,49 @@ import settings.ModernHeaderRenderer;
 public class Form3 extends javax.swing.JPanel {
 
     private Map<String, orderPanel> orderPanels;
-    
-    
+    public static int itemMax = 0;
+    public static double itemPrice = 0.0;
+    private DecimalFormat decimal = new DecimalFormat("0.00");
+    public static ArrayList<String> cartList = new ArrayList<>();
+    public static ArrayList<Double> priceList = new ArrayList<>();
+    public static boolean isEditing = false;
+
     public Form3() {
         initComponents();
         setOpaque(false);
         initTable();
+
+        cartList.clear();
+        priceList.clear();
+
+        System.out.println("cart List: " + cartList);
+        System.out.println("price List: " + priceList);
+
         orderPanels = new HashMap<>();
         clearBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cartBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         deliveryBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
-        
+        spinner2.setValue(1);
+
         initData();
-        
+
         spinner2.addChangeListener(e -> {
             int value = (int) spinner2.getValue();
-            if (value < 0) {
-                spinner2.setValue(0);
+
+            if (value == 0) {
+                spinner2.setValue(1);
+                value = (int) spinner2.getValue();
             }
+
+            if (value > itemMax) {
+                spinner2.setValue(itemMax);
+                value = (int) spinner2.getValue();
+            }
+
+            double newAmount = value * itemPrice;
+            f3amountField.setText(String.valueOf(decimal.format(newAmount)));
         });
-        
+
         searchField.addEvent(new EventTextField() {
             @Override
             public void onPressed(EventCallBack call) {
@@ -124,11 +150,10 @@ public class Form3 extends javax.swing.JPanel {
                 }
             }
         });
-        
-        
+
     }
-    
-      public void initData() {
+
+    public void initData() {
         try {
             panelItem2.removeAll();
             Statement s = Main.getDbCon().createStatement();
@@ -157,12 +182,9 @@ public class Form3 extends javax.swing.JPanel {
             panelItem2.repaint();
             panelItem2.revalidate();
 
-
             // Close the ResultSet
             rs.close();
             s.close();
-
-            
 
         } catch (SQLException e) {
             e.printStackTrace(); // Print the exception details for debugging
@@ -171,8 +193,8 @@ public class Form3 extends javax.swing.JPanel {
             Main.closeCon();
         }
     }
-      
-      public void searchData() {
+
+    public void searchData() {
         try {
             panelItem2.removeAll();
 
@@ -220,7 +242,7 @@ public class Form3 extends javax.swing.JPanel {
         }
 
     }
-    
+
     public void addPanelCategory(String category) {
         orderPanel panel = new orderPanel(category);
         orderPanels.put(category, panel);
@@ -238,9 +260,7 @@ public class Form3 extends javax.swing.JPanel {
         }
         panel.addOrderItem(item);
     }
-    
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -250,7 +270,7 @@ public class Form3 extends javax.swing.JPanel {
         deliveryBtn = new components.RoundedButtons();
         jScrollPane2 = new javax.swing.JScrollPane();
         panelItem2 = new components.PanelItem();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane3 = new components.ScrollPaneWin11();
         orderTable = new javax.swing.JTable();
         panelBorder1 = new otherForms.PanelBorder();
         cartBtn = new components.RoundedButtons();
@@ -259,8 +279,9 @@ public class Form3 extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         spinner2 = new javax.swing.JSpinner();
-        itemField = new javax.swing.JTextField();
-        amountField = new javax.swing.JTextField();
+        f3itemField = new javax.swing.JTextField();
+        f3amountField = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -281,7 +302,7 @@ public class Form3 extends javax.swing.JPanel {
         add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 110, 363, -1));
 
         clearBtn.setForeground(new java.awt.Color(255, 255, 255));
-        clearBtn.setText("Clear");
+        clearBtn.setText("Clear Cart");
         clearBtn.setBorderColor(new java.awt.Color(15, 106, 191));
         clearBtn.setBorderPainted(false);
         clearBtn.setColor(new java.awt.Color(15, 106, 191));
@@ -296,7 +317,7 @@ public class Form3 extends javax.swing.JPanel {
                 clearBtnActionPerformed(evt);
             }
         });
-        add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 110, 102, 38));
+        add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(822, 110, 130, 38));
 
         deliveryBtn.setForeground(new java.awt.Color(255, 255, 255));
         deliveryBtn.setText("Set Delivery");
@@ -323,13 +344,13 @@ public class Form3 extends javax.swing.JPanel {
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 172, 660, 580));
 
+        jScrollPane3.setBackground(new java.awt.Color(40, 72, 102));
+        jScrollPane3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
         orderTable.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Item", "Quantity", "Cost"
@@ -344,6 +365,11 @@ public class Form3 extends javax.swing.JPanel {
             }
         });
         orderTable.setRowHeight(30);
+        orderTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                orderTableMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(orderTable);
         if (orderTable.getColumnModel().getColumnCount() > 0) {
             orderTable.getColumnModel().getColumn(0).setResizable(false);
@@ -366,6 +392,11 @@ public class Form3 extends javax.swing.JPanel {
         cartBtn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         cartBtn.setMaximumSize(new java.awt.Dimension(65, 38));
         cartBtn.setMinimumSize(new java.awt.Dimension(65, 38));
+        cartBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cartBtnActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel7.setText("Amount:");
@@ -398,29 +429,38 @@ public class Form3 extends javax.swing.JPanel {
         JFormattedTextField textField = ((JSpinner.DefaultEditor) spinner2.getEditor()).getTextField();
         textField.setFormatterFactory(createFormatterFactory());
 
-        itemField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
-        itemField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
-        itemField.setMaximumSize(new java.awt.Dimension(289, 35));
-        itemField.setMinimumSize(new java.awt.Dimension(289, 35));
-        itemField.setPreferredSize(new java.awt.Dimension(289, 35));
-        itemField.setSelectionColor(new java.awt.Color(204, 204, 204));
-        itemField.addActionListener(new java.awt.event.ActionListener() {
+        f3itemField.setEditable(false);
+        f3itemField.setBackground(new java.awt.Color(255, 255, 255));
+        f3itemField.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        f3itemField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        f3itemField.setMaximumSize(new java.awt.Dimension(289, 35));
+        f3itemField.setMinimumSize(new java.awt.Dimension(289, 35));
+        f3itemField.setPreferredSize(new java.awt.Dimension(289, 35));
+        f3itemField.setSelectionColor(new java.awt.Color(204, 204, 204));
+        f3itemField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemFieldActionPerformed(evt);
+                f3itemFieldActionPerformed(evt);
             }
         });
 
-        amountField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
-        amountField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
-        amountField.setMaximumSize(new java.awt.Dimension(289, 35));
-        amountField.setMinimumSize(new java.awt.Dimension(289, 35));
-        amountField.setPreferredSize(new java.awt.Dimension(289, 35));
-        amountField.setSelectionColor(new java.awt.Color(204, 204, 204));
-        amountField.addActionListener(new java.awt.event.ActionListener() {
+        f3amountField.setEditable(false);
+        f3amountField.setBackground(new java.awt.Color(255, 255, 255));
+        f3amountField.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        f3amountField.setText("0.00");
+        f3amountField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 7, 1, 7)));
+        f3amountField.setMaximumSize(new java.awt.Dimension(289, 35));
+        f3amountField.setMinimumSize(new java.awt.Dimension(289, 35));
+        f3amountField.setPreferredSize(new java.awt.Dimension(289, 35));
+        f3amountField.setSelectionColor(new java.awt.Color(204, 204, 204));
+        f3amountField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                amountFieldActionPerformed(evt);
+                f3amountFieldActionPerformed(evt);
             }
         });
+
+        jLabel10.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel10.setText("PHP");
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -435,21 +475,21 @@ public class Form3 extends javax.swing.JPanel {
                             .addGroup(panelBorder1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                                .addComponent(itemField, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(f3itemField, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(30, 30, 30))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(8, 8, 8)
                         .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(spinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(amountField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelBorder1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(f3amountField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cartBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cartBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(131, 131, 131))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,7 +498,7 @@ public class Form3 extends javax.swing.JPanel {
                 .addComponent(itemNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(itemField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(f3itemField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(15, 15, 15)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -466,11 +506,12 @@ public class Form3 extends javax.swing.JPanel {
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(15, 15, 15)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(amountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(f3amountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(cartBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(30, 30, 30))
         );
 
         add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, 400, 280));
@@ -487,25 +528,67 @@ public class Form3 extends javax.swing.JPanel {
 
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
         DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
-
         model.setRowCount(0);
+        cartList.clear();
+        priceList.clear();
     }//GEN-LAST:event_clearBtnActionPerformed
 
     private void deliveryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveryBtnActionPerformed
-        // TODO add your handling code here:
+        viewCart obj24 = new viewCart();
+        GlassPanePopup.showPopup(obj24);
     }//GEN-LAST:event_deliveryBtnActionPerformed
 
-    private void itemFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemFieldActionPerformed
+    private void f3itemFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_f3itemFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_itemFieldActionPerformed
+    }//GEN-LAST:event_f3itemFieldActionPerformed
 
     private void itemNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemNameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_itemNameFieldActionPerformed
 
-    private void amountFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountFieldActionPerformed
+    private void f3amountFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_f3amountFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_amountFieldActionPerformed
+    }//GEN-LAST:event_f3amountFieldActionPerformed
+
+    private void cartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartBtnActionPerformed
+        String itemData = f3itemField.getText().trim();
+        String amountData = f3amountField.getText().trim();
+        int quantityData = (int) spinner2.getValue();
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+
+        if (isEditing) {
+            itemPrice = 0;
+            model.setValueAt(amountData, cartList.indexOf(itemData), 2);
+            model.setValueAt(quantityData, cartList.indexOf(itemData), 1);
+            
+            cartBtn.setText("Add to Cart");
+            f3itemField.setText(" ");
+            spinner2.setValue(1);
+            f3amountField.setText("0.00");
+            isEditing = false;
+        } else {
+            
+            if (!itemData.isEmpty() && !amountData.isEmpty()) {
+                
+                model.addRow(new Object[]{itemData, quantityData, amountData});
+                cartList.add(itemData);
+                priceList.add(Double.parseDouble(amountData)/quantityData);
+
+                f3itemField.setText("");
+                itemPrice = 0;
+                spinner2.setValue(1);
+                f3amountField.setText("0.00");
+                isEditing = true;
+            }
+        }
+
+
+    }//GEN-LAST:event_cartBtnActionPerformed
+
+    private void orderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderTableMouseClicked
+
+
+    }//GEN-LAST:event_orderTableMouseClicked
 
     @Override
     protected void paintComponent(Graphics grphcs) {
@@ -515,7 +598,7 @@ public class Form3 extends javax.swing.JPanel {
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
         super.paintComponent(grphcs);
     }
-    
+
     public void initTable() {
         orderTable.setShowGrid(false);
 
@@ -523,17 +606,17 @@ public class Form3 extends javax.swing.JPanel {
             orderTable.setRowSelectionInterval(0, 0);
         }
 
-        CenteredCellRenderer centeredRenderer = new CenteredCellRenderer();
+        LeftCellRenderer LeftRenderer = new LeftCellRenderer();
         ModernCellRenderer modernRenderer = new ModernCellRenderer();
         ModernHeaderRenderer headerRenderer = new ModernHeaderRenderer();
 
-        orderTable.getColumnModel().getColumn(0).setCellRenderer(centeredRenderer); // First column
+        orderTable.getColumnModel().getColumn(0).setCellRenderer(LeftRenderer); // First column
         for (int i = 1; i < orderTable.getColumnCount(); i++) {
             orderTable.getColumnModel().getColumn(i).setCellRenderer(modernRenderer); // Other columns
         }
         orderTable.getTableHeader().setDefaultRenderer(headerRenderer); // Header
+
         
-        centeredRenderer.setHorizontalAlignment(SwingConstants.LEFT);
 
         orderTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -541,19 +624,33 @@ public class Form3 extends javax.swing.JPanel {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-                    int selectedRow = orderTable.getSelectedRow();
-                    if (selectedRow != -1 && !clearBtn.isVisible()) {
-                        String label = orderTable.getValueAt(selectedRow, 1).toString();
-                        String ID = orderTable.getValueAt(selectedRow, 0).toString();
+                    int row = orderTable.getSelectedRow();
+                    if (row != -1) {
+                        isEditing = true;
+                        System.out.println(row);
+                        System.out.println("cart List: " + cartList);
+                        System.out.println("price List: " + priceList);
 
+                        spinner2.setValue(orderTable.getValueAt(row, 1));
 
+                        String item = orderTable.getValueAt(row, 0).toString();
+
+                        itemPrice = priceList.get(row);
+                        System.out.println(itemPrice);
+
+                        f3itemField.setText(item);
+
+                        double newAmount = (int) spinner2.getValue() * itemPrice;
+                        f3amountField.setText(decimal.format(newAmount));
+                        
+                        cartBtn.setText("Update");
                     }
                 }
             }
         });
 
     }
-    
+
     // Method to calculate the preferred width of a column based on its content
     private static int getColumnWidth(JTable table, int columnIndex) {
         int width = 0; // Min width
@@ -567,7 +664,7 @@ public class Form3 extends javax.swing.JPanel {
         }
         return width;
     }
-    
+
     private static JFormattedTextField.AbstractFormatterFactory createFormatterFactory() {
         NumberFormat format = NumberFormat.getInstance();
         format.setGroupingUsed(true);
@@ -586,24 +683,23 @@ public class Form3 extends javax.swing.JPanel {
             }
         };
     }
-    
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField amountField;
-    private components.RoundedButtons cartBtn;
+    public static components.RoundedButtons cartBtn;
     private components.RoundedButtons clearBtn;
     private components.RoundedButtons deliveryBtn;
-    private javax.swing.JTextField itemField;
+    public static javax.swing.JTextField f3amountField;
+    public static javax.swing.JTextField f3itemField;
     public static javax.swing.JTextField itemNameField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable orderTable;
+    public static javax.swing.JTable orderTable;
     private otherForms.PanelBorder panelBorder1;
     private components.PanelItem panelItem2;
     private components.TextFieldAnimation searchField;
