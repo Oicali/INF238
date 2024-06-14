@@ -314,7 +314,7 @@ public class addNewUser extends javax.swing.JDialog {
         jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 481, -1, -1));
 
         generateBtn.setForeground(new java.awt.Color(255, 255, 255));
-        generateBtn.setText("Generate");
+        generateBtn.setText("Register");
         generateBtn.setBorderColor(new java.awt.Color(70, 191, 50));
         generateBtn.setBorderPainted(false);
         generateBtn.setColor(new java.awt.Color(70, 191, 50));

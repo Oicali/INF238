@@ -82,6 +82,9 @@ public class Form3 extends javax.swing.JPanel {
         clearBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cartBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         deliveryBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        trashBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        trashBtn.setVisible(true);
         spinner2.setValue(1);
 
         initData();
@@ -282,6 +285,7 @@ public class Form3 extends javax.swing.JPanel {
         f3itemField = new javax.swing.JTextField();
         f3amountField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        trashBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -404,7 +408,7 @@ public class Form3 extends javax.swing.JPanel {
         itemNameField.setEditable(false);
         itemNameField.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         itemNameField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        itemNameField.setText("Details");
+        itemNameField.setText("Item Details");
         itemNameField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         itemNameField.setMaximumSize(new java.awt.Dimension(16, 27));
         itemNameField.setOpaque(false);
@@ -462,6 +466,16 @@ public class Form3 extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(153, 153, 153));
         jLabel10.setText("PHP");
 
+        trashBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/trash.png"))); // NOI18N
+        trashBtn.setBorderPainted(false);
+        trashBtn.setContentAreaFilled(false);
+        trashBtn.setFocusPainted(false);
+        trashBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trashBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
@@ -469,27 +483,32 @@ public class Form3 extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(panelBorder1Layout.createSequentialGroup()
+                                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7))
+                                .addGap(8, 8, 8)
+                                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(spinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(f3amountField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(panelBorder1Layout.createSequentialGroup()
+                                .addComponent(trashBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cartBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
                         .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(itemNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(itemNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(panelBorder1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                                 .addComponent(f3itemField, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(30, 30, 30))
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(8, 8, 8)
-                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(spinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelBorder1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(f3amountField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cartBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(30, 30, 30))))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -510,8 +529,10 @@ public class Form3 extends javax.swing.JPanel {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(cartBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cartBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(trashBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
 
         add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, 400, 280));
@@ -566,6 +587,8 @@ public class Form3 extends javax.swing.JPanel {
             spinner2.setValue(1);
             f3amountField.setText("0.00");
             isEditing = false;
+            Form3.trashBtn.setVisible(false);
+            orderTable.clearSelection();
         } else {
             
             if (!itemData.isEmpty() && !amountData.isEmpty()) {
@@ -579,6 +602,7 @@ public class Form3 extends javax.swing.JPanel {
                 spinner2.setValue(1);
                 f3amountField.setText("0.00");
                 isEditing = true;
+                Form3.trashBtn.setVisible(false);
             }
         }
 
@@ -589,6 +613,25 @@ public class Form3 extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_orderTableMouseClicked
+
+    private void trashBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trashBtnActionPerformed
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+        
+        int row = orderTable.getSelectedRow();
+        
+        model.removeRow(row);
+        
+        cartList.remove(row);
+        priceList.remove(row);
+        orderTable.clearSelection();
+        
+        spinner2.setValue(1);
+        f3amountField.setText("0.00");
+        f3itemField.setText("");
+        
+        trashBtn.setVisible(false);
+
+    }//GEN-LAST:event_trashBtnActionPerformed
 
     @Override
     protected void paintComponent(Graphics grphcs) {
@@ -627,6 +670,7 @@ public class Form3 extends javax.swing.JPanel {
                     int row = orderTable.getSelectedRow();
                     if (row != -1) {
                         isEditing = true;
+                        Form3.trashBtn.setVisible(true);
                         System.out.println(row);
                         System.out.println("cart List: " + cartList);
                         System.out.println("price List: " + priceList);
@@ -704,5 +748,6 @@ public class Form3 extends javax.swing.JPanel {
     private components.PanelItem panelItem2;
     private components.TextFieldAnimation searchField;
     public static javax.swing.JSpinner spinner2;
+    public static javax.swing.JButton trashBtn;
     // End of variables declaration//GEN-END:variables
 }

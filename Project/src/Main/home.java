@@ -66,7 +66,7 @@ public class home extends javax.swing.JFrame {
         successChangePassword = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Password Changed", "You have successfully changed your password");
         successChangeImg = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Profile Image Changed", "New profile picture uploaded");
         successPrintUsers = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "File Exported", "Created a csv file for users");
-        successAddUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New User", "You have successfully added a new user");
+        successAddUser = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New User", "You have successfully registered a new user");
         successUpdateUser = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Updated User Information", "You have successfully updated user information");
         successDeleteUser = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "User Account Deleted", "You have successfully deleted a user account");
         successNewCategory = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New Category", "You have successfully added an item category");

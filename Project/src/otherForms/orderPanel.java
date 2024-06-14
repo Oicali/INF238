@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.SwingUtilities;
 import Pages.*;
 import static Pages.Form2.f2ErrorMessage;
+import static Pages.Form3.orderTable;
 import static Pages.Form3.priceList;
 import java.awt.Color;
 import java.text.DecimalFormat;
@@ -47,6 +48,7 @@ public class orderPanel extends javax.swing.JPanel {
                 if (Form3.cartList.contains(data.getItemName())) {
                     Form3.cartBtn.setText("Update");
                     Form3.isEditing = true;
+                    Form3.trashBtn.setVisible(true);
                     
                     Form3.f3itemField.setText("");
                     Form3.f3amountField.setText("");
@@ -73,6 +75,8 @@ public class orderPanel extends javax.swing.JPanel {
                 } else if (data.getStocks() > 0) {
                     Form3.cartBtn.setText("Add to Cart");
                     Form3.isEditing = false;
+                    Form3.trashBtn.setVisible(false);
+                    orderTable.clearSelection();
                     
                     Form3.f3itemField.setText("");
                     Form3.f3amountField.setText("");
