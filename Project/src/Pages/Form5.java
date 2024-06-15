@@ -163,6 +163,25 @@ public class Form5 extends javax.swing.JPanel {
         }
 
     }
+    
+    public static String capitalizeFirstLetters(String str) {
+        // Split the string into words
+        String[] words = str.split("\\s+");
+        
+        StringBuilder capitalizedString = new StringBuilder();
+        
+        // Capitalize the first letter of each word
+        for (String word : words) {
+            if (word.length() > 0) {
+                capitalizedString.append(Character.toUpperCase(word.charAt(0)))
+                                 .append(word.substring(1).toLowerCase())
+                                 .append(" ");
+            }
+        }
+        
+        // Remove the trailing space and return the result
+        return capitalizedString.toString().trim();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -184,7 +203,7 @@ public class Form5 extends javax.swing.JPanel {
         dualBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         ErrorMessage = new javax.swing.JLabel();
-        searchField = new components.TextFieldAnimation();
+        searchField = new components.SearchFieldAnimation();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -505,6 +524,7 @@ public class Form5 extends javax.swing.JPanel {
             editBtn.setText("Edit");
             dualBtn.setText("Add");
             isEditing = true;
+            customerTable.clearSelection();
 
             deleteBtn.setVisible(false);
         }
@@ -513,7 +533,7 @@ public class Form5 extends javax.swing.JPanel {
 
     private void dualBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dualBtnActionPerformed
         ErrorMessage.setText(" ");
-        String nameField = fnameField.getText().trim();
+        String nameField = capitalizeFirstLetters(fnameField.getText().trim());
 
         if (!isEditing) {
             ErrorMessage.setText(" ");
@@ -566,12 +586,14 @@ public class Form5 extends javax.swing.JPanel {
             }
 
         } else {
+            customerTable.clearSelection();
+            
             if (nameField.isEmpty()) {
                 ErrorMessage.setText("Please complete all required fields with *");
             } else if (numberField.getText().trim().length() < 9 && !numberField.getText().trim().isEmpty()) {
                 ErrorMessage.setText("Invalid mobile number!");
             } else {
-
+                
                 try {
                     Connection con = Main.getDbCon();
 
@@ -584,6 +606,7 @@ public class Form5 extends javax.swing.JPanel {
 
                     if (userCount > 0) {
                         ErrorMessage.setText("Customer already exist!");
+                        
 
                     } else {
 
@@ -762,6 +785,6 @@ public class Form5 extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField numberField;
     private otherForms.PanelBorder panelBorder1;
-    private components.TextFieldAnimation searchField;
+    private components.SearchFieldAnimation searchField;
     // End of variables declaration//GEN-END:variables
 }

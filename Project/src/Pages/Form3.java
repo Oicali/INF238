@@ -44,9 +44,9 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.text.NumberFormatter;
 import model.Model_Products;
+import otherForms.checkOut;
 import otherForms.orderPanel;
 import popUps.placeholder;
-import popUps.viewCart;
 import settings.CenteredCellRenderer;
 import settings.GlassPanePopup;
 import settings.LeftCellRenderer;
@@ -75,16 +75,13 @@ public class Form3 extends javax.swing.JPanel {
         cartList.clear();
         priceList.clear();
 
-        System.out.println("cart List: " + cartList);
-        System.out.println("price List: " + priceList);
-
         orderPanels = new HashMap<>();
         clearBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cartBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         deliveryBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         trashBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
-        trashBtn.setVisible(true);
+
+        trashBtn.setVisible(false);
         spinner2.setValue(1);
 
         initData();
@@ -268,7 +265,7 @@ public class Form3 extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        searchField = new components.TextFieldAnimation();
+        searchField = new components.SearchFieldAnimation();
         clearBtn = new components.RoundedButtons();
         deliveryBtn = new components.RoundedButtons();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -394,8 +391,6 @@ public class Form3 extends javax.swing.JPanel {
         cartBtn.setColorOver(new java.awt.Color(15, 106, 191));
         cartBtn.setFocusPainted(false);
         cartBtn.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        cartBtn.setMaximumSize(new java.awt.Dimension(65, 38));
-        cartBtn.setMinimumSize(new java.awt.Dimension(65, 38));
         cartBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cartBtnActionPerformed(evt);
@@ -555,8 +550,13 @@ public class Form3 extends javax.swing.JPanel {
     }//GEN-LAST:event_clearBtnActionPerformed
 
     private void deliveryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveryBtnActionPerformed
-        viewCart obj24 = new viewCart();
-        GlassPanePopup.showPopup(obj24);
+
+        if (!cartList.isEmpty()) {
+            orderTable.clearSelection();
+            placeholder obj24 = new placeholder();
+            GlassPanePopup.showPopup(obj24);
+            new checkOut(null, true).show();
+        }
     }//GEN-LAST:event_deliveryBtnActionPerformed
 
     private void f3itemFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_f3itemFieldActionPerformed
@@ -581,7 +581,7 @@ public class Form3 extends javax.swing.JPanel {
             itemPrice = 0;
             model.setValueAt(amountData, cartList.indexOf(itemData), 2);
             model.setValueAt(quantityData, cartList.indexOf(itemData), 1);
-            
+
             cartBtn.setText("Add to Cart");
             f3itemField.setText(" ");
             spinner2.setValue(1);
@@ -590,12 +590,12 @@ public class Form3 extends javax.swing.JPanel {
             Form3.trashBtn.setVisible(false);
             orderTable.clearSelection();
         } else {
-            
+
             if (!itemData.isEmpty() && !amountData.isEmpty()) {
-                
+
                 model.addRow(new Object[]{itemData, quantityData, amountData});
                 cartList.add(itemData);
-                priceList.add(Double.parseDouble(amountData)/quantityData);
+                priceList.add(Double.parseDouble(amountData) / quantityData);
 
                 f3itemField.setText("");
                 itemPrice = 0;
@@ -616,19 +616,19 @@ public class Form3 extends javax.swing.JPanel {
 
     private void trashBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trashBtnActionPerformed
         DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
-        
+
         int row = orderTable.getSelectedRow();
-        
+
         model.removeRow(row);
-        
+
         cartList.remove(row);
         priceList.remove(row);
         orderTable.clearSelection();
-        
+
         spinner2.setValue(1);
         f3amountField.setText("0.00");
         f3itemField.setText("");
-        
+
         trashBtn.setVisible(false);
 
     }//GEN-LAST:event_trashBtnActionPerformed
@@ -659,8 +659,6 @@ public class Form3 extends javax.swing.JPanel {
         }
         orderTable.getTableHeader().setDefaultRenderer(headerRenderer); // Header
 
-        
-
         orderTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         orderTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -686,7 +684,7 @@ public class Form3 extends javax.swing.JPanel {
 
                         double newAmount = (int) spinner2.getValue() * itemPrice;
                         f3amountField.setText(decimal.format(newAmount));
-                        
+
                         cartBtn.setText("Update");
                     }
                 }
@@ -746,7 +744,7 @@ public class Form3 extends javax.swing.JPanel {
     public static javax.swing.JTable orderTable;
     private otherForms.PanelBorder panelBorder1;
     private components.PanelItem panelItem2;
-    private components.TextFieldAnimation searchField;
+    private components.SearchFieldAnimation searchField;
     public static javax.swing.JSpinner spinner2;
     public static javax.swing.JButton trashBtn;
     // End of variables declaration//GEN-END:variables

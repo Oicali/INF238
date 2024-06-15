@@ -464,7 +464,7 @@ public class Form2 extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         f2ErrorMessage = new javax.swing.JLabel();
         itemNameField = new javax.swing.JTextField();
-        searchField = new components.TextFieldAnimation();
+        searchField = new components.SearchFieldAnimation();
         impBtn = new components.RoundedButtons();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -472,8 +472,8 @@ public class Form2 extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Manage Products");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 20, 336, 68));
+        jLabel1.setText("Manage Products and Stocks");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 20, 1070, 68));
 
         editCatBtn.setForeground(new java.awt.Color(255, 255, 255));
         editCatBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/2.png"))); // NOI18N
@@ -957,7 +957,7 @@ public class Form2 extends javax.swing.JPanel {
     public static components.RoundCornerImageAvatar picLbl;
     public static javax.swing.JTextField priceField;
     private components.RoundedButtons saveBtn;
-    private components.TextFieldAnimation searchField;
+    private components.SearchFieldAnimation searchField;
     public static javax.swing.JSpinner spinner;
     // End of variables declaration//GEN-END:variables
 }

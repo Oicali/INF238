@@ -39,7 +39,7 @@ public class home extends javax.swing.JFrame {
     
 
     ImageIcon image = new ImageIcon(getClass().getResource("/resources/logoSmall.png"));
-    private Form0 form0DashBoard;
+    public static Form0 form0DashBoard;
     public static Form2 form2Products;
     public static Form3 form3Order;
     public static Form4 form4ViewOrder;
@@ -50,7 +50,7 @@ public class home extends javax.swing.JFrame {
     public static int lastSelected;
     public static Notifications successChangePassword, successChangeImg, successPrintUsers, successAddUser, successUpdateUser,
             successDeleteUser, successNewCategory, successUpdateCategory, successDeleteCategory, successUpdateItem, successAddItem,
-            successAddCustomer, successUpdateCustomer, successDeleteCustomer;
+            successAddCustomer, successUpdateCustomer, successDeleteCustomer, successSetOrder;
     public static Notifications itemWarning;
 
     public home() {
@@ -78,6 +78,7 @@ public class home extends javax.swing.JFrame {
         successAddCustomer = new Notifications(this, Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Added New Customer", "You have successfully added a customer");
         successUpdateCustomer = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Updated Customer Data", "You have successfully updated a customer information");
         successDeleteCustomer = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Customer Data Deleted", "You have successfully deleted a customer information");
+        successSetOrder = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Set Order", "Order is now on process");
         
         //Set up forms
         setBackground(new Color(0, 0, 0, 0));

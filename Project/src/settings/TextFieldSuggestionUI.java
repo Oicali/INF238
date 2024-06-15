@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package components;
+package settings;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -41,27 +41,27 @@ public class TextFieldSuggestionUI extends MetalTextFieldUI {
 
     private JTextField textfield;
     private Border border;
-    private int round = 15;
+    private int round = 0;
     private List<String> items = new ArrayList<>();
 
     public TextFieldSuggestionUI(JTextField textfield) {
         this.textfield = textfield;
-        border = new Border(10);
+        border = new Border(7);
         border.setRound(round);
         textfield.setBorder(border);
         textfield.setOpaque(false);
         textfield.setSelectedTextColor(Color.WHITE);
-        textfield.setSelectionColor(new Color(54, 189, 248));
+        textfield.setSelectionColor(new Color(204, 204, 204));
         textfield.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent fe) {
-                border.setColor(new Color(128, 189, 255));
+                border.setColor(new Color(178, 178, 178));
                 textfield.repaint();
             }
 
             @Override
             public void focusLost(FocusEvent fe) {
-                border.setColor(new Color(206, 212, 218));
+                border.setColor(new Color(178, 178, 178));
                 textfield.repaint();
             }
         });
@@ -105,12 +105,12 @@ public class TextFieldSuggestionUI extends MetalTextFieldUI {
             this.color = color;
         }
 
-        private Color focusColor = new Color(128, 189, 255);
-        private Color color = new Color(206, 212, 218);
+        private Color focusColor = new Color(178, 178, 178);
+        private Color color = new Color(178, 178, 178);
         private int round;
 
         public Border(int border) {
-            super(border, border, border, border);
+            super(1, border, 1, border);
         }
 
         public Border() {

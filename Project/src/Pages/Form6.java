@@ -221,7 +221,7 @@ public class Form6 extends javax.swing.JPanel {
         panelItem2 = new components.PanelItem();
         addBtn = new components.RoundedButtons();
         exportBtn = new components.RoundedButtons();
-        searchField = new components.TextFieldAnimation();
+        searchField = new components.SearchFieldAnimation();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -340,6 +340,6 @@ public class Form6 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private components.PanelItem panelItem2;
     private javax.swing.JScrollPane scroll;
-    private components.TextFieldAnimation searchField;
+    private components.SearchFieldAnimation searchField;
     // End of variables declaration//GEN-END:variables
 }

@@ -52,7 +52,7 @@ import javax.mail.internet.MimeMessage;
 public class addNewUser extends javax.swing.JDialog {
 
     private JFileChooser file = new JFileChooser();
-    public static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMMM-dd-yyyy");
+    private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMMM-dd-yyyy");
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static final int LENGTH = 8;
     private static final SecureRandom RANDOM = new SecureRandom();
