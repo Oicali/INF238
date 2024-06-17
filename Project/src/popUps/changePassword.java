@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collections;
 import javax.swing.JOptionPane;
-import Pages.Form7;
+import Pages.Profile;
 import otherForms.Notifications;
 import settings.GlassPanePopup;
 
@@ -235,7 +235,7 @@ public class changePassword extends javax.swing.JPanel {
 
                                 if (rowsAffected > 0) {
                                     Main.setStoredPassword(newPassword);
-                                    home.form7Profile = new Form7(Main.username);
+                                    home.form7Profile = new Profile(Main.username);
                                     home.setForm(home.form7Profile);
                                     GlassPanePopup.closePopupLast();
                                     home.successChangePassword.showNotification();

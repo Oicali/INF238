@@ -14,7 +14,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.plaf.metal.MetalButtonUI;
 import popUps.forgotPasswordMsg;
 import popUps.forgotUsernameMsg;
-import Pages.Form7;
+import Pages.Profile;
 import settings.GlassPanePopup;
 
 public class logIn extends javax.swing.JFrame {

@@ -50,7 +50,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="36" y="110" width="363" height="-1"/>
+          <AbsoluteConstraints x="33" y="110" width="363" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -166,6 +166,7 @@
             <EmptyBorder/>
           </Border>
         </Property>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new components.ScrollPaneWin11()"/>

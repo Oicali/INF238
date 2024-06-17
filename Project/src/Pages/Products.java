@@ -52,13 +52,13 @@ import model.Model_Products;
 import otherForms.addNewProducts;
 import otherForms.categoryPanel;
 
-public class Form2 extends javax.swing.JPanel {
+public class Products extends javax.swing.JPanel {
 
     private Map<String, categoryPanel> categoryPanels;
     public static String oldItemName = "";
     private static final String DESTINATION_DIRECTORY = "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Inventory_System\\Documents";
 
-    public Form2() {
+    public Products() {
         initComponents();
         setOpaque(false);
 
@@ -390,9 +390,9 @@ public class Form2 extends javax.swing.JPanel {
             // Save file to destination directory
             saveFileToDirectory(csvFile);
 
-            home.form2Products = new Form2();
+            home.form2Products = new Products();
             home.setForm(home.form2Products);
-            home.form3Order = new Form3();
+            home.form3Order = new Order();
             home.successUpdateItem.showNotification();
 
         } catch (SQLException e) {
@@ -717,7 +717,7 @@ public class Form2 extends javax.swing.JPanel {
                 searchFieldActionPerformed(evt);
             }
         });
-        add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 110, 363, -1));
+        add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 110, 363, -1));
 
         impBtn.setForeground(new java.awt.Color(255, 255, 255));
         impBtn.setText("Import");
@@ -779,7 +779,7 @@ public class Form2 extends javax.swing.JPanel {
                 e.printStackTrace(); // Print the exception details for debugging
                 JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
             } catch (IOException ex) {
-                Logger.getLogger(Form2.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 Main.closeCon();
             }
@@ -802,9 +802,9 @@ public class Form2 extends javax.swing.JPanel {
                 processCSV(csvFile);
 
             } catch (IOException ex) {
-                Logger.getLogger(Form2.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
             } catch (CsvValidationException ex) {
-                Logger.getLogger(Form2.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_impBtnActionPerformed
@@ -892,9 +892,9 @@ public class Form2 extends javax.swing.JPanel {
 
                 f2ErrorMessage.setText(" ");
 
-                home.form2Products = new Form2();
+                home.form2Products = new Products();
                 home.setForm(home.form2Products);
-                home.form3Order = new Form3();
+                home.form3Order = new Order();
                 home.successUpdateItem.showNotification();
 
                 // Close the ResultSet

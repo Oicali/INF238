@@ -41,11 +41,11 @@ import settings.ModernHeaderRenderer;
  *
  * @author jairus
  */
-public class Form5 extends javax.swing.JPanel {
+public class Customers extends javax.swing.JPanel {
 
     private boolean isEditing = true;
 
-    public Form5() {
+    public Customers() {
         initComponents();
         setOpaque(false);
         initTable();
@@ -210,6 +210,7 @@ public class Form5 extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane1.setBackground(new java.awt.Color(40, 72, 102));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         customerTable.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         customerTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -440,7 +441,7 @@ public class Form5 extends javax.swing.JPanel {
                 searchFieldActionPerformed(evt);
             }
         });
-        add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 363, -1));
+        add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 110, 363, -1));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -567,7 +568,7 @@ public class Form5 extends javax.swing.JPanel {
 
                         ErrorMessage.setText(" ");
 
-                        home.form5Customers = new Form5();
+                        home.form5Customers = new Customers();
                         home.setForm(home.form5Customers);
                         home.successUpdateCustomer.showNotification();
 
@@ -617,7 +618,7 @@ public class Form5 extends javax.swing.JPanel {
                         ps.setString(3, emailField.getText().trim());
                         ps.executeUpdate();
 
-                        home.form5Customers = new Form5();
+                        home.form5Customers = new Customers();
                         home.setForm(home.form5Customers);
                         home.successAddCustomer.showNotification();
                     }
@@ -659,7 +660,7 @@ public class Form5 extends javax.swing.JPanel {
 
                         // Check if any rows were deleted
                         if (rowsDeleted > 0) {
-                            home.form5Customers = new Form5();
+                            home.form5Customers = new Customers();
                             home.setForm(home.form5Customers);
                             home.successDeleteCustomer.showNotification();
 

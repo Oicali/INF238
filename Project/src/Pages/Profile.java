@@ -1,6 +1,6 @@
 package Pages;
 
-import Pages.Form6;
+import Pages.Users;
 import Main.*;
 import java.awt.Cursor;
 import java.awt.Graphics;
@@ -26,11 +26,11 @@ import popUps.changePassword;
 import settings.GlassPanePopup;
 import model.Model_User;
 
-public class Form7 extends javax.swing.JPanel {
+public class Profile extends javax.swing.JPanel {
 
     JFileChooser file = new JFileChooser();
 
-    public Form7(String username) {
+    public Profile(String username) {
         initComponents();
         setOpaque(false);
         initData(username);
@@ -480,9 +480,9 @@ public class Form7 extends javax.swing.JPanel {
 
                         if (rowsAffected > 0) {
                             home.setHeader(home.jPanel1, Main.username);
-                            home.form7Profile = new Form7(Main.username);
+                            home.form7Profile = new Profile(Main.username);
                             home.setForm(home.form7Profile);
-                            home.form6Users = new Form6();
+                            home.form6Users = new Users();
                             this.setVisible(false);
                             home.successChangeImg.showNotification();
                             
@@ -522,7 +522,7 @@ public class Form7 extends javax.swing.JPanel {
     
     
     
-    public Form7() {
+    public Profile() {
         initComponents();
         setOpaque(false);
 

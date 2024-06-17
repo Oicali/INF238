@@ -6,7 +6,7 @@
 package cards;
 
 import Main.Main;
-import Pages.Form2;
+import Pages.Products;
 import model.Model_Products;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -29,7 +29,7 @@ public class Item_Card extends javax.swing.JPanel {
 
     private boolean selected;
     private model.Model_Products data;
-    DecimalFormat decimal = new DecimalFormat("0.00");
+    DecimalFormat decimal = new DecimalFormat("###,###,##0.00");
 
     public Item_Card() {
         initComponents();

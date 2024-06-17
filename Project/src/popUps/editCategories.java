@@ -5,10 +5,10 @@
  */
 package popUps;
 
-import Pages.Form2;
+import Pages.Products;
 import Main.Main;
 import Main.home;
-import Pages.Form3;
+import Pages.Order;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -249,7 +249,7 @@ public class editCategories extends javax.swing.JPanel {
         add(labelField, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 298, 285, 35));
 
         jScrollPane1.setBackground(new java.awt.Color(40, 72, 102));
-        jScrollPane1.setBorder(null);
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         categoryTable.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
@@ -384,9 +384,9 @@ public class editCategories extends javax.swing.JPanel {
                     ps.setString(1, categorylabel);
                     ps.executeUpdate();
 
-                    home.form2Products = new Form2();
+                    home.form2Products = new Products();
                     home.setForm(home.form2Products);
-                    home.form3Order = new Form3();
+                    home.form3Order = new Order();
 
                     GlassPanePopup.closePopupLast();
                     home.successNewCategory.showNotification();
@@ -486,9 +486,9 @@ public class editCategories extends javax.swing.JPanel {
 //                categoryTable.setValueAt(data, row, 1);
                 ErrorMessage.setText(" ");
 
-                home.form2Products = new Form2();
+                home.form2Products = new Products();
                 home.setForm(home.form2Products);
-                home.form3Order = new Form3();
+                home.form3Order = new Order();
                 GlassPanePopup.closePopupLast();
                 home.successUpdateCategory.showNotification();
 
@@ -527,9 +527,9 @@ public class editCategories extends javax.swing.JPanel {
 
                         // Check if any rows were deleted
                         if (rowsDeleted > 0) {
-                            home.form2Products = new Form2();
+                            home.form2Products = new Products();
                             home.setForm(home.form2Products);
-                            home.form3Order = new Form3();
+                            home.form3Order = new Order();
                             GlassPanePopup.closePopupLast();
                             home.successDeleteCategory.showNotification();
 

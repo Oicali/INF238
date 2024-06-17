@@ -11,9 +11,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingUtilities;
 import Pages.*;
-import static Pages.Form2.f2ErrorMessage;
-import static Pages.Form3.orderTable;
-import static Pages.Form3.priceList;
+import static Pages.Products.f2ErrorMessage;
+import static Pages.Order.orderTable;
+import static Pages.Order.priceList;
 import java.awt.Color;
 import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
@@ -45,46 +45,46 @@ public class orderPanel extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent me) {
 
-                if (Form3.cartList.contains(data.getItemName())) {
-                    Form3.cartBtn.setText("Update");
-                    Form3.isEditing = true;
-                    Form3.trashBtn.setVisible(true);
+                if (Order.cartList.contains(data.getItemName())) {
+                    Order.cartBtn.setText("Update");
+                    Order.isEditing = true;
+                    Order.trashBtn.setVisible(true);
                     
-                    Form3.f3itemField.setText("");
-                    Form3.f3amountField.setText("");
+                    Order.f3itemField.setText("");
+                    Order.f3amountField.setText("");
 
-                    int row = Form3.cartList.indexOf(data.getItemName());
-                    Form3.orderTable.setRowSelectionInterval(row, row);
+                    int row = Order.cartList.indexOf(data.getItemName());
+                    Order.orderTable.setRowSelectionInterval(row, row);
                     
                     //Set quantity from table to spinner
-                    Form3.spinner2.setValue(Form3.orderTable.getValueAt(row, 1));
+                    Order.spinner2.setValue(Order.orderTable.getValueAt(row, 1));
                
                     // Set item name
-                    String item = Form3.orderTable.getValueAt(row, 0).toString();
-                    Form3.f3itemField.setText(item);
+                    String item = Order.orderTable.getValueAt(row, 0).toString();
+                    Order.f3itemField.setText(item);
                     
                     // Set itemPrice
-                    Form3.itemPrice =  priceList.get(row);
-                    System.out.println("item Price from card: " + Form3.itemPrice);
+                    Order.itemPrice =  priceList.get(row);
+                    System.out.println("item Price from card: " + Order.itemPrice);
                     
                     
-                    double newAmount = (int) Form3.spinner2.getValue() * Form3.itemPrice;
-                    Form3.f3amountField.setText(decimal.format(newAmount));
+                    double newAmount = (int) Order.spinner2.getValue() * Order.itemPrice;
+                    Order.f3amountField.setText(decimal.format(newAmount));
                     System.out.println("new Amount Price from card: " + newAmount);
 
                 } else if (data.getStocks() > 0) {
-                    Form3.cartBtn.setText("Add to Cart");
-                    Form3.isEditing = false;
-                    Form3.trashBtn.setVisible(false);
+                    Order.cartBtn.setText("Add to Cart");
+                    Order.isEditing = false;
+                    Order.trashBtn.setVisible(false);
                     orderTable.clearSelection();
                     
-                    Form3.f3itemField.setText("");
-                    Form3.f3amountField.setText("");
-                    Form3.f3itemField.setText(data.getItemName());
-                    Form3.itemPrice = data.getPrice();
-                    Form3.f3amountField.setText(decimal.format(data.getPrice()));
-                    Form3.spinner2.setValue(1);
-                    Form3.itemMax = data.getStocks();
+                    Order.f3itemField.setText("");
+                    Order.f3amountField.setText("");
+                    Order.f3itemField.setText(data.getItemName());
+                    Order.itemPrice = data.getPrice();
+                    Order.f3amountField.setText(decimal.format(data.getPrice()));
+                    Order.spinner2.setValue(1);
+                    Order.itemMax = data.getStocks();
                     
 
                 }

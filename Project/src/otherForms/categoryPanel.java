@@ -11,7 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingUtilities;
 import Pages.*;
-import static Pages.Form2.f2ErrorMessage;
+import static Pages.Products.f2ErrorMessage;
 import java.awt.Color;
 import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
@@ -46,20 +46,20 @@ public class categoryPanel extends javax.swing.JPanel {
 
                 if (SwingUtilities.isLeftMouseButton(me)) {
 
-                    Form2.oldItemName = "";
+                    Products.oldItemName = "";
                     f2ErrorMessage.setText(" ");
-                    Form2.picLbl.setIcon(data.getImage());
+                    Products.picLbl.setIcon(data.getImage());
 
-                    Form2.itemDataPanel.repaint();
-                    Form2.itemDataPanel.revalidate();
+                    Products.itemDataPanel.repaint();
+                    Products.itemDataPanel.revalidate();
 
-                    Form2.oldItemName = data.getItemName();
-                    Form2.itemNameField.setText(data.getItemName());
-                    Form2.priceField.setText(decimal.format(data.getPrice()));
-                    Form2.categoryField.setSelectedItem(data.getCategory());
+                    Products.oldItemName = data.getItemName();
+                    Products.itemNameField.setText(data.getItemName());
+                    Products.priceField.setText(decimal.format(data.getPrice()));
+                    Products.categoryField.setSelectedItem(data.getCategory());
 
-                    Form2.spinner.setValue(data.getStocks());
-                    Form2.IDField.setText("Item ID: " + data.getID());
+                    Products.spinner.setValue(data.getStocks());
+                    Products.IDField.setText("Item ID: " + data.getID());
 
                 }
             }

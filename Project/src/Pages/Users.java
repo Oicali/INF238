@@ -37,9 +37,9 @@ import popUps.placeholder;
 import settings.GlassPanePopup;
 import model.Model_User;
 
-public class Form6 extends javax.swing.JPanel {
+public class Users extends javax.swing.JPanel {
 
-    public Form6() {
+    public Users() {
         initComponents();
         setOpaque(false);
         initData();
@@ -280,7 +280,7 @@ public class Form6 extends javax.swing.JPanel {
                 searchFieldActionPerformed(evt);
             }
         });
-        add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 110, 390, -1));
+        add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 110, 363, -1));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -319,7 +319,7 @@ public class Form6 extends javax.swing.JPanel {
                 e.printStackTrace(); // Print the exception details for debugging
                 JOptionPane.showMessageDialog(null, "An error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
             } catch (IOException ex) {
-                Logger.getLogger(Form6.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 Main.closeCon();
             }

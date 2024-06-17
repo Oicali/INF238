@@ -1,7 +1,7 @@
 package otherForms;
 
-import Pages.Form7;
-import Pages.Form6;
+import Pages.Profile;
+import Pages.Users;
 import Main.Main;
 import Main.home;
 import java.awt.AlphaComposite;
@@ -574,9 +574,9 @@ public class addNewUser extends javax.swing.JDialog {
 
                         emailNewUser(email);
                         home.setHeader(home.jPanel1, Main.username);
-                        home.form6Users = new Form6();
+                        home.form6Users = new Users();
                         home.setForm(home.form6Users);
-                        home.form7Profile = new Form7(Main.username);
+                        home.form7Profile = new Profile(Main.username);
                         GlassPanePopup.closePopupLast();
                         dispose();
                         home.successAddUser.showNotification();

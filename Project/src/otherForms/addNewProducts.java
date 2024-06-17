@@ -10,9 +10,9 @@ import java.awt.geom.RoundRectangle2D;
 
 import Main.Main;
 import Main.home;
-import Pages.Form2;
-import static Pages.Form2.spinner;
-import Pages.Form3;
+import Pages.Products;
+import static Pages.Products.spinner;
+import Pages.Order;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -580,9 +580,9 @@ public class addNewProducts extends javax.swing.JDialog {
 
                     GlassPanePopup.closePopupLast();
                     dispose();
-                    home.form2Products = new Form2();
+                    home.form2Products = new Products();
                     home.setForm(home.form2Products);
-                    home.form3Order = new Form3();
+                    home.form3Order = new Order();
                     home.successAddItem.showNotification();
                     
 

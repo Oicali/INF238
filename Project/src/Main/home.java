@@ -4,14 +4,14 @@
  */
 package Main;
 
-import Pages.Form7;
-import Pages.Form6;
-import Pages.Form5;
-import Pages.Form4;
-import Pages.Form3;
-import Pages.Form2;
-import Pages.Form0;
-import Pages.Form3;
+import Pages.Profile;
+import Pages.Users;
+import Pages.Customers;
+import Pages.Transactions;
+import Pages.Order;
+import Pages.Products;
+import Pages.Dashboard;
+import Pages.Order;
 import components.ScrollBarWin11UI;
 import interfaces.EventMenuSelected;
 import java.awt.Color;
@@ -39,18 +39,18 @@ public class home extends javax.swing.JFrame {
     
 
     ImageIcon image = new ImageIcon(getClass().getResource("/resources/logoSmall.png"));
-    public static Form0 form0DashBoard;
-    public static Form2 form2Products;
-    public static Form3 form3Order;
-    public static Form4 form4ViewOrder;
-    public static Form5 form5Customers;
-    public static Form6 form6Users;
-    public static Form7 form7Profile;
+    public static Dashboard form0DashBoard;
+    public static Products form2Products;
+    public static Order form3Order;
+    public static Transactions form4ViewOrder;
+    public static Customers form5Customers;
+    public static Users form6Users;
+    public static Profile form7Profile;
 
     public static int lastSelected;
     public static Notifications successChangePassword, successChangeImg, successPrintUsers, successAddUser, successUpdateUser,
             successDeleteUser, successNewCategory, successUpdateCategory, successDeleteCategory, successUpdateItem, successAddItem,
-            successAddCustomer, successUpdateCustomer, successDeleteCustomer, successSetOrder;
+            successAddCustomer, successUpdateCustomer, successDeleteCustomer, successSetOrder, successUpdateHistory;
     public static Notifications itemWarning;
 
     public home() {
@@ -79,16 +79,17 @@ public class home extends javax.swing.JFrame {
         successUpdateCustomer = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Updated Customer Data", "You have successfully updated a customer information");
         successDeleteCustomer = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Customer Data Deleted", "You have successfully deleted a customer information");
         successSetOrder = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Set Order", "Order is now on process");
+        successUpdateHistory = new Notifications(this, Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Items Delivered", "Package has been sent to customers");
         
         //Set up forms
         setBackground(new Color(0, 0, 0, 0));
-        form0DashBoard = new Form0();
-        form2Products = new Form2();
-        form3Order = new Form3();
-        form4ViewOrder = new Form4();
-        form5Customers = new Form5();
-        form6Users = new Form6();
-        form7Profile = new Form7(Main.username);
+        form0DashBoard = new Dashboard();
+        form2Products = new Products();
+        form3Order = new Order();
+        form4ViewOrder = new Transactions();
+        form5Customers = new Customers();
+        form6Users = new Users();
+        form7Profile = new Profile(Main.username);
         setForm(form0DashBoard); // added to be in form 0 by default
         menu.initMoving(home.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
@@ -411,12 +412,12 @@ public class home extends javax.swing.JFrame {
 
         //Set up forms
         setBackground(new Color(0, 0, 0, 0));
-        form0DashBoard = new Form0();
+        form0DashBoard = new Dashboard();
         //form1Categories = new Form1();
-        form2Products = new Form2();
-        form3Order = new Form3();
-        form6Users = new Form6();
-        form7Profile = new Form7();
+        form2Products = new Products();
+        form3Order = new Order();
+        form6Users = new Users();
+        form7Profile = new Profile();
         setForm(form0DashBoard); // added to be in form 0 by default
         menu.initMoving(home.this);
         menu.addEventMenuSelected(new EventMenuSelected() {

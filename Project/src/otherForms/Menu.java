@@ -38,7 +38,7 @@ public class Menu extends javax.swing.JPanel {
             listMenu1.addItem(new Model_Menu("5", "Transactions", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("6", "Customers", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("7", "Users", Model_Menu.MenuType.MENU));
-            listMenu1.addItem(new Model_Menu("8", "My Profile", Model_Menu.MenuType.MENU));
+            listMenu1.addItem(new Model_Menu("8", "Profile", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
@@ -51,7 +51,7 @@ public class Menu extends javax.swing.JPanel {
             listMenu1.addItem(new Model_Menu("4", "Order", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("5", "Transactions", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("6", "Customers", Model_Menu.MenuType.MENU));
-            listMenu1.addItem(new Model_Menu("8", "My Profile", Model_Menu.MenuType.MENU));
+            listMenu1.addItem(new Model_Menu("8", "Profile", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
@@ -64,7 +64,7 @@ public class Menu extends javax.swing.JPanel {
             listMenu1.addItem(new Model_Menu("4", "Order", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("5", "Transactions", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("6", "Customers", Model_Menu.MenuType.MENU));
-            listMenu1.addItem(new Model_Menu("8", "My Profile", Model_Menu.MenuType.MENU));
+            listMenu1.addItem(new Model_Menu("8", "Profile", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
@@ -77,7 +77,7 @@ public class Menu extends javax.swing.JPanel {
             listMenu1.addItem(new Model_Menu("1", "Dashboard", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("3", "Products", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("5", "Transactions", Model_Menu.MenuType.MENU));
-            listMenu1.addItem(new Model_Menu("8", "My Profile", Model_Menu.MenuType.MENU));
+            listMenu1.addItem(new Model_Menu("8", "Profile", Model_Menu.MenuType.MENU));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
             listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));

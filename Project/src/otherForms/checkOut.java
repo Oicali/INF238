@@ -7,11 +7,11 @@ package otherForms;
 
 import Main.Main;
 import Main.home;
-import Pages.Form0;
-import Pages.Form2;
-import Pages.Form3;
-import Pages.Form4;
-import Pages.Form5;
+import Pages.Dashboard;
+import Pages.Products;
+import Pages.Order;
+import Pages.Transactions;
+import Pages.Customers;
 import java.awt.Cursor;
 import java.awt.Shape;
 import java.awt.event.KeyEvent;
@@ -35,7 +35,7 @@ import settings.GlassPanePopup;
  */
 public class checkOut extends javax.swing.JDialog {
 
-    private DecimalFormat decimal = new DecimalFormat("0.00");
+    private DecimalFormat decimal = new DecimalFormat("###,###,##0.00");
     private String typedName = "";
     private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMMM-dd-yyyy HH:mm");
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -50,8 +50,8 @@ public class checkOut extends javax.swing.JDialog {
         generateBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         double total = 0;
-        for (int i = 0; i < Form3.cartList.size(); i++) {
-            total = total + Double.parseDouble(Form3.orderTable.getValueAt(i, 2).toString());
+        for (int i = 0; i < Order.cartList.size(); i++) {
+            total = total + Double.parseDouble(Order.orderTable.getValueAt(i, 2).toString().replace(",", ""));
         }
         totalLbl.setText("₱" + decimal.format(total));
 
@@ -318,7 +318,7 @@ public class checkOut extends javax.swing.JDialog {
         LocalDateTime now = LocalDateTime.now();
         String dateOrdered = dtf.format(now);
         String code = transactionCode(); //
-        String delivery_status = "NOT DELIVERED"; //
+        String delivery_status = "PENDING"; //
         String location = locationField.getText();
         String mop = (String) paymentMethod.getSelectedItem();
         String total = totalLbl.getText();
@@ -348,23 +348,24 @@ public class checkOut extends javax.swing.JDialog {
                     ps.executeUpdate();
                 }
 
-                for (int i = 0; i < Form3.cartList.size(); i++) {
-                    String query = "INSERT INTO orders (name, item_ordered, quantity, payment_Method, total_Price, date_Ordered, location, delivery_status, code) "
-                            + "VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?)";
+                for (int i = 0; i < Order.cartList.size(); i++) {
+                    String query = "INSERT INTO orders (name, item_ordered, quantity, payment_Method, total_Price, date_Ordered, location, delivery_status, code, cost) "
+                            + "VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?)";
                     ps = con.prepareStatement(query);
                     ps.setString(1, customer);
-                    ps.setString(2, Form3.cartList.get(i));
-                    ps.setString(3, Form3.orderTable.getValueAt(i, 1).toString());
+                    ps.setString(2, Order.cartList.get(i));
+                    ps.setString(3, Order.orderTable.getValueAt(i, 1).toString());
                     ps.setString(4, mop);
                     ps.setString(5, total);
                     ps.setString(6, dateOrdered);
                     ps.setString(7, location);
                     ps.setString(8, delivery_status);
                     ps.setString(9, code);
+                    ps.setString(10, "₱"+decimal.format(Order.priceList.get(i)));
                     ps.executeUpdate();
 
                     int OldQty = 0;
-                    rs2 = s.executeQuery("Select * from products where item_Name = '" + Form3.cartList.get(i) + "'");
+                    rs2 = s.executeQuery("Select * from products where item_Name = '" + Order.cartList.get(i) + "'");
                     if (rs2.next()) {
                         OldQty = rs2.getInt("quantity");
                     }
@@ -373,10 +374,10 @@ public class checkOut extends javax.swing.JDialog {
 
                     String query2 = "UPDATE products SET quantity = ? where item_Name = ?";
                     ps = con.prepareStatement(query2);
-                    ps.setString(1, String.valueOf(OldQty - Integer.parseInt(Form3.orderTable.getValueAt(i, 1).toString())));
+                    ps.setString(1, String.valueOf(OldQty - Integer.parseInt(Order.orderTable.getValueAt(i, 1).toString())));
                     
-                    System.out.println("new quantity: " + String.valueOf(OldQty - Integer.parseInt(Form3.orderTable.getValueAt(i, 1).toString())));
-                    ps.setString(2, Form3.cartList.get(i));
+                    System.out.println("new quantity: " + String.valueOf(OldQty - Integer.parseInt(Order.orderTable.getValueAt(i, 1).toString())));
+                    ps.setString(2, Order.cartList.get(i));
                     ps.executeUpdate();
 
                 }
@@ -384,12 +385,12 @@ public class checkOut extends javax.swing.JDialog {
                 GlassPanePopup.closePopupLast();
                 dispose();
 
-                home.form3Order = new Form3();
+                home.form3Order = new Order();
                 home.setForm(home.form3Order);
-                home.form2Products = new Form2();
-                home.form4ViewOrder = new Form4();
-                home.form5Customers = new Form5();
-                home.form0DashBoard = new Form0();
+                home.form2Products = new Products();
+                home.form4ViewOrder = new Transactions();
+                home.form5Customers = new Customers();
+                home.form0DashBoard = new Dashboard();
 
                 home.successSetOrder.showNotification();
 
