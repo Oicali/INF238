@@ -10,6 +10,7 @@ import java.awt.geom.RoundRectangle2D;
 
 import Main.Main;
 import Main.home;
+import Pages.Dashboard;
 import Pages.Products;
 import static Pages.Products.spinner;
 import Pages.Order;
@@ -584,6 +585,7 @@ public class addNewProducts extends javax.swing.JDialog {
                     home.setForm(home.form2Products);
                     home.form3Order = new Order();
                     home.successAddItem.showNotification();
+                    home.form0DashBoard = new Dashboard();
                     
 
                 } catch (SQLException e) {

@@ -8,6 +8,7 @@ package popUps;
 import Pages.Products;
 import Main.Main;
 import Main.home;
+import Pages.Dashboard;
 import Pages.Order;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -248,7 +249,7 @@ public class editCategories extends javax.swing.JPanel {
         });
         add(labelField, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 298, 285, 35));
 
-        jScrollPane1.setBackground(new java.awt.Color(40, 72, 102));
+        jScrollPane1.setBackground(new java.awt.Color(40, 72, 134));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -387,6 +388,7 @@ public class editCategories extends javax.swing.JPanel {
                     home.form2Products = new Products();
                     home.setForm(home.form2Products);
                     home.form3Order = new Order();
+                    home.form0DashBoard = new Dashboard();
 
                     GlassPanePopup.closePopupLast();
                     home.successNewCategory.showNotification();
@@ -489,6 +491,7 @@ public class editCategories extends javax.swing.JPanel {
                 home.form2Products = new Products();
                 home.setForm(home.form2Products);
                 home.form3Order = new Order();
+                home.form0DashBoard = new Dashboard();
                 GlassPanePopup.closePopupLast();
                 home.successUpdateCategory.showNotification();
 
@@ -530,6 +533,7 @@ public class editCategories extends javax.swing.JPanel {
                             home.form2Products = new Products();
                             home.setForm(home.form2Products);
                             home.form3Order = new Order();
+                            home.form0DashBoard = new Dashboard();
                             GlassPanePopup.closePopupLast();
                             home.successDeleteCategory.showNotification();
 

@@ -4,6 +4,7 @@ import Pages.Profile;
 import Pages.Users;
 import Main.Main;
 import Main.home;
+import Pages.Dashboard;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -580,6 +581,7 @@ public class addNewUser extends javax.swing.JDialog {
                         GlassPanePopup.closePopupLast();
                         dispose();
                         home.successAddUser.showNotification();
+                        home.form0DashBoard = new Dashboard();
 
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Internet Connection Occurred!", "Network Error", JOptionPane.ERROR_MESSAGE);

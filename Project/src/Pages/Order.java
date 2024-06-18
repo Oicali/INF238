@@ -345,7 +345,7 @@ public class Order extends javax.swing.JPanel {
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 172, 660, 580));
 
-        jScrollPane3.setBackground(new java.awt.Color(40, 72, 102));
+        jScrollPane3.setBackground(new java.awt.Color(40, 72, 134));
         jScrollPane3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 

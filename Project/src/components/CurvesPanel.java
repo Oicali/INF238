@@ -4,6 +4,7 @@
  */
 package components;
 
+import settings.GradientPanel;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -19,6 +20,8 @@ import java.awt.geom.Area;
 import java.awt.geom.CubicCurve2D;
 import java.awt.geom.GeneralPath;
 import javax.swing.Timer;
+
+//[24,124,217]
 
 public class CurvesPanel extends GradientPanel {
 

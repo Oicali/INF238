@@ -163,22 +163,22 @@ public class Customers extends javax.swing.JPanel {
         }
 
     }
-    
+
     public static String capitalizeFirstLetters(String str) {
         // Split the string into words
         String[] words = str.split("\\s+");
-        
+
         StringBuilder capitalizedString = new StringBuilder();
-        
+
         // Capitalize the first letter of each word
         for (String word : words) {
             if (word.length() > 0) {
                 capitalizedString.append(Character.toUpperCase(word.charAt(0)))
-                                 .append(word.substring(1).toLowerCase())
-                                 .append(" ");
+                        .append(word.substring(1).toLowerCase())
+                        .append(" ");
             }
         }
-        
+
         // Remove the trailing space and return the result
         return capitalizedString.toString().trim();
     }
@@ -209,7 +209,7 @@ public class Customers extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane1.setBackground(new java.awt.Color(40, 72, 102));
+        jScrollPane1.setBackground(new java.awt.Color(40, 72, 134));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         customerTable.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
@@ -498,7 +498,7 @@ public class Customers extends javax.swing.JPanel {
             } else {
                 String name = customerTable.getValueAt(row, 1).toString();
                 String number = "";
-                if (customerTable.getValueAt(row, 2).equals("")) {
+                if (customerTable.getValueAt(row, 2).toString().equals("")) {
                     number = "";
                 } else {
                     number = customerTable.getValueAt(row, 2).toString().substring(2);
@@ -588,13 +588,13 @@ public class Customers extends javax.swing.JPanel {
 
         } else {
             customerTable.clearSelection();
-            
+
             if (nameField.isEmpty()) {
                 ErrorMessage.setText("Please complete all required fields with *");
             } else if (numberField.getText().trim().length() < 9 && !numberField.getText().trim().isEmpty()) {
                 ErrorMessage.setText("Invalid mobile number!");
             } else {
-                
+
                 try {
                     Connection con = Main.getDbCon();
 
@@ -607,7 +607,6 @@ public class Customers extends javax.swing.JPanel {
 
                     if (userCount > 0) {
                         ErrorMessage.setText("Customer already exist!");
-                        
 
                     } else {
 
@@ -621,6 +620,7 @@ public class Customers extends javax.swing.JPanel {
                         home.form5Customers = new Customers();
                         home.setForm(home.form5Customers);
                         home.successAddCustomer.showNotification();
+                        home.form0DashBoard = new Dashboard();
                     }
 
                     ps.close();
@@ -663,6 +663,7 @@ public class Customers extends javax.swing.JPanel {
                             home.form5Customers = new Customers();
                             home.setForm(home.form5Customers);
                             home.successDeleteCustomer.showNotification();
+                            home.form0DashBoard = new Dashboard();
 
                         } else {
                             System.out.println("No rows were deleted.");
@@ -738,18 +739,27 @@ public class Customers extends javax.swing.JPanel {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     int selectedRow = customerTable.getSelectedRow();
-                    if (selectedRow != -1 && isEditing == false) {
-                        String name = customerTable.getValueAt(selectedRow, 1).toString();
-                        String number = customerTable.getValueAt(selectedRow, 2).toString();
-                        String email = customerTable.getValueAt(selectedRow, 3).toString();
+                    if (selectedRow != -1 && !isEditing) {
+                        String name = getValueFromTable(customerTable, selectedRow, 1);
+                        String number = getValueFromTable(customerTable, selectedRow, 2);
+                        String email = getValueFromTable(customerTable, selectedRow, 3);
 
-                        fnameField.setText(name);
-                        numberField.setText(number);
-                        emailField.setText(email);
+                        if (number != null && !number.isEmpty()) {
+                            number = number.substring(2);
+                        }
 
+                        fnameField.setText(name != null ? name : "");
+                        numberField.setText(number != null ? number : "");
+                        emailField.setText(email != null ? email : "");
                     }
                 }
             }
+
+            private String getValueFromTable(JTable table, int row, int column) {
+                Object value = table.getValueAt(row, column);
+                return value != null ? value.toString() : "";
+            }
+
         });
 
     }

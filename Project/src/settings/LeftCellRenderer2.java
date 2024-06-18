@@ -15,7 +15,7 @@ public class LeftCellRenderer2 extends DefaultTableCellRenderer {
         c.setFont(new Font("SansSerif", Font.PLAIN, 12)); // Set the font
 
         if (isSelected) {
-            c.setBackground(new Color(40, 72, 102));
+            c.setBackground(new Color(40, 72, 134));
             c.setForeground(Color.WHITE);
         } else {
             c.setBackground(row % 2 == 0 ? Color.WHITE : new Color(240, 240, 240));

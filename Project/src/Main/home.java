@@ -262,7 +262,7 @@ public class home extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1250, 750));
         setUndecorated(true);
 
-        panelBorder1.setBackground(new java.awt.Color(204, 204, 204));
+        panelBorder1.setBackground(new java.awt.Color(225, 225, 225));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

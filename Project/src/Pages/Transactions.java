@@ -355,7 +355,7 @@ public class Transactions extends javax.swing.JPanel {
         });
         add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 110, 363, -1));
 
-        jScrollPane1.setBackground(new java.awt.Color(40, 72, 102));
+        jScrollPane1.setBackground(new java.awt.Color(40, 72, 134));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -391,7 +391,7 @@ public class Transactions extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(803, 172, 300, 210));
 
-        jScrollPane3.setBackground(new java.awt.Color(40, 72, 102));
+        jScrollPane3.setBackground(new java.awt.Color(40, 72, 134));
         jScrollPane3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 

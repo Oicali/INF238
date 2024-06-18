@@ -394,6 +394,7 @@ public class Products extends javax.swing.JPanel {
             home.setForm(home.form2Products);
             home.form3Order = new Order();
             home.successUpdateItem.showNotification();
+            home.form0DashBoard = new Dashboard();
 
         } catch (SQLException e) {
             e.printStackTrace(); // Print the exception details for debugging
@@ -896,6 +897,7 @@ public class Products extends javax.swing.JPanel {
                 home.setForm(home.form2Products);
                 home.form3Order = new Order();
                 home.successUpdateItem.showNotification();
+                home.form0DashBoard = new Dashboard();
 
                 // Close the ResultSet
                 ps.close();
