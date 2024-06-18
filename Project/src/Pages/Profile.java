@@ -195,6 +195,8 @@ public class Profile extends javax.swing.JPanel {
         birthField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
         birthField.setSelectionColor(new java.awt.Color(204, 204, 204));
 
+        numberField.setEditable(false);
+        numberField.setBackground(new java.awt.Color(255, 255, 255));
         numberField.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         numberField.setForeground(new java.awt.Color(153, 153, 153));
         numberField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createEmptyBorder(1, 8, 1, 1)));
